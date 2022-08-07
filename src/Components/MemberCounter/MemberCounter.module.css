@@ -1,0 +1,19 @@
+.user-container {
+  background-color: #246253;
+  display: flex;
+  gap: 8rem;
+  justify-content: center;
+  margin: 0 auto;
+  width: 40%;
+  border: 4px solid white;
+  padding: 1rem;
+  box-shadow: 0 20px 40px 0px rgba(0, 0, 0, 0.516);
+}
+
+.members-number {
+  font-size: 2rem;
+}
+
+.my-users {
+  font-size: 1.5rem;
+}
