@@ -1,9 +1,16 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import CreateUserPage from "./Components/CreateUser/CreateUserPage";
 import HomePage from "./Components/HomePage/HomePage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const storedUserLoggedInInfo = localStorage.getItem("isLoggedIn");
+    if (storedUserLoggedInInfo === "1") {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const loginHandler = (users) => {
     localStorage.setItem("isLoggedIn", "1");
@@ -20,7 +27,7 @@ function App() {
     <Fragment>
       <main>
         {!isLoggedIn && <CreateUserPage onLogin={loginHandler} />}
-        {isLoggedIn && <HomePage />}
+        {isLoggedIn && <HomePage onLogOut={logoutHandler} />}
       </main>
     </Fragment>
   );
