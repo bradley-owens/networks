@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./CreateUserForm.module.css";
 
 const CreateUserForm = (props) => {
@@ -10,36 +10,29 @@ const CreateUserForm = (props) => {
   const [userPinValid, setUserPinValid] = useState();
   const [userLanguageValid, setUserLanguageValid] = useState();
 
+  const [formIsValid, setFormIsValid] = useState(false);
+
   const [createdUsers, setCreatedUsers] = useState([]);
+
+  let upperCaseLetters = /[A-Z]/g;
+  let letters = /[a-zA-Z]/;
 
   const userNameHandler = (e) => {
     setUserName(e.target.value);
+    setUserNameValid(!userName.match(upperCaseLetters) && userName.length > 5);
   };
   const userPinHandler = (e) => {
     setUserPin(e.target.value);
+    setUserPinValid(!userPin.match(letters) && userPin.length > 2);
   };
   const userLanguageHandler = (e) => {
     setUserLanguage(e.target.value);
+    setUserLanguageValid(userLanguage === "");
   };
 
-  const validateUserName = () => {
-    let upperCaseLetters = /[A-Z]/g;
-    !userName.match(upperCaseLetters) && userName.length > 1
-      ? setUserNameValid(true)
-      : setUserNameValid(false);
-  };
-
-  const validatePin = () => {
-    let numbers = /[0-9]/g;
-    userPin.match(numbers) && userPin.length === 4
-      ? setUserPinValid(true)
-      : setUserPinValid(false);
-  };
-  const validateLanguage = () => {
-    userLanguage === ""
-      ? setUserLanguageValid(true)
-      : setUserLanguageValid(true);
-  };
+  useEffect(() => {
+    setFormIsValid(userNameValid && userPinValid && userLanguageValid);
+  }, [userName, userPin, userLanguage]);
 
   //  Using class for created users
   const user = class {
@@ -78,7 +71,6 @@ const CreateUserForm = (props) => {
         placeholder="username"
         value={userName}
         onChange={userNameHandler}
-        onBlur={validateUserName}
       />
       <input
         className={`${styles.input} ${
@@ -89,7 +81,6 @@ const CreateUserForm = (props) => {
         maxLength={4}
         onChange={userPinHandler}
         value={userPin}
-        onBlur={validatePin}
       />
 
       <select
@@ -99,10 +90,9 @@ const CreateUserForm = (props) => {
         name="Language"
         id="Language"
         onChange={userLanguageHandler}
-        value={userLanguage}
-        onBlur={validateLanguage}
+        defaultValue={userLanguage}
       >
-        <option value="" disabled selected>
+        <option defaultValue={""} disabled selected>
           What's your language?
         </option>
         <option value="Javascript">Javascript</option>
@@ -116,7 +106,11 @@ const CreateUserForm = (props) => {
         <option value="Swift">Swift</option>
         <option value="None">Don't have one yet</option>
       </select>
-      <button id="login" type="submit" className={styles["login-button"]}>
+      <button
+        type="submit"
+        disabled={!formIsValid}
+        className={styles["login-button"]}
+      >
         Join
       </button>
     </form>
