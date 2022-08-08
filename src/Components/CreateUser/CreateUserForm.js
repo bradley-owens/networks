@@ -4,7 +4,7 @@ import styles from "./CreateUserForm.module.css";
 const CreateUserForm = (props) => {
   const [userName, setUserName] = useState("");
   const [userPin, setUserPin] = useState("");
-  const [userLanguage, setUserLanguage] = useState("");
+  const [userLanguage, setUserLanguage] = useState();
 
   const [userNameValid, setUserNameValid] = useState();
   const [userPinValid, setUserPinValid] = useState();
@@ -27,14 +27,13 @@ const CreateUserForm = (props) => {
   };
   const userLanguageHandler = (e) => {
     setUserLanguage(e.target.value);
-    setUserLanguageValid(userLanguage === "");
+    setUserLanguageValid(true);
   };
 
   useEffect(() => {
     setFormIsValid(userNameValid && userPinValid && userLanguageValid);
   }, [userName, userPin, userLanguage]);
 
-  //  Using class for created users
   const user = class {
     //making password a private field (instance)
     #password;
@@ -90,9 +89,9 @@ const CreateUserForm = (props) => {
         name="Language"
         id="Language"
         onChange={userLanguageHandler}
-        defaultValue={userLanguage}
+        value={userLanguage}
       >
-        <option defaultValue={""} disabled selected>
+        <option value="" disabled selected>
           What's your language?
         </option>
         <option value="Javascript">Javascript</option>
