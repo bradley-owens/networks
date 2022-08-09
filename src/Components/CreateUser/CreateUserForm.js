@@ -1,38 +1,105 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import styles from "./CreateUserForm.module.css";
 
 const CreateUserForm = (props) => {
-  const [userName, setUserName] = useState("");
-  const [userPin, setUserPin] = useState("");
-  const [userLanguage, setUserLanguage] = useState();
+  const usernameReducer = (state, action) => {
+    if (action.type === "USER-INPUT") {
+      return {
+        value: action.val,
+        isValid: action.val.includes(".com") && action.val.length > 4,
+      };
+    }
+    if (action.type === "INPUT-BLUR") {
+      return {
+        value: state.value,
+        isValid: state.value.includes(".com") && state.value.length > 4,
+      };
+    }
+    return { value: "", isValid: false };
+  };
 
-  const [userNameValid, setUserNameValid] = useState();
-  const [userPinValid, setUserPinValid] = useState();
-  const [userLanguageValid, setUserLanguageValid] = useState();
+  const pinReducer = (state, action) => {
+    if (action.type === "USER-INPUT") {
+      return {
+        value: action.val,
+        isValid: action.val.length > 3,
+      };
+    }
+    if (action.type === "INPUT-BLUR") {
+      return {
+        value: state.value,
+        isValid: state.value.length > 3,
+      };
+    }
+    return { value: "", isValid: false };
+  };
 
+  const languageReducer = (state, action) => {
+    if (action.type === "USER-INPUT") {
+      return {
+        value: action.val,
+        isValid: true,
+      };
+    }
+    if (action.type === "INPUT-BLUR") {
+      return {
+        value: state.value,
+        isValid: true,
+      };
+    }
+    return { value: "", isValid: false };
+  };
+
+  const [usernameState, dispatchUsername] = useReducer(usernameReducer, {
+    value: "",
+    isValid: true,
+  });
+
+  const [pinState, dispatchPin] = useReducer(pinReducer, {
+    value: "",
+    isValid: true,
+  });
+
+  const [languageState, dispatchLanguage] = useReducer(languageReducer, {
+    value: "",
+    isValid: true,
+  });
+  //////////////////////////////////////////////////////////////
   const [formIsValid, setFormIsValid] = useState(false);
-
   const [createdUsers, setCreatedUsers] = useState([]);
 
-  let upperCaseLetters = /[A-Z]/g;
-  let letters = /[a-zA-Z]/;
-
   const userNameHandler = (e) => {
-    setUserName(e.target.value);
-    setUserNameValid(!userName.match(upperCaseLetters) && userName.length > 5);
+    dispatchUsername({ type: "USER-INPUT", val: e.target.value });
+    setFormIsValid(
+      usernameState.isValid && pinState.isValid && languageState.isValid
+    );
   };
   const userPinHandler = (e) => {
-    setUserPin(e.target.value);
-    setUserPinValid(!userPin.match(letters) && userPin.length > 2);
+    dispatchPin({ type: "USER-INPUT", val: e.target.value });
+    setFormIsValid(
+      usernameState.isValid && pinState.isValid && languageState.isValid
+    );
   };
   const userLanguageHandler = (e) => {
-    setUserLanguage(e.target.value);
-    setUserLanguageValid(true);
+    dispatchLanguage({ type: "USER-INPUT", val: e.target.value });
+    setFormIsValid(
+      usernameState.isValid && pinState.isValid && languageState.isValid
+    );
   };
 
-  useEffect(() => {
-    setFormIsValid(userNameValid && userPinValid && userLanguageValid);
-  }, [userName, userPin, userLanguage]);
+  const validateUsername = () => {
+    dispatchUsername({ type: "INPUT-BLUR" });
+  };
+  const validatePin = () => {
+    dispatchPin({ type: "INPUT-BLUR" });
+  };
+  const validateLanguage = () => {
+    dispatchLanguage({ type: "INPUT-BLUR" });
+  };
+
+  // useEffect(() => {
+  //   setFormIsValid(userNameValid && userPinValid && userLanguageValid);
+  // }, [userName, userPin, userLanguage]);
 
   const user = class {
     //making password a private field (instance)
@@ -48,11 +115,15 @@ const CreateUserForm = (props) => {
     e.preventDefault();
 
     if (
-      userNameValid === true &&
-      userPinValid === true &&
-      userLanguageValid === true
+      usernameState.isValid === true &&
+      pinState.isValid === true &&
+      languageState.isValid === true
     ) {
-      let newUser = new user(userName, userPin, userLanguage);
+      let newUser = new user(
+        usernameState.value,
+        pinState.value,
+        languageState.value
+      );
       createdUsers.push(newUser);
 
       props.onLogin(createdUsers);
@@ -65,31 +136,34 @@ const CreateUserForm = (props) => {
     <form className={styles["form-container"]} onSubmit={submitCreateUserForm}>
       <input
         className={`${styles.input} ${
-          userNameValid === false ? styles.invalid : ""
+          usernameState.isValid === false ? styles.invalid : ""
         }`}
-        placeholder="username"
-        value={userName}
+        placeholder="Email"
+        value={usernameState.value}
         onChange={userNameHandler}
+        onBlur={validateUsername}
       />
       <input
         className={`${styles.input} ${
-          userPinValid === false ? styles.invalid : ""
+          pinState.isValid === false ? styles.invalid : ""
         }`}
-        placeholder="pin"
+        placeholder="Pin"
         type="password"
         maxLength={4}
         onChange={userPinHandler}
-        value={userPin}
+        value={pinState.value}
+        onBlur={validatePin}
       />
 
       <select
         className={`${styles.input} ${
-          userLanguageValid === false ? styles.invalid : ""
+          languageState.isValid === false ? styles.invalid : ""
         }`}
         name="Language"
         id="Language"
         onChange={userLanguageHandler}
-        value={userLanguage}
+        value={languageState.value}
+        onBlur={validateLanguage}
       >
         <option value="" disabled selected>
           What's your language?

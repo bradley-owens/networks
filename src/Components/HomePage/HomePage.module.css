@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-bottom: 5rem;
+  margin-right: 0.5rem;
+}
+
+.header-title {
+  margin-left: 1rem;
+}
+
+.home-main {
+  background-color: #246253;
+  margin: 0 10rem;
+  text-align: center;
+  border: 2px solid white;
+  padding: 0.3rem;
+}

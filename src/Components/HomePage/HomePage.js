@@ -1,10 +1,18 @@
 import React, { Fragment } from "react";
+import styles from "./HomePage.module.css";
+import Navigation from "./Navigation";
 
 const HomePage = (props) => {
   return (
     <Fragment>
-      <h1>Signed in</h1>
-      <button onClick={props.onLogOut}>Sign out</button>
+      <header className={styles.header}>
+        <h1 className={styles["header-title"]}>NetWORKS</h1>
+        <Navigation logout={props.onLogOut} />
+      </header>
+
+      <div className={styles["home-main"]}>
+        <h1>{`Welcome back ${props.savedUser}!`}</h1>
+      </div>
     </Fragment>
   );
 };

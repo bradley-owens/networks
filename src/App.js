@@ -4,6 +4,7 @@ import HomePage from "./Components/HomePage/HomePage";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState();
 
   useEffect(() => {
     const storedUserLoggedInInfo = localStorage.getItem("isLoggedIn");
@@ -15,7 +16,7 @@ function App() {
   const loginHandler = (users) => {
     localStorage.setItem("isLoggedIn", "1");
     setIsLoggedIn(true);
-    console.log(users);
+    setUser(users);
   };
 
   const logoutHandler = () => {
@@ -27,7 +28,7 @@ function App() {
     <Fragment>
       <main>
         {!isLoggedIn && <CreateUserPage onLogin={loginHandler} />}
-        {isLoggedIn && <HomePage onLogOut={logoutHandler} />}
+        {isLoggedIn && <HomePage savedUser={user} onLogOut={logoutHandler} />}
       </main>
     </Fragment>
   );
