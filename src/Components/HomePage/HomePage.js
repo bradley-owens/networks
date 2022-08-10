@@ -11,7 +11,7 @@ const HomePage = (props) => {
       </header>
 
       <div className={styles["home-main"]}>
-        <h1>{`Welcome back ${props.savedUser}!`}</h1>
+        <h1>Start Connecting!</h1>
       </div>
     </Fragment>
   );

@@ -6,13 +6,13 @@ const CreateUserForm = (props) => {
     if (action.type === "USER-INPUT") {
       return {
         value: action.val,
-        isValid: action.val.includes(".com") && action.val.length > 4,
+        isValid: action.val.includes(".com") && action.val.length > 16,
       };
     }
     if (action.type === "INPUT-BLUR") {
       return {
         value: state.value,
-        isValid: state.value.includes(".com") && state.value.length > 4,
+        isValid: state.value.includes(".com") && state.value.length > 16,
       };
     }
     return { value: "", isValid: false };
@@ -70,21 +70,12 @@ const CreateUserForm = (props) => {
 
   const userNameHandler = (e) => {
     dispatchUsername({ type: "USER-INPUT", val: e.target.value });
-    setFormIsValid(
-      e.target.value.includes(".com") &&
-        pinState.isValid &&
-        languageState.isValid
-    );
   };
   const userPinHandler = (e) => {
     dispatchPin({ type: "USER-INPUT", val: e.target.value });
-    setFormIsValid(
-      e.target.value > 999 && usernameState.isValid && languageState.isValid
-    );
   };
   const userLanguageHandler = (e) => {
     dispatchLanguage({ type: "USER-INPUT", val: e.target.value });
-    setFormIsValid(e.target.value && pinState.isValid && usernameState.isValid);
   };
 
   const validateUsername = () => {
@@ -97,9 +88,12 @@ const CreateUserForm = (props) => {
     dispatchLanguage({ type: "INPUT-BLUR" });
   };
 
-  // useEffect(() => {
-  //   setFormIsValid(userNameValid && userPinValid && userLanguageValid);
-  // }, [userName, userPin, userLanguage]);
+  const { isValid: emailIsValid } = usernameState;
+  const { isValid: pinIsValid } = pinState;
+  const { isValid: languageIsValid } = languageState;
+  useEffect(() => {
+    setFormIsValid(emailIsValid && pinIsValid && languageIsValid);
+  }, [emailIsValid, pinIsValid, languageIsValid]);
 
   const user = class {
     //making password a private field (instance)
@@ -114,21 +108,15 @@ const CreateUserForm = (props) => {
   const submitCreateUserForm = (e) => {
     e.preventDefault();
 
-    if (
-      usernameState.isValid === true &&
-      pinState.isValid === true &&
-      languageState.isValid === true
-    ) {
+    if (formIsValid) {
       let newUser = new user(
         usernameState.value,
         pinState.value,
         languageState.value
       );
-      createdUsers.push(newUser);
 
+      createdUsers.push(newUser);
       props.onLogin(createdUsers);
-    } else {
-      alert("Failed to create User! Try again!");
     }
   };
 
