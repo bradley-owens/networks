@@ -22,13 +22,13 @@ const CreateUserForm = (props) => {
     if (action.type === "USER-INPUT") {
       return {
         value: action.val,
-        isValid: action.val.length > 3,
+        isValid: action.val > 999,
       };
     }
     if (action.type === "INPUT-BLUR") {
       return {
         value: state.value,
-        isValid: state.value.length > 3,
+        isValid: state.value > 999,
       };
     }
     return { value: "", isValid: false };
@@ -52,17 +52,17 @@ const CreateUserForm = (props) => {
 
   const [usernameState, dispatchUsername] = useReducer(usernameReducer, {
     value: "",
-    isValid: true,
+    isValid: null,
   });
 
   const [pinState, dispatchPin] = useReducer(pinReducer, {
     value: "",
-    isValid: true,
+    isValid: null,
   });
 
   const [languageState, dispatchLanguage] = useReducer(languageReducer, {
     value: "",
-    isValid: true,
+    isValid: null,
   });
   //////////////////////////////////////////////////////////////
   const [formIsValid, setFormIsValid] = useState(false);
@@ -71,20 +71,20 @@ const CreateUserForm = (props) => {
   const userNameHandler = (e) => {
     dispatchUsername({ type: "USER-INPUT", val: e.target.value });
     setFormIsValid(
-      usernameState.isValid && pinState.isValid && languageState.isValid
+      e.target.value.includes(".com") &&
+        pinState.isValid &&
+        languageState.isValid
     );
   };
   const userPinHandler = (e) => {
     dispatchPin({ type: "USER-INPUT", val: e.target.value });
     setFormIsValid(
-      usernameState.isValid && pinState.isValid && languageState.isValid
+      e.target.value > 999 && usernameState.isValid && languageState.isValid
     );
   };
   const userLanguageHandler = (e) => {
     dispatchLanguage({ type: "USER-INPUT", val: e.target.value });
-    setFormIsValid(
-      usernameState.isValid && pinState.isValid && languageState.isValid
-    );
+    setFormIsValid(e.target.value && pinState.isValid && usernameState.isValid);
   };
 
   const validateUsername = () => {

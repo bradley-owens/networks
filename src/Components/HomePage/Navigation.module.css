@@ -6,7 +6,7 @@
 }
 
 a {
-  color: white;
+  color: #246253;
   text-decoration: none;
 }
 
@@ -15,8 +15,7 @@ a {
   border-radius: 10px;
   text-decoration: none;
   padding: 0.3rem;
-  border: 2px solid white;
+  border: 3px solid #246253;
   cursor: pointer;
-  color: white;
-  background-color: #246253;
+  color: #246253;
 }

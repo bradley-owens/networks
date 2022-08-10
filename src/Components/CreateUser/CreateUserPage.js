@@ -2,23 +2,25 @@ import React, { Fragment, useState } from "react";
 import CreateUserForm from "./CreateUserForm";
 import MemberCounter from "../MemberCounter/MemberCounter";
 import styles from "./CreateUserPage.module.css";
+import img from "../IMG/CreateAccImg.svg";
 
 const CreateUserPage = (props) => {
   return (
-    <Fragment>
+    <div className={styles.container}>
       <h1 className={styles["main-title"]}>NetWORKS</h1>
       <div className={styles["main-container"]}>
-        <h1 className={styles["login-title"]}>Join My Group!</h1>
+        <h1 className={styles["login-title"]}>Create an Account</h1>
         <CreateUserForm onLogin={props.onLogin} />
         <div className={styles["create-login-container"]}>
-          <p className={styles["create-login description"]}>
+          <p className={styles["create-login-description"]}>
             Already have one?
           </p>
           <button className={styles["link"]}>Sign in!</button>
         </div>
       </div>
+      <img className={styles.img} src={img}></img>
       <MemberCounter />
-    </Fragment>
+    </div>
   );
 };
 

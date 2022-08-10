@@ -1,20 +1,19 @@
 .form-container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   padding: 1rem;
 }
 
 .input {
-  width: 70%;
-  margin: 0 auto 1rem;
-  text-align: center;
+  width: 50%;
+  text-align: left;
   font-size: 1.5rem;
   background: none;
-  border: none;
-  border-bottom: 2px solid white;
-  padding: 0.3rem;
-  color: white;
+  border: 4px solid #246253;
+  border-radius: 10px;
+  padding: 0.5rem;
+  color: #246253;
 }
 
 .input:focus {
@@ -22,24 +21,23 @@
 }
 
 .input.invalid {
-  border-bottom: 2px solid red;
+  border: 4px solid red;
 }
 
 ::placeholder {
-  color: white;
+  color: #246253;
 }
 
 .login-button {
-  background-color: white;
-  color: #246253;
+  background-color: #246253;
+  color: white;
   font-weight: 800;
-  width: 30%;
+  width: 15%;
   text-align: center;
   text-decoration: none;
-  margin: 0 auto 1rem;
   font-size: 1.5rem;
   padding: 0.3rem;
-  border: 2px solid white;
+  border: 2px solid #246253;
   border-radius: 10px;
   cursor: pointer;
 
@@ -47,16 +45,16 @@
 }
 
 .login-button:hover {
-  background-color: #246253;
-  color: white;
-  border: 4px solid white;
+  background-color: white;
+  color: #246253;
+  border: 4px solid #246253;
   /* box-shadow: 0 20px 40px 0px rgba(0, 0, 0, 0.516); */
 }
 
 .login-button:disabled {
   background-color: grey;
   border-color: grey;
-  color: #246253;
+  color: white;
   cursor: not-allowed;
   border: 2px solid white;
 }

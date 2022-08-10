@@ -12,9 +12,8 @@
 }
 
 .home-main {
-  background-color: #246253;
   margin: 0 10rem;
   text-align: center;
-  border: 2px solid white;
+  border: 2px solid #246253;
   padding: 0.3rem;
 }
