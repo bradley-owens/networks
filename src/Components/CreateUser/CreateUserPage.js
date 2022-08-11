@@ -10,7 +10,7 @@ const CreateUserPage = (props) => {
       <h1 className={styles["main-title"]}>NetWORKS</h1>
       <div className={styles["main-container"]}>
         <h1 className={styles["login-title"]}>Create an Account</h1>
-        <CreateUserForm onLogin={props.onLogin} />
+        <CreateUserForm />
         <div className={styles["create-login-container"]}>
           <p className={styles["create-login-description"]}>
             Already have one?

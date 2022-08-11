@@ -7,7 +7,7 @@ const HomePage = (props) => {
     <Fragment>
       <header className={styles.header}>
         <h1 className={styles["header-title"]}>NetWORKS</h1>
-        <Navigation logout={props.onLogOut} />
+        <Navigation />
       </header>
 
       <div className={styles["home-main"]}>

@@ -1,4 +1,5 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState, useContext } from "react";
+import AuthContext from "../../Store/login-context";
 import styles from "./CreateUserForm.module.css";
 
 const CreateUserForm = (props) => {
@@ -66,7 +67,6 @@ const CreateUserForm = (props) => {
   });
   //////////////////////////////////////////////////////////////
   const [formIsValid, setFormIsValid] = useState(false);
-  const [createdUsers, setCreatedUsers] = useState([]);
 
   const userNameHandler = (e) => {
     dispatchUsername({ type: "USER-INPUT", val: e.target.value });
@@ -105,18 +105,19 @@ const CreateUserForm = (props) => {
     }
   };
 
+  const ctx = useContext(AuthContext);
+
   const submitCreateUserForm = (e) => {
     e.preventDefault();
 
     if (formIsValid) {
-      let newUser = new user(
+      const newUser = new user(
         usernameState.value,
         pinState.value,
         languageState.value
       );
 
-      createdUsers.push(newUser);
-      props.onLogin(createdUsers);
+      ctx.onLogin(newUser);
     }
   };
 
