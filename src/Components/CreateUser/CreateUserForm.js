@@ -1,6 +1,8 @@
 import React, { useEffect, useReducer, useState, useContext } from "react";
 import AuthContext from "../../Store/login-context";
 import styles from "./CreateUserForm.module.css";
+import Input from "../UI/Input";
+import Select from "../UI/Select";
 
 const CreateUserForm = (props) => {
   const usernameReducer = (state, action) => {
@@ -67,6 +69,7 @@ const CreateUserForm = (props) => {
   });
   //////////////////////////////////////////////////////////////
   const [formIsValid, setFormIsValid] = useState(false);
+  const ctx = useContext(AuthContext);
 
   const userNameHandler = (e) => {
     dispatchUsername({ type: "USER-INPUT", val: e.target.value });
@@ -105,8 +108,6 @@ const CreateUserForm = (props) => {
     }
   };
 
-  const ctx = useContext(AuthContext);
-
   const submitCreateUserForm = (e) => {
     e.preventDefault();
 
@@ -123,51 +124,33 @@ const CreateUserForm = (props) => {
 
   return (
     <form className={styles["form-container"]} onSubmit={submitCreateUserForm}>
-      <input
-        className={`${styles.input} ${
-          usernameState.isValid === false ? styles.invalid : ""
-        }`}
-        placeholder="Email"
+      <Input
+        isValid={emailIsValid}
+        placeholder="E-Mail"
+        type="email"
         value={usernameState.value}
         onChange={userNameHandler}
         onBlur={validateUsername}
-      />
-      <input
-        className={`${styles.input} ${
-          pinState.isValid === false ? styles.invalid : ""
-        }`}
+      ></Input>
+
+      <Input
+        isValid={pinIsValid}
         placeholder="Pin"
         type="password"
-        maxLength={4}
-        onChange={userPinHandler}
         value={pinState.value}
+        onChange={userPinHandler}
         onBlur={validatePin}
-      />
+        maxLength={4}
+      ></Input>
 
-      <select
-        className={`${styles.input} ${
-          languageState.isValid === false ? styles.invalid : ""
-        }`}
-        name="Language"
-        id="Language"
+      <Select
+        isValid={languageIsValid}
+        placeholder="Language"
         onChange={userLanguageHandler}
         value={languageState.value}
         onBlur={validateLanguage}
-      >
-        <option value="" disabled selected>
-          What's your language?
-        </option>
-        <option value="Javascript">Javascript</option>
-        <option value="Python">Python</option>
-        <option value="C++">C++</option>
-        <option value="Java">Java</option>
-        <option value="C">C</option>
-        <option value="C#">C#</option>
-        <option value="Ruby">Ruby</option>
-        <option value="PHP">PHP</option>
-        <option value="Swift">Swift</option>
-        <option value="None">Don't have one yet</option>
-      </select>
+      ></Select>
+
       <button
         type="submit"
         disabled={!formIsValid}

@@ -6,28 +6,6 @@
   margin-bottom: 2rem;
 }
 
-.input {
-  width: 50%;
-  text-align: left;
-  font-size: 1.5rem;
-  border: 4px solid #246253;
-  border-radius: 10px;
-  padding: 0.5rem;
-  color: #246253;
-}
-
-.input:focus {
-  outline: none;
-}
-
-.input.invalid {
-  border: 4px solid red;
-}
-
-::placeholder {
-  color: #246253;
-}
-
 .login-button {
   background-color: #246253;
   color: white;
