@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const AuthContext = React.createContext({
+  createdUsers: [],
   isLoggedIn: false,
   onLogOut: () => {},
   onLogin: (newUser) => {},
@@ -9,6 +10,7 @@ const AuthContext = React.createContext({
 export const AuthContextProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState();
+  const allUsers = [];
 
   useEffect(() => {
     const storedUserLoggedInInfo = localStorage.getItem("isLoggedIn");
@@ -17,10 +19,10 @@ export const AuthContextProvider = (props) => {
     }
   }, []);
 
-  const loginHandler = (newUser) => {
+  const loginHandler = (loggedInUser) => {
     localStorage.setItem("isLoggedIn", "1");
     setIsLoggedIn(true);
-    setUser(newUser);
+    setUser(loggedInUser);
   };
 
   const logoutHandler = () => {
@@ -34,6 +36,7 @@ export const AuthContextProvider = (props) => {
         isLoggedIn: isLoggedIn,
         onLogOut: logoutHandler,
         onLogin: loginHandler,
+        createdUsers: allUsers,
       }}
     >
       {props.children}

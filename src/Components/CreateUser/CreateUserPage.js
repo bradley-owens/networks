@@ -18,7 +18,7 @@ const CreateUserPage = (props) => {
           <button className={styles["link"]}>Sign in!</button>
         </div>
       </div>
-      <img className={styles.img} src={img}></img>
+      <img className={styles.img} src={img} alt="network"></img>
       <MemberCounter />
     </div>
   );

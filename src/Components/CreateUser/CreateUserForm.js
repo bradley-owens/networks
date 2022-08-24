@@ -37,6 +37,22 @@ const CreateUserForm = (props) => {
     return { value: "", isValid: false };
   };
 
+  const nameReducer = (state, action) => {
+    if (action.type === "USER-INPUT") {
+      return {
+        value: action.val,
+        isValid: action.val.length > 2,
+      };
+    }
+
+    if (action.type === "INPUT-BLUR") {
+      return {
+        value: state.value,
+        isValid: state.value.length > 2,
+      };
+    }
+  };
+
   const languageReducer = (state, action) => {
     if (action.type === "USER-INPUT") {
       return {
@@ -63,12 +79,18 @@ const CreateUserForm = (props) => {
     isValid: null,
   });
 
+  const [nameState, dispatchName] = useReducer(nameReducer, {
+    value: "",
+    isValid: null,
+  });
+
   const [languageState, dispatchLanguage] = useReducer(languageReducer, {
     value: "",
     isValid: null,
   });
   //////////////////////////////////////////////////////////////
   const [formIsValid, setFormIsValid] = useState(false);
+
   const ctx = useContext(AuthContext);
 
   const userNameHandler = (e) => {
@@ -77,6 +99,11 @@ const CreateUserForm = (props) => {
   const userPinHandler = (e) => {
     dispatchPin({ type: "USER-INPUT", val: e.target.value });
   };
+
+  const nameHandler = (e) => {
+    dispatchName({ type: "USER-INPUT", val: e.target.value });
+  };
+
   const userLanguageHandler = (e) => {
     dispatchLanguage({ type: "USER-INPUT", val: e.target.value });
   };
@@ -87,6 +114,10 @@ const CreateUserForm = (props) => {
   const validatePin = () => {
     dispatchPin({ type: "INPUT-BLUR" });
   };
+
+  const validateName = () => {
+    dispatchName({ type: "INPUT-BLUR" });
+  };
   const validateLanguage = () => {
     dispatchLanguage({ type: "INPUT-BLUR" });
   };
@@ -94,17 +125,22 @@ const CreateUserForm = (props) => {
   const { isValid: emailIsValid } = usernameState;
   const { isValid: pinIsValid } = pinState;
   const { isValid: languageIsValid } = languageState;
+  const { isValid: nameIsValid } = nameState;
+
   useEffect(() => {
-    setFormIsValid(emailIsValid && pinIsValid && languageIsValid);
-  }, [emailIsValid, pinIsValid, languageIsValid]);
+    setFormIsValid(
+      emailIsValid && pinIsValid && languageIsValid && nameIsValid
+    );
+  }, [emailIsValid, pinIsValid, languageIsValid, nameIsValid]);
 
   const user = class {
     //making password a private field (instance)
     #password;
-    constructor(userName, password, language) {
+    constructor(userName, password, language, name) {
       this.userName = userName;
       this.#password = password;
       this.language = language;
+      this.name = name;
     }
   };
 
@@ -112,12 +148,14 @@ const CreateUserForm = (props) => {
     e.preventDefault();
 
     if (formIsValid) {
-      const newUser = new user(
+      let newUser = new user(
         usernameState.value,
         pinState.value,
-        languageState.value
+        languageState.value,
+        nameState.value
       );
 
+      console.log(newUser);
       ctx.onLogin(newUser);
     }
   };
@@ -143,6 +181,15 @@ const CreateUserForm = (props) => {
         maxLength={4}
       ></Input>
 
+      <Input
+        isValid={nameIsValid}
+        placeholder="Name"
+        type="name"
+        value={nameState.value}
+        onChange={nameHandler}
+        onBlur={validateName}
+      ></Input>
+
       <Select
         isValid={languageIsValid}
         placeholder="Language"
@@ -151,11 +198,7 @@ const CreateUserForm = (props) => {
         onBlur={validateLanguage}
       ></Select>
 
-      <button
-        type="submit"
-        disabled={!formIsValid}
-        className={styles["login-button"]}
-      >
+      <button type="submit" className={styles["login-button"]}>
         Join
       </button>
     </form>
