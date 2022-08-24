@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
+import { db } from "./Firebase";
 
 const AuthContext = React.createContext({
-  createdUsers: [],
   isLoggedIn: false,
   onLogOut: () => {},
-  onLogin: (newUser) => {},
+  onLogin: (loggedInUser) => {},
+  onCreateUser: () => {},
 });
 
 export const AuthContextProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState();
-  const allUsers = [];
 
   useEffect(() => {
     const storedUserLoggedInInfo = localStorage.getItem("isLoggedIn");
@@ -30,13 +30,26 @@ export const AuthContextProvider = (props) => {
     localStorage.removeItem("isLoggedIn");
   };
 
+  /////////////////////////////////////////////////////
+
+  const database = db.collection("Users");
+
+  const createUserHandler = (createdUser) => {
+    database.add({
+      email: createdUser.userName,
+      pin: createdUser.password,
+      name: createdUser.name,
+      language: createdUser.language,
+    });
+  };
+
   return (
     <AuthContext.Provider
       value={{
         isLoggedIn: isLoggedIn,
         onLogOut: logoutHandler,
         onLogin: loginHandler,
-        createdUsers: allUsers,
+        onCreateUser: createUserHandler,
       }}
     >
       {props.children}

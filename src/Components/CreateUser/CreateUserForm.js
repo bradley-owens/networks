@@ -134,11 +134,9 @@ const CreateUserForm = (props) => {
   }, [emailIsValid, pinIsValid, languageIsValid, nameIsValid]);
 
   const user = class {
-    //making password a private field (instance)
-    #password;
     constructor(userName, password, language, name) {
       this.userName = userName;
-      this.#password = password;
+      this.password = password;
       this.language = language;
       this.name = name;
     }
@@ -155,10 +153,12 @@ const CreateUserForm = (props) => {
         nameState.value
       );
 
-      console.log(newUser);
+      ctx.onCreateUser(newUser);
       ctx.onLogin(newUser);
     }
   };
+
+  const lengthOfPassword = 4;
 
   return (
     <form className={styles["form-container"]} onSubmit={submitCreateUserForm}>
@@ -178,7 +178,7 @@ const CreateUserForm = (props) => {
         value={pinState.value}
         onChange={userPinHandler}
         onBlur={validatePin}
-        maxLength={4}
+        inputProps={{ maxLength: lengthOfPassword }}
       ></Input>
 
       <Input
@@ -198,7 +198,12 @@ const CreateUserForm = (props) => {
         onBlur={validateLanguage}
       ></Select>
 
-      <button type="submit" className={styles["login-button"]}>
+      <button
+        type="submit"
+        className={
+          formIsValid ? styles["login-button"] : styles["login-button_disabled"]
+        }
+      >
         Join
       </button>
     </form>

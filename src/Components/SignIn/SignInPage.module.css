@@ -1,0 +1,57 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(90deg, white, rgba(79, 154, 135, 0.6));
+  color: #246253;
+  font-family: "Roboto Slab", serif;
+}
+
+.container {
+  padding: 2rem;
+}
+
+.main-title {
+  margin-left: 3.5rem;
+  margin-bottom: 2rem;
+  font-size: 3rem;
+}
+
+.login-title {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 3.5rem;
+}
+
+.create-login-description {
+  margin-left: 1.5rem;
+}
+
+.link {
+  color: #246253;
+  margin-left: 1.5rem;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  text-decoration: underline 2px solid;
+}
+
+.link:hover {
+  color: aqua;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.create-login-container {
+  font-size: 1.2rem;
+}
+
+.img {
+  width: 28rem;
+  position: absolute;
+  top: 18%;
+  left: 60%;
+}

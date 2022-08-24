@@ -12,6 +12,7 @@ const Input = (props) => {
       value={props.value}
       onChange={props.onChange}
       onBlur={props.onBlur}
+      inputProps={props.inputprops}
     />
   );
 };
