@@ -5,7 +5,7 @@ import styles from "./CreateUserPage.module.css";
 import img from "../IMG/CreateAccImg.svg";
 import SignInPage from "../SignIn/SignInPage";
 
-const CreateUserPage = () => {
+const CreateUserPage = (props) => {
   const [hasAccount, setHasAccount] = useState(false);
 
   const toSignInPageHandler = () => {

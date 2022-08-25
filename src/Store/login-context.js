@@ -6,6 +6,7 @@ const AuthContext = React.createContext({
   onLogOut: () => {},
   onLogin: (loggedInUser) => {},
   onCreateUser: () => {},
+  onSignIn: [],
 });
 
 export const AuthContextProvider = (props) => {
@@ -43,6 +44,28 @@ export const AuthContextProvider = (props) => {
     });
   };
 
+  //////////////////////////////////////////////////////
+
+  const [data, setData] = useState([]);
+  const [loader, setloader] = useState(true);
+
+  const getData = () => {
+    database.onSnapshot((snap) => {
+      const items = [];
+      snap.forEach((doc) => {
+        items.push(doc.data());
+      });
+
+      setData(items);
+      setloader(false);
+    });
+  };
+
+  useEffect(() => {
+    getData();
+    // console.log(data);
+  }, [loader]);
+
   return (
     <AuthContext.Provider
       value={{
@@ -50,6 +73,7 @@ export const AuthContextProvider = (props) => {
         onLogOut: logoutHandler,
         onLogin: loginHandler,
         onCreateUser: createUserHandler,
+        onSignIn: data,
       }}
     >
       {props.children}

@@ -12,17 +12,18 @@ body {
 
 .container {
   padding: 2rem;
+  margin: 5rem 0;
 }
 
 .main-title {
-  margin-left: 3.5rem;
+  margin-left: 1.8rem;
   margin-bottom: 2rem;
   font-size: 3rem;
 }
 
 .login-title {
   margin-left: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   font-size: 3.5rem;
 }
 
@@ -52,6 +53,6 @@ body {
 .img {
   width: 28rem;
   position: absolute;
-  top: 18%;
+  top: 25%;
   left: 60%;
 }

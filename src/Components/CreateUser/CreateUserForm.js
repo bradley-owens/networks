@@ -178,7 +178,7 @@ const CreateUserForm = (props) => {
         value={pinState.value}
         onChange={userPinHandler}
         onBlur={validatePin}
-        inputProps={{ maxLength: lengthOfPassword }}
+        maxLength={lengthOfPassword}
       ></Input>
 
       <Input
