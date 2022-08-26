@@ -71,18 +71,24 @@ const SignInForm = (props) => {
     setFormIsValid(emailIsValid && pinIsValid);
   }, [emailIsValid, pinIsValid]);
 
+  const [userCorrect, setUserCorrect] = useState(true);
+
+  const checkForUser = (username, password) => {
+    setUserCorrect(true);
+    ctx.onSignIn.forEach((user) => {
+      if (user.email.includes(username) && user.pin.includes(password)) {
+        ctx.onLogin(user);
+      } else {
+        setUserCorrect(false);
+      }
+    });
+  };
+
   const submitCreateUserForm = (e) => {
     e.preventDefault();
 
     if (formIsValid) {
-      ctx.onSignIn.forEach((user) => {
-        console.log(user.pin, user.email);
-        if (user.email == usernameState.value) {
-          if (user.pin === pinState.value) {
-            ctx.onLogin(user);
-          }
-        }
-      });
+      checkForUser(usernameState.value, pinState.value);
     }
   };
 
@@ -94,6 +100,7 @@ const SignInForm = (props) => {
     <form className={styles["form-container"]} onSubmit={submitCreateUserForm}>
       <Input
         isValid={emailIsValid}
+        accCorrect={userCorrect}
         placeholder="E-Mail"
         type="email"
         value={usernameState.value}
@@ -103,6 +110,7 @@ const SignInForm = (props) => {
 
       <Input
         isValid={pinIsValid}
+        accCorrect={userCorrect}
         placeholder="Pin"
         type="password"
         value={pinState.value}

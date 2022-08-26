@@ -1,8 +1,11 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import styles from "./HomePage.module.css";
 import Navigation from "./Navigation";
+import AuthContext from "../../Store/login-context";
 
 const HomePage = (props) => {
+  const ctx = useContext(AuthContext);
+
   return (
     <Fragment>
       <header className={styles.header}>
@@ -11,7 +14,7 @@ const HomePage = (props) => {
       </header>
 
       <div className={styles["home-main"]}>
-        <h1>Start Connecting!</h1>
+        <h1>{`Welcome ${ctx.signedIn.name}`}</h1>
       </div>
     </Fragment>
   );

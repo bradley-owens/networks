@@ -7,6 +7,7 @@ const AuthContext = React.createContext({
   onLogin: (loggedInUser) => {},
   onCreateUser: () => {},
   onSignIn: [],
+  signedIn: "",
 });
 
 export const AuthContextProvider = (props) => {
@@ -74,6 +75,7 @@ export const AuthContextProvider = (props) => {
         onLogin: loginHandler,
         onCreateUser: createUserHandler,
         onSignIn: data,
+        signedIn: user,
       }}
     >
       {props.children}
