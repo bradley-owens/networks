@@ -93,7 +93,13 @@ const SignInForm = (props) => {
   };
 
   const signInAsGuest = () => {
-    ctx.onLogin();
+    const guest = {
+      email: "guest12345@guest.com",
+      pin: 1234,
+      name: "Guest",
+      language: "None",
+    };
+    ctx.onLogin(guest);
   };
 
   return (
