@@ -16,21 +16,28 @@ export const AuthContextProvider = (props) => {
 
   useEffect(() => {
     const storedUserLoggedInInfo = localStorage.getItem("isLoggedIn");
+    const storedLoggedInUser = localStorage.getItem("loggedInUser");
     if (storedUserLoggedInInfo === "1") {
       setIsLoggedIn(true);
+    }
+
+    if (storedLoggedInUser !== "") {
+      setUser(storedLoggedInUser);
     }
   }, []);
 
   const loginHandler = (loggedInUser) => {
-    localStorage.setItem("isLoggedIn", "1");
     setIsLoggedIn(true);
     setUser(loggedInUser);
+    localStorage.setItem("isLoggedIn", "1");
+    localStorage.setItem("loggedInUser", user);
     console.log(user);
   };
 
   const logoutHandler = () => {
     setIsLoggedIn(false);
     localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("loggedInUser");
   };
 
   /////////////////////////////////////////////////////

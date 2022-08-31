@@ -14,7 +14,9 @@ const HomePage = (props) => {
       </header>
 
       <div className={styles["home-main"]}>
-        <h1>{`Welcome ${ctx.isLoggedIn === true && ctx.signedIn.name}`}</h1>
+        <h1>{`Welcome back ${
+          ctx.isLoggedIn === true && ctx.signedIn.name
+        }`}</h1>
       </div>
     </Fragment>
   );
