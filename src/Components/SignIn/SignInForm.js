@@ -1,4 +1,6 @@
 import React, { useEffect, useContext, useState, useReducer } from "react";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../Store/authentication-slice";
 import AuthContext from "../../Store/login-context";
 import Input from "../UI/Input";
 import styles from "./SignInForm.module.css";
@@ -65,19 +67,20 @@ const SignInForm = (props) => {
 
   const [formIsValid, setFormIsValid] = useState(false);
 
-  const ctx = useContext(AuthContext);
-
   useEffect(() => {
     setFormIsValid(emailIsValid && pinIsValid);
   }, [emailIsValid, pinIsValid]);
 
   const [userCorrect, setUserCorrect] = useState(true);
 
+  const ctx = useContext(AuthContext);
+  const dispatch = useDispatch();
+
   const checkForUser = (username, password) => {
     setUserCorrect(true);
-    ctx.onSignIn.forEach((user) => {
+    ctx.checkUser.forEach((user) => {
       if (user.email.includes(username) && user.pin.includes(password)) {
-        ctx.onLogin(user);
+        dispatch(authActions.login(user));
       } else {
         setUserCorrect(false);
       }
@@ -99,7 +102,7 @@ const SignInForm = (props) => {
       name: "Guest",
       language: "None",
     };
-    ctx.onLogin(guest);
+    dispatch(authActions.login(guest));
   };
 
   return (

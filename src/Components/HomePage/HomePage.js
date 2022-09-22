@@ -1,10 +1,13 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment } from "react";
 import styles from "./HomePage.module.css";
 import Navigation from "./Navigation";
-import AuthContext from "../../Store/login-context";
+import { useSelector } from "react-redux";
 
 const HomePage = (props) => {
-  const ctx = useContext(AuthContext);
+  const isLoggedIn = useSelector((state) => state.authentication.isLoggedIn);
+  const loggedInName = useSelector(
+    (state) => state.authentication.loggedInUser.name
+  );
 
   return (
     <Fragment>
@@ -14,9 +17,7 @@ const HomePage = (props) => {
       </header>
 
       <div className={styles["home-main"]}>
-        <h1>{`Welcome back ${
-          ctx.isLoggedIn === true && ctx.signedIn.name
-        }`}</h1>
+        <h1>{`Welcome back ${isLoggedIn === true && loggedInName}`}</h1>
       </div>
     </Fragment>
   );

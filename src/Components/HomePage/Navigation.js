@@ -1,15 +1,19 @@
-import React, { useContext } from "react";
+import React from "react";
 import styles from "./Navigation.module.css";
-import AuthContext from "../../Store/login-context";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../Store/authentication-slice";
 
 const Navigation = (props) => {
-  const ctx = useContext(AuthContext);
+  const dispatch = useDispatch();
+  const logoutHandler = () => {
+    dispatch(authActions.logout());
+  };
 
   return (
     <nav className={styles.nav}>
       <a href="/">My Network</a>
       <a href="/">Account</a>
-      <button className={styles.logout} onClick={ctx.onLogOut}>
+      <button className={styles.logout} onClick={logoutHandler}>
         Sign out
       </button>
     </nav>

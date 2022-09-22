@@ -1,8 +1,9 @@
-import React, { useEffect, useReducer, useState, useContext } from "react";
-import AuthContext from "../../Store/login-context";
-import styles from "./CreateUserForm.module.css";
+import React, { useEffect, useReducer, useState } from "react";
+import { authActions } from "../../Store/authentication-slice";
+import { useDispatch } from "react-redux";
 import Input from "../UI/Input";
 import Select from "../UI/Select";
+import styles from "./CreateUserForm.module.css";
 
 const CreateUserForm = (props) => {
   const usernameReducer = (state, action) => {
@@ -91,8 +92,6 @@ const CreateUserForm = (props) => {
   //////////////////////////////////////////////////////////////
   const [formIsValid, setFormIsValid] = useState(false);
 
-  const ctx = useContext(AuthContext);
-
   const userNameHandler = (e) => {
     dispatchUsername({ type: "USER-INPUT", val: e.target.value });
   };
@@ -142,6 +141,8 @@ const CreateUserForm = (props) => {
     }
   };
 
+  const dispatch = useDispatch();
+
   const submitCreateUserForm = (e) => {
     e.preventDefault();
 
@@ -153,8 +154,7 @@ const CreateUserForm = (props) => {
         nameState.value
       );
 
-      ctx.onCreateUser(newUser);
-      ctx.onLogin(newUser);
+      dispatch(authActions.createUser(newUser));
     }
   };
 

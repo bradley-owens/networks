@@ -2,12 +2,7 @@ import React, { useState, useEffect } from "react";
 import { db } from "./Firebase";
 
 const AuthContext = React.createContext({
-  isLoggedIn: false,
-  onLogOut: () => {},
-  onLogin: (loggedInUser) => {},
-  onCreateUser: () => {},
-  onSignIn: [],
-  signedIn: "",
+  checkUser: [],
 });
 
 export const AuthContextProvider = (props) => {
@@ -78,12 +73,7 @@ export const AuthContextProvider = (props) => {
   return (
     <AuthContext.Provider
       value={{
-        isLoggedIn: isLoggedIn,
-        onLogOut: logoutHandler,
-        onLogin: loginHandler,
-        onCreateUser: createUserHandler,
-        onSignIn: data,
-        signedIn: user,
+        checkUser: data,
       }}
     >
       {props.children}
