@@ -3,6 +3,7 @@ import { db } from "./Firebase";
 
 const AuthContext = React.createContext({
   checkUser: [],
+  fetchData: () => {},
 });
 
 export const AuthContextProvider = (props) => {
@@ -74,6 +75,7 @@ export const AuthContextProvider = (props) => {
     <AuthContext.Provider
       value={{
         checkUser: data,
+        fetchData: getData,
       }}
     >
       {props.children}
