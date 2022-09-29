@@ -15,6 +15,8 @@ const authenticationSlice = createSlice({
     createUser(state, action) {
       state.isLoggedIn = true;
       state.loggedInUser = action.payload;
+      localStorage.setItem("isLoggedIn", "1");
+      localStorage.setItem("loggedInUser", action.payload);
       database.add({
         email: action.payload.userName,
         pin: action.payload.password,
@@ -25,10 +27,14 @@ const authenticationSlice = createSlice({
     login(state, action) {
       state.isLoggedIn = true;
       state.loggedInUser = action.payload;
+      localStorage.setItem("isLoggedIn", "1");
+      localStorage.setItem("loggedInUser", action.payload);
     },
     logout(state) {
       state.isLoggedIn = false;
       state.loggedInUser = {};
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("loggedInUser");
     },
   },
 });

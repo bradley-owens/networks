@@ -7,14 +7,13 @@ const AuthContext = React.createContext({
 });
 
 export const AuthContextProvider = (props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loginStatus, setLoginStatus] = useState(false);
   const [user, setUser] = useState();
-
   useEffect(() => {
     const storedUserLoggedInInfo = localStorage.getItem("isLoggedIn");
     const storedLoggedInUser = localStorage.getItem("loggedInUser");
     if (storedUserLoggedInInfo === "1") {
-      setIsLoggedIn(true);
+      setLoginStatus(true);
     }
 
     if (storedLoggedInUser !== "") {
@@ -22,35 +21,9 @@ export const AuthContextProvider = (props) => {
     }
   }, []);
 
-  const loginHandler = (loggedInUser) => {
-    setIsLoggedIn(true);
-    setUser(loggedInUser);
-    localStorage.setItem("isLoggedIn", "1");
-    localStorage.setItem("loggedInUser", user);
-    console.log(user);
-  };
-
-  const logoutHandler = () => {
-    setIsLoggedIn(false);
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("loggedInUser");
-  };
-
-  /////////////////////////////////////////////////////
+  //////////////////////////////
 
   const database = db.collection("Users");
-
-  const createUserHandler = (createdUser) => {
-    database.add({
-      email: createdUser.userName,
-      pin: createdUser.password,
-      name: createdUser.name,
-      language: createdUser.language,
-    });
-  };
-
-  //////////////////////////////////////////////////////
-
   const [data, setData] = useState([]);
   const [loader, setloader] = useState(true);
 
@@ -68,7 +41,6 @@ export const AuthContextProvider = (props) => {
 
   useEffect(() => {
     getData();
-    // console.log(data);
   }, [loader]);
 
   return (

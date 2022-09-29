@@ -11,7 +11,6 @@ const CreateUserPage = (props) => {
   const toSignInPageHandler = () => {
     setHasAccount(true);
   };
-
   if (hasAccount) {
     return <SignInPage />;
   }
