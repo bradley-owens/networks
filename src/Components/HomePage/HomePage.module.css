@@ -1,40 +1,6 @@
-.home-header {
-  padding: 2rem;
-  display: grid;
-  grid-template-columns: 45rem 35rem;
-  column-gap: 6rem;
-}
-
-.arrow {
-  width: 4rem;
-  position: absolute;
-  right: 8%;
-  top: 13%;
-  transform: rotate(-50deg);
-}
-
 .home-modal {
   border: 3px solid #246253;
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.6);
   padding: 1.5rem 3rem;
-}
-
-.welcome {
-  border-bottom: 2px solid #246253;
-  width: fit-content;
-  margin-bottom: 1.5rem;
-  font-weight: 500;
-}
-
-.tip {
-  border-bottom: 2px solid #246253;
-  width: fit-content;
-  font-size: 1.6rem;
-  margin-bottom: 1.2rem;
-}
-
-p {
-  font-size: 1.2rem;
-  line-height: 1.5;
 }
