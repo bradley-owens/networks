@@ -4,22 +4,19 @@ import { db } from "./Firebase";
 const AuthContext = React.createContext({
   checkUser: [],
   fetchData: () => {},
+  loggedInStatus: false,
 });
 
 export const AuthContextProvider = (props) => {
   const [loginStatus, setLoginStatus] = useState(false);
-  const [user, setUser] = useState();
+
   useEffect(() => {
     const storedUserLoggedInInfo = localStorage.getItem("isLoggedIn");
     const storedLoggedInUser = localStorage.getItem("loggedInUser");
     if (storedUserLoggedInInfo === "1") {
       setLoginStatus(true);
     }
-
-    if (storedLoggedInUser !== "") {
-      setUser(storedLoggedInUser);
-    }
-  }, []);
+  }, [loginStatus]);
 
   //////////////////////////////
 
@@ -48,6 +45,7 @@ export const AuthContextProvider = (props) => {
       value={{
         checkUser: data,
         fetchData: getData,
+        loggedInStatus: loginStatus,
       }}
     >
       {props.children}

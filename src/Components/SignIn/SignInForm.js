@@ -102,6 +102,7 @@ const SignInForm = (props) => {
       name: "Guest",
       language: "None",
     };
+
     dispatch(authActions.login(guest));
   };
 
