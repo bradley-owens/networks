@@ -12,7 +12,7 @@ const HomePage = (props) => {
 
   if (ctx.loggedInStatus)
     return (
-      <Fragment>
+      <Fragment id="home">
         <Navigation />
         <Header />
         <TheNetwork />

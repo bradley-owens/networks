@@ -13,7 +13,7 @@ const Navigation = (props) => {
     <nav className={styles.nav}>
       <h1 className={styles["nav-title"]}>NetWORKS</h1>
       <div className={styles["flex-link"]}>
-        <a className={styles.link} href="/">
+        <a className={styles.link} href="#home">
           Home
         </a>
         <a className={styles.link} href="/">

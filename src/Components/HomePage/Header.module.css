@@ -3,6 +3,7 @@
   display: grid;
   grid-template-columns: 45rem 35rem;
   column-gap: 6rem;
+  margin-bottom: 3rem;
 }
 
 .arrow {
