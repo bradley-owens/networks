@@ -21,6 +21,7 @@ const Navigation = (props) => {
         >
           Home
         </NavLink>
+
         <NavLink
           activeClassName={styles.active}
           className={styles.link}
@@ -28,6 +29,7 @@ const Navigation = (props) => {
         >
           My Network
         </NavLink>
+
         <NavLink
           activeClassName={styles.active}
           className={styles.link}
@@ -35,6 +37,7 @@ const Navigation = (props) => {
         >
           Account
         </NavLink>
+
         <a className={styles.link} onClick={logoutHandler}>
           Sign out
         </a>

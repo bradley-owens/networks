@@ -5,6 +5,8 @@ import { useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import MyNetwork from "./Components/MyNetwork/MyNetwork";
 import Account from "./Components/Account/Account";
+import Layout from "./Components/Layout/Layout";
+import { Redirect } from "react-router-dom";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.authentication.isLoggedIn);
@@ -13,17 +15,24 @@ function App() {
     <main>
       {!isLoggedIn && <CreateUserPage />}
       {/* {isLoggedIn && <HomePage />} */}
-      <Switch>
-        <Route path="/home">
-          <HomePage />
-        </Route>
-        <Route path="/my-network">
-          <MyNetwork />
-        </Route>
-        <Route path="/account">
-          <Account />
-        </Route>
-      </Switch>
+      {isLoggedIn && (
+        <Layout>
+          <Switch>
+            <Route path="/" exact>
+              <Redirect to="/home" />
+            </Route>
+            <Route path="/home">
+              <HomePage />
+            </Route>
+            <Route path="/my-network">
+              <MyNetwork />
+            </Route>
+            <Route path="/account">
+              <Account />
+            </Route>
+          </Switch>
+        </Layout>
+      )}
     </main>
   );
 }
