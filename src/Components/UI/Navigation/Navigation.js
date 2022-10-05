@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Navigation.module.css";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../../Store/authentication-slice";
+import { NavLink } from "react-router-dom";
 
 const Navigation = (props) => {
   const dispatch = useDispatch();
@@ -13,15 +14,27 @@ const Navigation = (props) => {
     <nav className={styles.nav}>
       <h1 className={styles["nav-title"]}>NetWORKS</h1>
       <div className={styles["flex-link"]}>
-        <a className={styles.link} href="#home">
+        <NavLink
+          activeClassName={styles.active}
+          className={styles.link}
+          to="/home"
+        >
           Home
-        </a>
-        <a className={styles.link} href="/">
+        </NavLink>
+        <NavLink
+          activeClassName={styles.active}
+          className={styles.link}
+          to="/my-network"
+        >
           My Network
-        </a>
-        <a className={styles.link} href="/">
+        </NavLink>
+        <NavLink
+          activeClassName={styles.active}
+          className={styles.link}
+          to="/account"
+        >
           Account
-        </a>
+        </NavLink>
         <a className={styles.link} onClick={logoutHandler}>
           Sign out
         </a>
