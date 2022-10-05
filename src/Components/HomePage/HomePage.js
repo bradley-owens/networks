@@ -1,6 +1,6 @@
 import React, { Fragment, useContext } from "react";
 
-import Navigation from "./Navigation";
+import Navigation from "../UI/Navigation/Navigation";
 import { useSelector } from "react-redux";
 import AuthContext from "../../Store/login-context";
 import Header from "./Header";

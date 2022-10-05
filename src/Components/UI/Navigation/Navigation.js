@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Navigation.module.css";
 import { useDispatch } from "react-redux";
-import { authActions } from "../../Store/authentication-slice";
+import { authActions } from "../../../Store/authentication-slice";
 
 const Navigation = (props) => {
   const dispatch = useDispatch();

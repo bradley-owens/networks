@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const database = db.collection("Users");
 
 const authenticationInitialState = {
-  isLoggedIn: true,
+  isLoggedIn: false,
   loggedInUser: {},
 };
 

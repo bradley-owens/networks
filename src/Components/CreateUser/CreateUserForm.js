@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { authActions } from "../../Store/authentication-slice";
 import { useDispatch } from "react-redux";
-import Input from "../UI/Input";
+import Input from "../UI/Inputs/Input";
 import Select from "../UI/Select";
 import styles from "./CreateUserForm.module.css";
 

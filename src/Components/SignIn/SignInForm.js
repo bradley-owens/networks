@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState, useReducer } from "react";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../Store/authentication-slice";
 import AuthContext from "../../Store/login-context";
-import Input from "../UI/Input";
+import Input from "../UI/Inputs/Input";
 import styles from "./SignInForm.module.css";
 
 const SignInForm = (props) => {
