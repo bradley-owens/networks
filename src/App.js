@@ -1,11 +1,12 @@
 import React, { Fragment } from "react";
 import CreateUserPage from "./Components/CreateUser/CreateUserPage";
-import HomePage from "./Components/HomePage/HomePage";
+import HomePage from "./Pages/HomePage/HomePage";
 import { useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
-import MyNetwork from "./Components/MyNetwork/MyNetwork";
-import Account from "./Components/Account/Account";
+import MyNetwork from "./Pages/MyNetwork/MyNetwork";
+import Account from "./Pages/Account/Account";
 import Layout from "./Components/Layout/Layout";
+import AccountEdit from "./Pages/Account/AccountEdit";
 import { Redirect } from "react-router-dom";
 
 function App() {
@@ -29,6 +30,9 @@ function App() {
             </Route>
             <Route path="/account">
               <Account />
+            </Route>
+            <Route path="/edit-profile">
+              <AccountEdit />
             </Route>
           </Switch>
         </Layout>

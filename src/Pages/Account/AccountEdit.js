@@ -1,14 +1,10 @@
-import { useSelector } from "react-redux";
-import styles from "./Account.module.css";
+import { Fragment } from "react";
+import styles from "./AccountEdit.module.css";
 
-const Account = () => {
-  const userName = useSelector(
-    (state) => state.authentication.loggedInUser.name
-  );
+const AccountEdit = () => {
   return (
-    <div className={styles["account-container"]}>
-      <h1>{`${userName}'s Account`}</h1>
-      <p>Set up more information to show other members about yourself!</p>
+    <Fragment>
+      <h1 className={styles.title}>Edit Profile</h1>
       <div className={styles["modal-flex"]}>
         <div className={styles["account-modal"]}>
           <h3>Account Information</h3>
@@ -47,8 +43,8 @@ const Account = () => {
           </form>
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 };
 
-export default Account;
+export default AccountEdit;

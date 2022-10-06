@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
-import arrow from "../IMG/arrow.png";
+import arrow from "../../Components/IMG/arrow.png";
 import styles from "./Header.module.css";
 
 const Header = () => {
