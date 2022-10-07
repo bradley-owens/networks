@@ -5,7 +5,6 @@ import styles from "./AccountInformation.module.css";
 const AccountInformation = () => {
   const user = useSelector((state) => state.authentication.loggedInUser);
 
-  console.log(user);
   return (
     <div className={styles["modal-container"]}>
       <AccountCard>

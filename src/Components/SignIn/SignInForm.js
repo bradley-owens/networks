@@ -78,9 +78,14 @@ const SignInForm = (props) => {
 
   const checkForUser = (username, password) => {
     setUserCorrect(true);
+
     ctx.checkUser.forEach((user) => {
-      if (user.email.includes(username) && user.pin.includes(password)) {
-        dispatch(authActions.login(user));
+      if (
+        user.info.email.includes(username) &&
+        user.info.pin.includes(password)
+      ) {
+        dispatch(authActions.login(user.info));
+        console.log(user);
       } else {
         setUserCorrect(false);
       }

@@ -28,7 +28,7 @@ export const AuthContextProvider = (props) => {
     database.onSnapshot((snap) => {
       const items = [];
       snap.forEach((doc) => {
-        items.push(doc.data());
+        items.push({ info: doc.data(), id: doc.id });
       });
 
       setData(items);
@@ -36,6 +36,7 @@ export const AuthContextProvider = (props) => {
     });
   };
 
+  // console.log(data);
   useEffect(() => {
     getData();
   }, [loader]);
