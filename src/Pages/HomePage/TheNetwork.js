@@ -13,6 +13,7 @@ const TheNetwork = () => {
         {ctx.checkUser.map((user) => {
           return (
             <MemberCard
+              key={Math.random()}
               name={user.name}
               email={user.email}
               language={user.language}

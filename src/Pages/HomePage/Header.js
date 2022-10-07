@@ -15,7 +15,7 @@ const Header = () => {
           <h2 className={styles.welcome}>{`Hi ${loggedInName}!`}</h2>
           <p>
             Welcome to NetWORKS! The casual fling of linkedIN. Follow other
-            developers and connect to grow the network you need!
+            developers and connect to grow the network you need to grow!
           </p>
         </div>
         <div className={styles["home-modal"]}>
