@@ -1,7 +1,22 @@
 import { Fragment } from "react";
 import styles from "./AccountEdit.module.css";
+import { editAccountActions } from "../../Store/editAccount-slice";
+import { useDispatch } from "react-redux";
 
 const AccountEdit = () => {
+  const dispatch = useDispatch();
+
+  const editPersonalDetailsHandler = (e) => {
+    e.preventDefault();
+    console.log("test");
+
+    dispatch(
+      editAccountActions.editPersonalDetails({
+        name: "TESTSLICE",
+        email: "TESTSLICE",
+      })
+    );
+  };
   return (
     <Fragment>
       <h1 className={styles.title}>Edit Profile</h1>
@@ -9,7 +24,7 @@ const AccountEdit = () => {
         <div className={styles["account-modal"]}>
           <h3>Account Information</h3>
           <p>Must be completed</p>
-          <form>
+          <form onSubmit={editPersonalDetailsHandler}>
             <input type="text" placeholder="name"></input>
             <input type="email" placeholder="email"></input>
             <input type="pin" placeholder="pin"></input>

@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useState, useReducer } from "react";
 import { useDispatch } from "react-redux";
 import { authActions } from "../../Store/authentication-slice";
+import { editAccountActions } from "../../Store/editAccount-slice";
 import AuthContext from "../../Store/login-context";
 import Input from "../UI/Inputs/Input";
 import styles from "./SignInForm.module.css";
@@ -85,7 +86,7 @@ const SignInForm = (props) => {
         user.info.pin.includes(password)
       ) {
         dispatch(authActions.login(user.info));
-        console.log(user);
+        dispatch(editAccountActions.setUser(user));
       } else {
         setUserCorrect(false);
       }
@@ -109,6 +110,7 @@ const SignInForm = (props) => {
     };
 
     dispatch(authActions.login(guest));
+    dispatch(editAccountActions.setUser(guest));
   };
 
   return (

@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import Input from "../UI/Inputs/Input";
 import Select from "../UI/Select";
 import styles from "./CreateUserForm.module.css";
+import { editAccountActions } from "../../Store/editAccount-slice";
 
 const CreateUserForm = (props) => {
   const usernameReducer = (state, action) => {
@@ -155,6 +156,7 @@ const CreateUserForm = (props) => {
       );
 
       dispatch(authActions.createUser(newUser));
+      dispatch(editAccountActions.setUser(newUser));
     }
   };
 

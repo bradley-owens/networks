@@ -1,20 +1,28 @@
 import { db } from "./Firebase";
 import { createSlice } from "@reduxjs/toolkit";
-import { useSelector } from "react-redux";
 
 const database = db.collection("Users");
-const user = useSelector((state) => state.authentication.loggedInUser);
 const accountIntialState = {
   editState: false,
-  userState: user,
+  user: {},
 };
 
-const EditAccountSlice = createSlice({
+const editAccountSlice = createSlice({
   name: "edit",
   initialState: accountIntialState,
   reducers: {
+    setUser(state, action) {
+      state.user = action.payload;
+      console.log(state.user);
+    },
     editPersonalDetails(state, action) {
-      database.update();
+      database.ref(state.user.id).update({
+        name: action.payload.name,
+        email: action.payload.userName,
+      });
     },
   },
 });
+
+export const editAccountActions = editAccountSlice.actions;
+export default editAccountSlice.reducer;
