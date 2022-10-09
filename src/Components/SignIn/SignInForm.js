@@ -94,9 +94,7 @@ const SignInForm = (props) => {
     });
   };
 
-  const submitCreateUserForm = (e) => {
-    e.preventDefault();
-
+  const submitCreateUserForm = () => {
     if (formIsValid) {
       checkForUser(usernameState.value, pinState.value);
     }
@@ -115,10 +113,7 @@ const SignInForm = (props) => {
   };
 
   return (
-    <form
-      className={styles["form-container"]}
-      //  onSubmit={submitCreateUserForm}
-    >
+    <form className={styles["form-container"]}>
       <Input
         isValid={emailIsValid}
         accCorrect={userCorrect}
