@@ -16,10 +16,12 @@ const editAccountSlice = createSlice({
       console.log(state.user);
     },
     editPersonalDetails(state, action) {
-      database.ref(state.user.id).update({
+      database.ref(state.user.info).update({
         name: action.payload.name,
         email: action.payload.userName,
       });
+
+      console.log("changed");
     },
   },
 });

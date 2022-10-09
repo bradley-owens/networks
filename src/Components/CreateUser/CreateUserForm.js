@@ -5,6 +5,7 @@ import Input from "../UI/Inputs/Input";
 import Select from "../UI/Select";
 import styles from "./CreateUserForm.module.css";
 import { editAccountActions } from "../../Store/editAccount-slice";
+import { Link } from "react-router-dom";
 
 const CreateUserForm = (props) => {
   const usernameReducer = (state, action) => {
@@ -200,14 +201,15 @@ const CreateUserForm = (props) => {
         onBlur={validateLanguage}
       ></Select>
 
-      <button
+      <Link
+        to="/sign-in"
         type="submit"
         className={
           formIsValid ? styles["login-button"] : styles["login-button_disabled"]
         }
       >
         Join
-      </button>
+      </Link>
     </form>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState, useReducer } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { authActions } from "../../Store/authentication-slice";
 import { editAccountActions } from "../../Store/editAccount-slice";
 import AuthContext from "../../Store/login-context";
@@ -135,8 +136,10 @@ const SignInForm = (props) => {
         onBlur={validatePin}
         maxLength={4}
       ></Input>
+
       <div className={styles["flex-button"]}>
-        <button
+        <Link
+          to="/home"
           type="submit"
           className={
             formIsValid
@@ -145,11 +148,15 @@ const SignInForm = (props) => {
           }
         >
           Sign In
-        </button>
+        </Link>
 
-        <button className={styles["login-button"]} onClick={signInAsGuest}>
+        <Link
+          to="/home"
+          className={styles["login-button"]}
+          onClick={signInAsGuest}
+        >
           Sign in as Guest
-        </button>
+        </Link>
       </div>
     </form>
   );

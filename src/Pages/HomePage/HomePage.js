@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 import Header from "./Header";
 import TheNetwork from "./TheNetwork";
 
-const HomePage = (props) => {
+const HomePage = () => {
   return (
     <Fragment>
       <Header />

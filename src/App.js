@@ -8,14 +8,27 @@ import Account from "./Pages/Account/Account";
 import Layout from "./Components/Layout/Layout";
 import AccountEdit from "./Pages/Account/AccountEdit";
 import { Redirect } from "react-router-dom";
+import SignInPage from "./Components/SignIn/SignInPage";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.authentication.isLoggedIn);
 
   return (
     <main>
-      {!isLoggedIn && <CreateUserPage />}
-      {/* {isLoggedIn && <HomePage />} */}
+      {!isLoggedIn && (
+        <Switch>
+          <Route exact path="/">
+            <Redirect to="/sign-in" />
+          </Route>
+          <Route path="/sign-in">
+            <SignInPage />
+          </Route>
+          <Route path="/create-user">
+            <CreateUserPage />
+          </Route>
+        </Switch>
+      )}
+
       {isLoggedIn && (
         <Layout>
           <Switch>

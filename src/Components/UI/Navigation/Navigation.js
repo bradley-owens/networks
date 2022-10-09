@@ -38,9 +38,9 @@ const Navigation = (props) => {
           Account
         </NavLink>
 
-        <a className={styles.link} onClick={logoutHandler}>
+        <NavLink className={styles.link} onClick={logoutHandler} to="/sign-in">
           Sign out
-        </a>
+        </NavLink>
       </div>
     </nav>
   );

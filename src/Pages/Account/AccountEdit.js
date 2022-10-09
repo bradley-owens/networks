@@ -2,13 +2,14 @@ import { Fragment } from "react";
 import styles from "./AccountEdit.module.css";
 import { editAccountActions } from "../../Store/editAccount-slice";
 import { useDispatch } from "react-redux";
+import { db } from "../../Store/Firebase";
 
 const AccountEdit = () => {
   const dispatch = useDispatch();
+  const database = db.collection("Users");
 
   const editPersonalDetailsHandler = (e) => {
     e.preventDefault();
-    console.log("test");
 
     dispatch(
       editAccountActions.editPersonalDetails({
