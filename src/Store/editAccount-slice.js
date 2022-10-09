@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const database = db.collection("Users");
 const accountIntialState = {
-  editState: false,
+  editAccount: false,
   user: {},
 };
 
@@ -16,6 +16,7 @@ const editAccountSlice = createSlice({
       console.log(state.user);
     },
     editPersonalDetails(state, action) {
+      state.editAccount(true);
       database.ref(state.user.info).update({
         name: action.payload.name,
         email: action.payload.userName,

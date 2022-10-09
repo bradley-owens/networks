@@ -8,6 +8,8 @@ const Account = () => {
   const userName = useSelector(
     (state) => state.authentication.loggedInUser.name
   );
+  const editState = useSelector((state) => state.edit.editAccount);
+
   return (
     <Fragment>
       <div className={styles["account-container"]}>
