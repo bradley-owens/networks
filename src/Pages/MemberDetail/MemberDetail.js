@@ -14,7 +14,7 @@ const MemberDetail = () => {
 
   const checkProvided = (info) => {
     if (info === undefined) {
-      return "N/A";
+      return "Not Provided";
     }
     return info;
   };
