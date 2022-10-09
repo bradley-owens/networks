@@ -22,10 +22,18 @@
   justify-content: space-evenly;
 }
 
-button {
+.button {
   font-size: 1rem;
   border: 2px solid #246253;
   padding: 0.5rem 1rem;
   background-color: white;
   border-radius: 20px;
+  text-decoration: none;
+  color: #246253;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: #5cb8a1;
+  transition: 0.3s;
 }

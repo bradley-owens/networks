@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./MemberCard.module.css";
 
 const MemberCard = (props) => {
@@ -10,8 +11,10 @@ const MemberCard = (props) => {
         <h4> Code: {props.language}</h4>
       </div>
       <div className={styles.buttons}>
-        <button>View</button>
-        <button>Follow</button>
+        <Link to={`/${props.id}`} className={styles.button}>
+          View
+        </Link>
+        <button className={styles.button}>Follow</button>
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ import Layout from "./Components/Layout/Layout";
 import AccountEdit from "./Pages/Account/AccountEdit";
 import { Redirect } from "react-router-dom";
 import SignInPage from "./Components/SignIn/SignInPage";
+import MemberDetail from "./Pages/MemberDetail/MemberDetail";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.authentication.isLoggedIn);
@@ -46,6 +47,9 @@ function App() {
             </Route>
             <Route path="/edit-profile">
               <AccountEdit />
+            </Route>
+            <Route path={`/:memberId`}>
+              <MemberDetail />
             </Route>
           </Switch>
         </Layout>

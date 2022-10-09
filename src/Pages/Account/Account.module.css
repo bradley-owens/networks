@@ -23,3 +23,9 @@
   border-radius: 10px;
   cursor: pointer;
 }
+
+.account-container button:hover {
+  cursor: pointer;
+  background-color: #5cb8a1;
+  transition: 0.3s;
+}

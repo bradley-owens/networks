@@ -26,4 +26,11 @@
   border: 2px solid #246253;
   border-radius: 10px;
   cursor: pointer;
+  transition: 0.5s;
+}
+
+.container button:hover {
+  cursor: pointer;
+  background-color: #5cb8a1;
+  transition: 0.3s;
 }
