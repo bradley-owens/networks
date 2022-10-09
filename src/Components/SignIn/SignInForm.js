@@ -115,7 +115,10 @@ const SignInForm = (props) => {
   };
 
   return (
-    <form className={styles["form-container"]} onSubmit={submitCreateUserForm}>
+    <form
+      className={styles["form-container"]}
+      //  onSubmit={submitCreateUserForm}
+    >
       <Input
         isValid={emailIsValid}
         accCorrect={userCorrect}
@@ -140,12 +143,12 @@ const SignInForm = (props) => {
       <div className={styles["flex-button"]}>
         <Link
           to="/home"
-          type="submit"
           className={
             formIsValid
               ? styles["login-button"]
               : styles["login-button_disabled"]
           }
+          onClick={submitCreateUserForm}
         >
           Sign In
         </Link>

@@ -16,7 +16,7 @@ function App() {
   return (
     <main>
       {!isLoggedIn && (
-        <Switch>
+        <Fragment>
           <Route exact path="/">
             <Redirect to="/sign-in" />
           </Route>
@@ -26,7 +26,7 @@ function App() {
           <Route path="/create-user">
             <CreateUserPage />
           </Route>
-        </Switch>
+        </Fragment>
       )}
 
       {isLoggedIn && (
