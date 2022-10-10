@@ -1,4 +1,3 @@
-import { click } from "@testing-library/user-event/dist/click";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import AuthContext from "../../Store/login-context";

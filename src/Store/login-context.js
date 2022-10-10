@@ -36,7 +36,6 @@ export const AuthContextProvider = (props) => {
     });
   };
 
-  // console.log(data);
   useEffect(() => {
     getData();
   }, [loader]);

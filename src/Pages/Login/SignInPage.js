@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import img from "../IMG/CreateAccImg.svg";
-import SignInForm from "./SignInForm";
+import React from "react";
+import img from "../../Components/IMG/CreateAccImg.svg";
+import SignInForm from "../../Components/SignIn/SignInForm";
 import styles from "./SignInPage.module.css";
 import { Link } from "react-router-dom";
-import CreateUserPage from "../CreateUser/CreateUserPage";
 
 const SignInPage = (props) => {
   return (

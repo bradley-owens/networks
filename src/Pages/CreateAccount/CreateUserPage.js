@@ -1,20 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import CreateUserForm from "./CreateUserForm";
-import MemberCounter from "../MemberCounter/MemberCounter";
+import CreateUserForm from "../../Components/CreateUser/CreateUserForm";
+import MemberCounter from "../../Components/MemberCounter/MemberCounter";
 import styles from "./CreateUserPage.module.css";
-import img from "../IMG/CreateAccImg.svg";
-import SignInPage from "../SignIn/SignInPage";
+import img from "../../Components/IMG/CreateAccImg.svg";
 
 const CreateUserPage = (props) => {
-  // const [hasAccount, setHasAccount] = useState(false);
-
-  // const toSignInPageHandler = () => {
-  //   setHasAccount(true);
-  // };
-  // if (hasAccount) {
-  //   return <SignInPage />;
-  // }
   return (
     <div className={styles.container}>
       <h1 className={styles["main-title"]}>NetWORKS</h1>

@@ -27,7 +27,6 @@
   color: #246253;
   border: 2px solid #246253;
   transition: 1s;
-  /* box-shadow: 0 20px 40px 0px rgba(0, 0, 0, 0.516); */
 }
 
 .login-button_disabled {

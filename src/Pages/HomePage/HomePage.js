@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 
-import Header from "./Header";
-import TheNetwork from "./TheNetwork";
+import Header from "../../Components/Home/Header";
+import TheNetwork from "../../Components/Home/TheNetwork";
 
 const HomePage = () => {
   return (
