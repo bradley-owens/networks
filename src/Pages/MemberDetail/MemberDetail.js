@@ -19,6 +19,10 @@ const MemberDetail = () => {
     return info;
   };
 
+  if (!clickedUser) {
+    return <p> User does not exist</p>;
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles["header-flex"]}>

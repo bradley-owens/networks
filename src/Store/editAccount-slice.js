@@ -13,7 +13,6 @@ const editAccountSlice = createSlice({
   reducers: {
     setUser(state, action) {
       state.user = action.payload;
-      console.log(state.user);
     },
     editPersonalDetails(state, action) {
       state.editAccount(true);

@@ -18,15 +18,20 @@ function App() {
     <main>
       {!isLoggedIn && (
         <Fragment>
-          <Route exact path="/">
-            <Redirect to="/sign-in" />
-          </Route>
-          <Route path="/sign-in">
-            <SignInPage />
-          </Route>
-          <Route path="/create-user">
-            <CreateUserPage />
-          </Route>
+          <Switch>
+            <Route exact path="/">
+              <Redirect to="/sign-in" />
+            </Route>
+            <Route path="/sign-in">
+              <SignInPage />
+            </Route>
+            <Route path="/create-user">
+              <CreateUserPage />
+            </Route>
+            <Route path="*">
+              <SignInPage />
+            </Route>
+          </Switch>
         </Fragment>
       )}
 

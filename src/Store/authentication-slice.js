@@ -6,6 +6,7 @@ const database = db.collection("Users");
 const authenticationInitialState = {
   isLoggedIn: false,
   loggedInUser: {},
+  storageUser: {},
 };
 
 const authenticationSlice = createSlice({
@@ -17,6 +18,7 @@ const authenticationSlice = createSlice({
       state.loggedInUser = action.payload;
       localStorage.setItem("isLoggedIn", "1");
       localStorage.setItem("loggedInUser", action.payload);
+
       database.add({
         email: action.payload.userName,
         pin: action.payload.password,
