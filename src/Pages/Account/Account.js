@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Connections from "../../Components/Account/Connections";
 import styles from "./Account.module.css";
 import AccountInformation from "./AccountInformation";
 
@@ -23,21 +24,8 @@ const Account = () => {
             <button>Edit Profile</button>
           </Link>
         </div>
-        <div className={styles["followers-container"]}>
-          <div className={styles.numbers}>
-            <label>Followers</label>
-            <h2>0</h2>
-          </div>
-
-          <div className={styles["followers-container"]}>
-            <div className={styles.numbers}>
-              <label>Following</label>
-              <h2>0</h2>
-            </div>
-          </div>
-        </div>
+        <Connections />
       </div>
-
       <AccountInformation />
     </Fragment>
   );

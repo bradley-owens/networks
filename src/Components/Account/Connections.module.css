@@ -1,0 +1,17 @@
+.followers-container {
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.numbers {
+  border: 3px solid white;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+}
+
+.numbers label {
+  font-size: 1.2rem;
+}

@@ -1,5 +1,22 @@
 .modal-container {
-  display: flex;
+  /* display: flex;
   align-items: flex-start;
-  gap: 2rem;
+  gap: 2rem; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  column-gap: 1.5rem;
+  row-gap: 1.5rem;
+
+  align-items: flex-start;
+  /* justify-items: center; */
+}
+
+.connect {
+  grid-column: 2 / span 2;
+  margin-top: -4.5rem;
+}
+
+.personal {
+  grid-row: 1 / 2;
 }
