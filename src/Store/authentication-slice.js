@@ -6,7 +6,12 @@ const database = db.collection("Users");
 const authenticationInitialState = {
   isLoggedIn: false,
   loggedInUser: {},
-  storageUser: {},
+  guestUser: {
+    email: "guest12345@guest.com",
+    pin: 1234,
+    name: "Guest",
+    language: "None",
+  },
 };
 
 const authenticationSlice = createSlice({

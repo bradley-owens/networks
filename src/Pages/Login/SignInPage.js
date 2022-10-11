@@ -3,6 +3,7 @@ import img from "../../Components/IMG/CreateAccImg.svg";
 import SignInForm from "../../Components/SignIn/SignInForm";
 import styles from "./SignInPage.module.css";
 import { Link } from "react-router-dom";
+import MemberCounter from "../../Components/MemberCounter/MemberCounter";
 
 const SignInPage = (props) => {
   return (
@@ -16,6 +17,7 @@ const SignInPage = (props) => {
             Create Account
           </Link>
         </div>
+        <MemberCounter />
       </div>
       <img className={styles.img} src={img} alt="network"></img>
     </div>

@@ -4,7 +4,8 @@
   border-radius: 20px;
   padding: 2rem;
   width: 30rem;
-  height: fit-content;
+  height: 26rem;
+  /* height: fit-content; */
 }
 
 .container h1 {

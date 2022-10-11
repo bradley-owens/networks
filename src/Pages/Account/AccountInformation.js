@@ -30,18 +30,25 @@ const AccountInformation = () => {
         <h3>None</h3>
         <button>Edit</button>
       </AccountCard>
-      <div>
-        <AccountCard>
-          <h1>Contact Information</h1>
-          <label>LinkedIN</label>
-          <h3>None</h3>
-          <label>Github</label>
-          <h3>None</h3>
-          <label>Portfolio Website</label>
-          <h3>None</h3>
-          <button>Edit</button>
-        </AccountCard>
-      </div>
+
+      <AccountCard>
+        <h1>Contact Information</h1>
+        <label>LinkedIN</label>
+        <h3>None</h3>
+        <label>Github</label>
+        <h3>None</h3>
+        <label>Portfolio Website</label>
+        <h3>None</h3>
+        <button>Edit</button>
+      </AccountCard>
+
+      <AccountCard>
+        <h1>Want to Connect?</h1>
+        <label>
+          This will display to all users that you want to connect with others on
+          Networks!
+        </label>
+      </AccountCard>
     </div>
   );
 };

@@ -13,14 +13,29 @@ const Account = () => {
   return (
     <Fragment>
       <div className={styles["account-container"]}>
-        <h1>{`${userName}'s Account`}</h1>
-        <p>
-          Edit your profile to show more information about yourself to other
-          members
-        </p>
-        <Link to="/edit-profile">
-          <button>Edit Profile</button>
-        </Link>
+        <div>
+          <h1>{`${userName}'s Account`}</h1>
+          <p>
+            Edit your profile to show more information about yourself to other
+            members
+          </p>
+          <Link to="/edit-profile">
+            <button>Edit Profile</button>
+          </Link>
+        </div>
+        <div className={styles["followers-container"]}>
+          <div className={styles.numbers}>
+            <label>Followers</label>
+            <h2>0</h2>
+          </div>
+
+          <div className={styles["followers-container"]}>
+            <div className={styles.numbers}>
+              <label>Following</label>
+              <h2>0</h2>
+            </div>
+          </div>
+        </div>
       </div>
 
       <AccountInformation />
