@@ -1,4 +1,5 @@
 import Modal from "../UI/Modal/Modal";
+import styles from "./Edit.module.css";
 
 const EditSkills = (props) => {
   return (
@@ -21,6 +22,10 @@ const EditSkills = (props) => {
           type="number"
           placeholder="How many years experience (years)"
         ></input>
+        <div className={styles.buttons}>
+          <button>Submit</button>
+          <button>Cancel</button>
+        </div>
       </form>
     </Modal>
   );

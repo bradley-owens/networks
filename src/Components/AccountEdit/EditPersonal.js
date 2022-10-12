@@ -1,4 +1,5 @@
 import Modal from "../UI/Modal/Modal";
+import styles from "./Edit.module.css";
 
 const EditPersonal = (props) => {
   return (
@@ -10,7 +11,10 @@ const EditPersonal = (props) => {
         <input type="email" placeholder="email"></input>
         <input type="pin" placeholder="pin"></input>
         <input type="text" placeholder="Programming Language"></input>
-        <button>Submit</button>
+        <div className={styles.buttons}>
+          <button>Submit</button>
+          <button>Cancel</button>
+        </div>
       </form>
     </Modal>
   );
