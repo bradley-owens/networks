@@ -1,63 +1,102 @@
-import { useSelector } from "react-redux";
+import { Fragment, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import EditContact from "../../Components/AccountEdit/EditContact";
+import EditPersonal from "../../Components/AccountEdit/EditPersonal";
+import EditSkills from "../../Components/AccountEdit/EditSkills";
 import AccountCard from "../../Components/UI/AccountCards/AccountCard";
+import { editAccountActions } from "../../Store/editAccount-slice";
 import styles from "./AccountInformation.module.css";
 
 const AccountInformation = () => {
   const user = useSelector((state) => state.authentication.loggedInUser);
+  const modalState = useSelector((state) => state.edit.modalState);
+  const [clickedEditModal, setClickedEditModal] = useState();
+  const dispatch = useDispatch();
+
+  const modalHandler = (event) => {
+    setClickedEditModal(event.target.id);
+    dispatch(editAccountActions.modalStateHandler());
+  };
+
+  const closeModalHandler = () => {
+    dispatch(editAccountActions.modalStateHandler());
+  };
+
+  const editChoice = clickedEditModal;
+
+  if (modalState)
+    switch (editChoice) {
+      case "personal":
+        return <EditPersonal onClose={closeModalHandler} />;
+
+      case "skills":
+        return <EditSkills onClose={closeModalHandler} />;
+
+      case "contact":
+        return <EditContact onClose={closeModalHandler} />;
+    }
 
   return (
-    <div className={styles["modal-container"]}>
-      <div className={styles.personal}>
-        <AccountCard>
-          <h1>Personal Details</h1>
-          <label>Name</label>
-          <h3>{user.name}</h3>
-          <label>Current Position</label>
-          <h3>None</h3>
-          <label>Email</label>
-          <h3>{user.email}</h3>
-          <label>Location</label>
-          <h3>None</h3>
-          {/* <button>Edit</button> */}
-        </AccountCard>
-      </div>
+    <Fragment>
+      <div className={styles["modal-container"]}>
+        <div className={styles.personal}>
+          <AccountCard>
+            <h1>Personal Details</h1>
+            <label>Name</label>
+            <h3>{user.name}</h3>
+            <label>Current Position</label>
+            <h3>None</h3>
+            <label>Email</label>
+            <h3>{user.email}</h3>
+            <label>Location</label>
+            <h3>None</h3>
+            <button id="personal" onClick={modalHandler}>
+              Edit
+            </button>
+          </AccountCard>
+        </div>
 
-      <div className={styles.skills}>
-        <AccountCard>
-          <h1>Skills and Expereince</h1>
-          <label>Programming Language</label>
-          <h3>{user.language}</h3>
-          <label>Frameworks</label>
-          <h3>None</h3>
-          <label>Years Expereince</label>
-          <h3>None</h3>
-          {/* <button>Edit</button> */}
-        </AccountCard>
-      </div>
+        <div className={styles.skills}>
+          <AccountCard>
+            <h1>Skills and Expereince</h1>
+            <label>Programming Language</label>
+            <h3>{user.language}</h3>
+            <label>Frameworks</label>
+            <h3>None</h3>
+            <label>Years Expereince</label>
+            <h3>None</h3>
+            <button id="skills" onClick={modalHandler}>
+              Edit
+            </button>
+          </AccountCard>
+        </div>
 
-      <div className={styles.contact}>
-        <AccountCard>
-          <h1>Contact Information</h1>
-          <label>LinkedIN</label>
-          <h3>None</h3>
-          <label>Github</label>
-          <h3>None</h3>
-          <label>Portfolio Website</label>
-          <h3>None</h3>
-          {/* <button>Edit</button> */}
-        </AccountCard>
-      </div>
+        <div className={styles.contact}>
+          <AccountCard>
+            <h1>Contact Information</h1>
+            <label>LinkedIN</label>
+            <h3>None</h3>
+            <label>Github</label>
+            <h3>None</h3>
+            <label>Portfolio Website</label>
+            <h3>None</h3>
+            <button id="contact" onClick={modalHandler}>
+              Edit
+            </button>
+          </AccountCard>
+        </div>
 
-      <div className={styles.connect}>
-        <AccountCard>
-          <h1>Want to Connect</h1>
-          <label>
-            This will display to all users that you want to connect with others
-            on Networks!
-          </label>
-        </AccountCard>
+        <div className={styles.connect}>
+          <AccountCard>
+            <h1>Want to Connect</h1>
+            <label>
+              This will display to all users that you want to connect with
+              others on Networks!
+            </label>
+          </AccountCard>
+        </div>
       </div>
-    </div>
+    </Fragment>
   );
 };
 

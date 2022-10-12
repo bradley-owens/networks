@@ -51,9 +51,9 @@ function App() {
             <Route path="/account">
               <Account />
             </Route>
-            <Route path="/edit-profile">
+            {/* <Route path="/edit-profile">
               <AccountEdit />
-            </Route>
+            </Route> */}
             <Route path={`/:memberId`}>
               <MemberDetail />
             </Route>

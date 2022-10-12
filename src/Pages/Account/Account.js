@@ -9,8 +9,6 @@ const Account = () => {
   const userName = useSelector(
     (state) => state.authentication.loggedInUser.name
   );
-  const editState = useSelector((state) => state.edit.editAccount);
-
   return (
     <Fragment>
       <div className={styles["account-container"]}>
@@ -20,12 +18,10 @@ const Account = () => {
             Edit your profile to show more information about yourself to other
             members
           </p>
-          <Link to="/edit-profile">
-            <button>Edit Profile</button>
-          </Link>
         </div>
         <Connections />
       </div>
+
       <AccountInformation />
     </Fragment>
   );

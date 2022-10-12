@@ -5,6 +5,7 @@ const database = db.collection("Users");
 const accountIntialState = {
   editAccount: false,
   user: {},
+  modalState: false,
 };
 
 const editAccountSlice = createSlice({
@@ -22,6 +23,9 @@ const editAccountSlice = createSlice({
       });
 
       console.log("changed");
+    },
+    modalStateHandler(state) {
+      state.modalState = !state.modalState;
     },
   },
 });
