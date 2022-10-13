@@ -66,7 +66,7 @@ const CreateUserForm = (props) => {
     if (action.type === "INPUT-BLUR") {
       return {
         value: state.value,
-        isValid: true,
+        isValid: state.value,
       };
     }
     return { value: "", isValid: false };
