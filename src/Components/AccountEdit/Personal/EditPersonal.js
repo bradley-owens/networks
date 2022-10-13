@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react";
+import { useReducer, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { editAccountActions } from "../../../Store/editAccount-slice";
 import Modal from "../../UI/Modal/Modal";
@@ -24,7 +24,7 @@ const EditPersonal = (props) => {
 
   const [nameState, dispatchName] = useReducer(nameReducer, {
     value: "",
-    isValid: false,
+    isValid: null,
   });
 
   const nameHandler = (e) => {
@@ -40,6 +40,8 @@ const EditPersonal = (props) => {
     });
   };
 
+  const { isValid: nameIsValid } = nameState;
+
   //////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////
 
@@ -53,7 +55,7 @@ const EditPersonal = (props) => {
     if (action.type === "INPUT-BLUR")
       return {
         value: state.value,
-        isValid: state.value.includes(".com") && action.val.length > 16,
+        isValid: state.value.includes(".com") && state.value.length > 16,
       };
 
     return { value: "", isValid: false };
@@ -61,7 +63,7 @@ const EditPersonal = (props) => {
 
   const [emailState, dispatchEmail] = useReducer(emailReducer, {
     value: "",
-    isValid: false,
+    isValid: null,
   });
 
   const emailHandler = (e) => {
@@ -76,6 +78,8 @@ const EditPersonal = (props) => {
       type: "INPUT-BLUR",
     });
   };
+
+  const { isValid: emailIsValid } = emailState;
 
   //////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////
@@ -96,7 +100,7 @@ const EditPersonal = (props) => {
 
   const [pinState, dispatchPin] = useReducer(pinReducer, {
     value: "",
-    isValid: false,
+    isValid: null,
   });
 
   const pinHandler = (e) => {
@@ -111,6 +115,8 @@ const EditPersonal = (props) => {
       type: "INPUT-BLUR",
     });
   };
+
+  const { isValid: pinIsValid } = pinState;
 
   //////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////
@@ -131,7 +137,7 @@ const EditPersonal = (props) => {
 
   const [languageState, dispatchLanguage] = useReducer(languageReducer, {
     value: "",
-    isValid: false,
+    isValid: null,
   });
 
   const languageHandler = (e) => {
@@ -147,6 +153,8 @@ const EditPersonal = (props) => {
     });
   };
 
+  const { isValid: languageIsValid } = languageState;
+
   //////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////
 
@@ -157,6 +165,14 @@ const EditPersonal = (props) => {
     pin: "",
     language: "",
   });
+
+  const [formIsValid, setFormIsValid] = useState(false);
+
+  useEffect(() => {
+    setFormIsValid(
+      emailIsValid && pinIsValid && languageIsValid && nameIsValid
+    );
+  }, [emailIsValid, pinIsValid, languageIsValid, nameIsValid]);
 
   const editPersonalSubmit = (e) => {
     e.preventDefault();
@@ -177,6 +193,9 @@ const EditPersonal = (props) => {
       <p>Must be completed</p>
       <form onSubmit={editPersonalSubmit}>
         <input
+          className={`${styles.input} ${
+            nameIsValid === false ? styles.invalid : undefined
+          }`}
           type="text"
           onChange={nameHandler}
           onBlur={validateName}
@@ -184,25 +203,42 @@ const EditPersonal = (props) => {
         ></input>
 
         <input
+          className={`${styles.input} ${
+            emailIsValid === false ? styles.invalid : undefined
+          }`}
           type="email"
           onChange={emailHandler}
           onBlur={validateEmail}
           placeholder="email"
         ></input>
         <input
+          className={`${styles.input} ${
+            pinIsValid === false ? styles.invalid : undefined
+          }`}
           type="pin"
           onChange={pinHandler}
           onBlur={validatePin}
           placeholder="pin"
         ></input>
         <input
+          className={`${styles.input} ${
+            languageIsValid === false ? styles.invalid : undefined
+          }`}
           type="text"
           onChange={languageHandler}
           onBlur={validateLanguage}
           placeholder="Programming Language"
         ></input>
         <div className={styles.buttons}>
-          <button>Submit</button>
+          <button
+            className={
+              formIsValid
+                ? styles["login-button"]
+                : styles["login-button_disabled"]
+            }
+          >
+            Submit
+          </button>
           <button onClick={props.onClose}>Cancel</button>
         </div>
       </form>

@@ -2,3 +2,42 @@
   display: flex;
   gap: 2rem;
 }
+
+.input {
+  width: 60%;
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: 2px solid #246253;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.input.invalid {
+  position: relative;
+  border: 2px solid red;
+  transition: 0.3s;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.login-button {
+  color: white;
+  background-color: #246253;
+  font-weight: bolder;
+  padding: 0.5rem 2rem;
+  border: 2px solid #246253;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.login-button_disabled {
+  background-color: grey;
+  border-color: grey;
+  color: white;
+  cursor: not-allowed;
+  border: 2px solid white;
+  font-weight: 800;
+  text-decoration: none;
+}
