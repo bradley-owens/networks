@@ -1,8 +1,8 @@
 import { Fragment, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import EditContact from "../../Components/AccountEdit/EditContact";
-import EditPersonal from "../../Components/AccountEdit/EditPersonal";
-import EditSkills from "../../Components/AccountEdit/EditSkills";
+import EditContact from "../../Components/AccountEdit/Contact/EditContact";
+import EditPersonal from "../../Components/AccountEdit/Personal/EditPersonal";
+import EditSkills from "../../Components/AccountEdit/Skills/EditSkills";
 import AccountCard from "../../Components/UI/AccountCards/AccountCard";
 import { editAccountActions } from "../../Store/editAccount-slice";
 import styles from "./AccountInformation.module.css";

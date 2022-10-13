@@ -1,5 +1,5 @@
-import Modal from "../UI/Modal/Modal";
-import styles from "./Edit.module.css";
+import Modal from "../../UI/Modal/Modal";
+import styles from "../Edit.module.css";
 
 const EditSkills = (props) => {
   return (
@@ -24,7 +24,7 @@ const EditSkills = (props) => {
         ></input>
         <div className={styles.buttons}>
           <button>Submit</button>
-          <button>Cancel</button>
+          <button onClick={props.onClose}>Cancel</button>
         </div>
       </form>
     </Modal>

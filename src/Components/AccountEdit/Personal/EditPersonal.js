@@ -1,5 +1,5 @@
-import Modal from "../UI/Modal/Modal";
-import styles from "./Edit.module.css";
+import Modal from "../../UI/Modal/Modal";
+import styles from "../Edit.module.css";
 
 const EditPersonal = (props) => {
   return (
@@ -13,7 +13,7 @@ const EditPersonal = (props) => {
         <input type="text" placeholder="Programming Language"></input>
         <div className={styles.buttons}>
           <button>Submit</button>
-          <button>Cancel</button>
+          <button onClick={props.onClose}>Cancel</button>
         </div>
       </form>
     </Modal>
