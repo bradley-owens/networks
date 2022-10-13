@@ -84,23 +84,28 @@ const EditContact = (props) => {
       <p>Optional</p>
       <form onSubmit={editContactSubmit}>
         <input
+          className={styles.input}
           type="text"
           onChange={linkedInHandler}
           placeholder="LinkedIN"
         ></input>
         <input
+          className={styles.input}
           type="text"
           onChange={githubHandler}
           placeholder="Github"
         ></input>
         <input
+          className={styles.input}
           type="text"
           onChange={websiteHandler}
           placeholder="Portfolio Website"
         ></input>
         <div className={styles.buttons}>
-          <button>Submit</button>
-          <button onClick={props.onClose}>Cancel</button>
+          <button className={styles.button}>Submit</button>
+          <button className={styles.button} onClick={props.onClose}>
+            Cancel
+          </button>
         </div>
       </form>
     </Modal>

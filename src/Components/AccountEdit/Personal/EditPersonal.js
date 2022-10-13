@@ -231,15 +231,13 @@ const EditPersonal = (props) => {
         ></input>
         <div className={styles.buttons}>
           <button
-            className={
-              formIsValid
-                ? styles["login-button"]
-                : styles["login-button_disabled"]
-            }
+            className={formIsValid ? styles.button : styles["submit_disabled"]}
           >
             Submit
           </button>
-          <button onClick={props.onClose}>Cancel</button>
+          <button className={styles.button} onClick={props.onClose}>
+            Cancel
+          </button>
         </div>
       </form>
     </Modal>

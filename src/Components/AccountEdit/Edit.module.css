@@ -22,7 +22,7 @@
   outline: none;
 }
 
-.login-button {
+.button {
   color: white;
   background-color: #246253;
   font-weight: bolder;
@@ -32,7 +32,7 @@
   cursor: pointer;
 }
 
-.login-button_disabled {
+.submit_disabled {
   background-color: grey;
   border-color: grey;
   color: white;
@@ -40,4 +40,6 @@
   border: 2px solid white;
   font-weight: 800;
   text-decoration: none;
+  padding: 0.5rem 2rem;
+  border-radius: 10px;
 }
