@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState, useReducer } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import authenticationSlice, {
   authActions,
@@ -79,26 +79,19 @@ const SignInForm = (props) => {
   }, [emailIsValid, pinIsValid]);
 
   const [userCorrect, setUserCorrect] = useState(true);
-
   const ctx = useContext(AuthContext);
   const dispatch = useDispatch();
 
   const checkForUser = (email, pin) => {
-    // setUserCorrect(true);
-    // ctx.checkUser.forEach((user) => {
-    //   if (
-    //     user.info.email.includes(username) &&
-    //     user.info.pin.includes(password)
-    //   ) {
-    //     dispatch(authActions.login(user.info));
-    //     dispatch(editAccountActions.setUser(user));
-    //   } else {
-    //     setUserCorrect(false);
-    //   }
-    // });
-    // dispatch(authActions.checkUser(email, pin));
+    const users = ctx.checkUser;
 
-    fetchUsers();
+    users.forEach((user) => {
+      if (user.info.email === email && user.info.pin === pin) {
+        dispatch(authActions.login(user));
+      } else {
+        setUserCorrect(false);
+      }
+    });
   };
 
   const submitCreateUserForm = () => {

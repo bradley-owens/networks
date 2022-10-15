@@ -8,7 +8,7 @@ import { editAccountActions } from "../../Store/editAccount-slice";
 import styles from "./AccountInformation.module.css";
 
 const AccountInformation = () => {
-  const user = useSelector((state) => state.authentication.loggedInUser);
+  const user = useSelector((state) => state.authentication.loggedInUser.info);
   const modalState = useSelector((state) => state.edit.modalState);
   const [clickedEditModal, setClickedEditModal] = useState();
   const dispatch = useDispatch();

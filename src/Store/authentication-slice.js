@@ -1,11 +1,19 @@
 // import { db } from "./Firebase";
 import { createSlice } from "@reduxjs/toolkit";
 import StartFirebase from "./Firebase";
-import { ref, set, get, update, remove, child } from "firebase/database";
+import {
+  ref,
+  set,
+  get,
+  update,
+  remove,
+  child,
+  getDatabase,
+} from "firebase/database";
 
-// const database = db.collection("Users");
 const db = StartFirebase();
 
+const database = getDatabase();
 const authenticationInitialState = {
   isLoggedIn: false,
   loggedInUser: {},
@@ -17,18 +25,18 @@ const authenticationInitialState = {
   },
 };
 
-const idGen = Math.floor(Math.random() * 1000);
-
 const authenticationSlice = createSlice({
   name: "authentication",
   initialState: authenticationInitialState,
   reducers: {
     createUser(state, action) {
+      const user = action.payload;
+      const idGen = Math.floor(Math.random() * 1000);
       set(ref(db, "Users/" + idGen), {
-        email: action.payload.username,
-        pin: action.payload.pin + "",
-        name: action.payload.name,
-        language: action.payload.language,
+        email: user.username,
+        pin: user.pin + "",
+        name: user.name,
+        language: user.language,
       })
         .then(() => {
           alert("Account Created Successfully");
@@ -38,17 +46,17 @@ const authenticationSlice = createSlice({
         });
 
       state.isLoggedIn = true;
-      state.loggedInUser = action.payload;
+      state.loggedInUser = user;
       localStorage.setItem("isLoggedIn", "1");
-      localStorage.setItem("loggedInUser", action.payload);
+      localStorage.setItem("loggedInUser", user);
     },
-    checkUser(state, action) {},
 
     login(state, action) {
+      const user = action.payload;
       state.isLoggedIn = true;
-      state.loggedInUser = action.payload;
+      state.loggedInUser = user;
       localStorage.setItem("isLoggedIn", "1");
-      localStorage.setItem("loggedInUser", action.payload);
+      localStorage.setItem("loggedInUser", user);
     },
     logout(state) {
       state.isLoggedIn = false;
@@ -58,18 +66,6 @@ const authenticationSlice = createSlice({
     },
   },
 });
-
-const options = {
-  method: "GET", // *GET, POST, PUT, DELETE, etc.
-  body: JSON.stringify(),
-};
-
-export async function fetchUsers() {
-  const response = await fetch(
-    "https://networks-react-default-rtdb.firebaseio.com/"
-  );
-  const data = await response.json();
-}
 
 export const authActions = authenticationSlice.actions;
 export default authenticationSlice.reducer;

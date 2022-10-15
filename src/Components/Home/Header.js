@@ -5,8 +5,9 @@ import styles from "./Header.module.css";
 
 const Header = () => {
   const loggedInName = useSelector(
-    (state) => state.authentication.loggedInUser.name
+    (state) => state.authentication.loggedInUser.info.name
   );
+
   return (
     <Fragment>
       <img className={styles.arrow} src={arrow}></img>

@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-// import { db } from "./Firebase";
+import StartFirebase from "./Firebase";
+import {
+  ref,
+  set,
+  get,
+  update,
+  remove,
+  child,
+  getDatabase,
+} from "firebase/database";
 
 const AuthContext = React.createContext({
   checkUser: [],
@@ -8,44 +17,36 @@ const AuthContext = React.createContext({
 });
 
 export const AuthContextProvider = (props) => {
-  const [loginStatus, setLoginStatus] = useState(false);
-
-  useEffect(() => {
-    const storedUserLoggedInInfo = localStorage.getItem("isLoggedIn");
-    const storedLoggedInUser = localStorage.getItem("loggedInUser");
-    if (storedUserLoggedInInfo === "1") {
-      setLoginStatus(true);
-    }
-  }, [loginStatus]);
-
   //////////////////////////////
 
-  // const database = db.collection("Users");
+  const database = getDatabase();
+
   const [data, setData] = useState([]);
   const [loader, setloader] = useState(true);
 
-  // const getData = () => {
-  //   database.onSnapshot((snap) => {
-  //     const items = [];
-  //     snap.forEach((doc) => {
-  //       items.push({ info: doc.data(), id: doc.id });
-  //     });
+  const getData = () => {
+    const dbRef = ref(database);
+    const items = [];
+    get(child(dbRef, "Users/")).then((snapshot) => {
+      const userDatabase = snapshot.val();
 
-  //     setData(items);
-  //     setloader(false);
-  //   });
-  // };
+      Object.entries(userDatabase).forEach((userAcc) => {
+        items.push({ info: userAcc[1], id: userAcc[0] });
+      });
+      setData(items);
+      setloader(false);
+    });
+  };
 
-  // useEffect(() => {
-  //   getData();
-  // }, [loader]);
+  useEffect(() => {
+    getData();
+  }, [loader]);
 
   return (
     <AuthContext.Provider
       value={{
         checkUser: data,
-        // fetchData: getData,
-        loggedInStatus: loginStatus,
+        fetchData: getData,
       }}
     >
       {props.children}
