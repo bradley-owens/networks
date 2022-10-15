@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import StartFirebase from "./Firebase";
 import {
   ref,
   set,

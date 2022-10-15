@@ -1,4 +1,3 @@
-// import { db } from "./Firebase";
 import { createSlice } from "@reduxjs/toolkit";
 import StartFirebase from "./Firebase";
 import {
@@ -12,8 +11,8 @@ import {
 } from "firebase/database";
 
 const db = StartFirebase();
-
 const database = getDatabase();
+
 const authenticationInitialState = {
   isLoggedIn: false,
   loggedInUser: {},
