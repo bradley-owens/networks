@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { db } from "./Firebase";
+// import { db } from "./Firebase";
 
 const AuthContext = React.createContext({
   checkUser: [],
@@ -20,31 +20,31 @@ export const AuthContextProvider = (props) => {
 
   //////////////////////////////
 
-  const database = db.collection("Users");
+  // const database = db.collection("Users");
   const [data, setData] = useState([]);
   const [loader, setloader] = useState(true);
 
-  const getData = () => {
-    database.onSnapshot((snap) => {
-      const items = [];
-      snap.forEach((doc) => {
-        items.push({ info: doc.data(), id: doc.id });
-      });
+  // const getData = () => {
+  //   database.onSnapshot((snap) => {
+  //     const items = [];
+  //     snap.forEach((doc) => {
+  //       items.push({ info: doc.data(), id: doc.id });
+  //     });
 
-      setData(items);
-      setloader(false);
-    });
-  };
+  //     setData(items);
+  //     setloader(false);
+  //   });
+  // };
 
-  useEffect(() => {
-    getData();
-  }, [loader]);
+  // useEffect(() => {
+  //   getData();
+  // }, [loader]);
 
   return (
     <AuthContext.Provider
       value={{
         checkUser: data,
-        fetchData: getData,
+        // fetchData: getData,
         loggedInStatus: loginStatus,
       }}
     >

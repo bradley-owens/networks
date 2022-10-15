@@ -75,7 +75,9 @@ const EditContact = (props) => {
       website: websiteState.value,
     });
 
-    dispatch(editAccountActions.modalStateHandler());
+    console.log(contactDetails);
+
+    // dispatch(editAccountActions.modalStateHandler());
   };
 
   return (

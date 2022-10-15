@@ -1,7 +1,9 @@
-import { db } from "./Firebase";
+// import { db } from "./Firebase";
 import { createSlice } from "@reduxjs/toolkit";
 
-const database = db.collection("Users");
+import { red, set, get, update, remove, child } from "firebase/database";
+
+// const database = db.collection("Users");
 const accountIntialState = {
   editAccount: false,
   user: {},
@@ -15,12 +17,11 @@ const editAccountSlice = createSlice({
     setUser(state, action) {
       state.user = action.payload;
     },
-    editPersonalDetails(state, action) {
-      state.editAccount(true);
-      database.ref(state.user.info).update({
-        name: action.payload.name,
-        email: action.payload.userName,
-      });
+    editSkillsDetails(state, action) {
+      // database.ref(state.user.info).update({
+      //   name: action.payload.name,
+      //   email: action.payload.userName,
+      // });
 
       console.log("changed");
     },

@@ -9,7 +9,7 @@ import MyNetwork from "./Pages/MyNetwork/MyNetwork";
 import Account from "./Pages/Account/Account";
 import SignInPage from "./Pages/Login/SignInPage";
 import MemberDetail from "./Pages/MemberDetail/MemberDetail";
-import AccountEdit from "./Pages/Account/AccountEdit";
+
 import Layout from "./Components/Layout/Layout";
 
 function App() {
@@ -51,9 +51,6 @@ function App() {
             <Route path="/account">
               <Account />
             </Route>
-            {/* <Route path="/edit-profile">
-              <AccountEdit />
-            </Route> */}
             <Route path={`/:memberId`}>
               <MemberDetail />
             </Route>

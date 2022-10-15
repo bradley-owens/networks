@@ -1,11 +1,16 @@
 import React, { useEffect, useContext, useState, useReducer } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { authActions } from "../../Store/authentication-slice";
+import authenticationSlice, {
+  authActions,
+} from "../../Store/authentication-slice";
 import { editAccountActions } from "../../Store/editAccount-slice";
 import AuthContext from "../../Store/login-context";
 import Input from "../UI/Inputs/Input";
 import styles from "./SignInForm.module.css";
+
+//
+import { fetchUsers } from "../../Store/authentication-slice";
 
 const SignInForm = (props) => {
   const usernameReducer = (state, action) => {
@@ -78,20 +83,22 @@ const SignInForm = (props) => {
   const ctx = useContext(AuthContext);
   const dispatch = useDispatch();
 
-  const checkForUser = (username, password) => {
-    setUserCorrect(true);
+  const checkForUser = (email, pin) => {
+    // setUserCorrect(true);
+    // ctx.checkUser.forEach((user) => {
+    //   if (
+    //     user.info.email.includes(username) &&
+    //     user.info.pin.includes(password)
+    //   ) {
+    //     dispatch(authActions.login(user.info));
+    //     dispatch(editAccountActions.setUser(user));
+    //   } else {
+    //     setUserCorrect(false);
+    //   }
+    // });
+    // dispatch(authActions.checkUser(email, pin));
 
-    ctx.checkUser.forEach((user) => {
-      if (
-        user.info.email.includes(username) &&
-        user.info.pin.includes(password)
-      ) {
-        dispatch(authActions.login(user.info));
-        dispatch(editAccountActions.setUser(user));
-      } else {
-        setUserCorrect(false);
-      }
-    });
+    fetchUsers();
   };
 
   const submitCreateUserForm = () => {

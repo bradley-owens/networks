@@ -98,7 +98,7 @@ const CreateUserForm = (props) => {
     dispatchUsername({ type: "USER-INPUT", val: e.target.value });
   };
   const userPinHandler = (e) => {
-    dispatchPin({ type: "USER-INPUT", val: e.target.value });
+    dispatchPin({ type: "USER-INPUT", val: e.target.value + "" });
   };
 
   const nameHandler = (e) => {
@@ -134,31 +134,30 @@ const CreateUserForm = (props) => {
     );
   }, [emailIsValid, pinIsValid, languageIsValid, nameIsValid]);
 
-  const user = class {
-    constructor(userName, password, language, name) {
-      this.userName = userName;
-      this.password = password;
-      this.language = language;
-      this.name = name;
-    }
-  };
+  // const user = class {
+  //   constructor(userName, password, language, name) {
+  //     this.userName = userName;
+  //     this.password = password;
+  //     this.language = language;
+  //     this.name = name;
+  //   }
+  // };
 
   const dispatch = useDispatch();
+  const [newUser, setNewUser] = useState();
 
   const submitCreateUserForm = (e) => {
     e.preventDefault();
 
-    if (formIsValid) {
-      let newUser = new user(
-        usernameState.value,
-        pinState.value,
-        languageState.value,
-        nameState.value
-      );
-
-      dispatch(authActions.createUser(newUser));
-      dispatch(editAccountActions.setUser(newUser));
-    }
+    dispatch(
+      authActions.createUser({
+        username: usernameState.value,
+        pin: pinState.value,
+        name: nameState.value,
+        language: languageState.value,
+      })
+    );
+    // dispatch(editAccountActions.setUser(newUser));
   };
 
   const lengthOfPassword = 4;
@@ -201,15 +200,23 @@ const CreateUserForm = (props) => {
         onBlur={validateLanguage}
       ></Select>
 
-      <Link
+      {/* <Link
         to="/sign-in"
+        // type="submit"
+        // onClick={submitCreateUserForm}
+        // className={
+        //   formIsValid ? styles["login-button"] : styles["login-button_disabled"]
+        // }
+      > */}
+      <button
         type="submit"
         className={
           formIsValid ? styles["login-button"] : styles["login-button_disabled"]
         }
       >
         Join
-      </Link>
+      </button>
+      {/* </Link> */}
     </form>
   );
 };
