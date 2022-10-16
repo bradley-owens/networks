@@ -102,10 +102,13 @@ const SignInForm = (props) => {
 
   const signInAsGuest = () => {
     const guest = {
-      email: "guest12345@guest.com",
-      pin: 1234,
-      name: "Guest",
-      language: "None",
+      info: {
+        email: "guest12345@guest.com",
+        pin: 1234,
+        name: "Guest",
+        language: "None",
+      },
+      id: "0000",
     };
 
     dispatch(authActions.login(guest));

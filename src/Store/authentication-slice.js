@@ -17,10 +17,13 @@ const authenticationInitialState = {
   isLoggedIn: false,
   loggedInUser: {},
   guestUser: {
-    email: "guest12345@guest.com",
-    pin: 1234,
-    name: "Guest",
-    language: "None",
+    info: {
+      email: "guest12345@guest.com",
+      pin: 1234,
+      name: "Guest",
+      language: "None",
+    },
+    id: "0000",
   },
 };
 
@@ -31,7 +34,7 @@ const authenticationSlice = createSlice({
     createUser(state, action) {
       const user = action.payload;
       const idGen = Math.floor(Math.random() * 1000);
-      set(ref(db, "Users/" + idGen), {
+      set(ref(database, "Users/" + idGen), {
         email: user.username,
         pin: user.pin + "",
         name: user.name,

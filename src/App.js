@@ -2,14 +2,12 @@ import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { Redirect } from "react-router-dom";
-
 import CreateUserPage from "./Pages/CreateAccount/CreateUserPage";
 import HomePage from "./Pages/HomePage/HomePage";
 import MyNetwork from "./Pages/MyNetwork/MyNetwork";
 import Account from "./Pages/Account/Account";
 import SignInPage from "./Pages/Login/SignInPage";
 import MemberDetail from "./Pages/MemberDetail/MemberDetail";
-
 import Layout from "./Components/Layout/Layout";
 
 function App() {

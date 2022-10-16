@@ -1,15 +1,16 @@
 import { useContext } from "react";
+
 import { useParams } from "react-router-dom";
 import AuthContext from "../../Store/login-context";
 import styles from "./MemberDetail.module.css";
 
-const MemberDetail = () => {
+const MemberDetail = (props) => {
   const params = useParams();
   const ctx = useContext(AuthContext);
 
-  const clickedUser = ctx.checkUser.find(
-    (user) => user.id === params.memberId
-  ).info;
+  const clickedUser = ctx.checkUser.forEach((user) => {
+    return user.id === params.memberId;
+  }).info;
 
   const checkProvided = (info) => {
     if (info === undefined) {
@@ -17,10 +18,6 @@ const MemberDetail = () => {
     }
     return info;
   };
-
-  if (!clickedUser) {
-    return <p> User does not exist</p>;
-  }
 
   return (
     <div className={styles.container}>

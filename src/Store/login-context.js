@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   ref,
   set,
@@ -12,18 +12,16 @@ import {
 const AuthContext = React.createContext({
   checkUser: [],
   fetchData: () => {},
-  loggedInStatus: false,
 });
 
 export const AuthContextProvider = (props) => {
   //////////////////////////////
-
   const database = getDatabase();
 
   const [data, setData] = useState([]);
   const [loader, setloader] = useState(true);
 
-  const getData = () => {
+  const getData = useCallback(() => {
     const dbRef = ref(database);
     const items = [];
     get(child(dbRef, "Users/")).then((snapshot) => {
@@ -34,12 +32,14 @@ export const AuthContextProvider = (props) => {
       });
       setData(items);
       setloader(false);
+
+      return items;
     });
-  };
+  }, [database]);
 
   useEffect(() => {
     getData();
-  }, [loader]);
+  }, [getData, database]);
 
   return (
     <AuthContext.Provider

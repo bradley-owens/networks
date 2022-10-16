@@ -1,11 +1,10 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import { authActions } from "../../Store/authentication-slice";
 import { useDispatch } from "react-redux";
 import Input from "../UI/Inputs/Input";
 import Select from "../UI/Select";
 import styles from "./CreateUserForm.module.css";
-import { editAccountActions } from "../../Store/editAccount-slice";
-import { Link } from "react-router-dom";
+import AuthContext from "../../Store/login-context";
 
 const CreateUserForm = (props) => {
   const usernameReducer = (state, action) => {
@@ -134,30 +133,31 @@ const CreateUserForm = (props) => {
     );
   }, [emailIsValid, pinIsValid, languageIsValid, nameIsValid]);
 
-  // const user = class {
-  //   constructor(userName, password, language, name) {
-  //     this.userName = userName;
-  //     this.password = password;
-  //     this.language = language;
-  //     this.name = name;
-  //   }
-  // };
-
   const dispatch = useDispatch();
-  const [newUser, setNewUser] = useState();
+  const ctx = useContext(AuthContext);
 
   const submitCreateUserForm = (e) => {
     e.preventDefault();
 
-    dispatch(
-      authActions.createUser({
-        username: usernameState.value,
-        pin: pinState.value,
-        name: nameState.value,
-        language: languageState.value,
-      })
-    );
-    // dispatch(editAccountActions.setUser(newUser));
+    const users = ctx.checkUser;
+
+    users.forEach((user) => {
+      console.log(user.info.email);
+      if (user.info.email === usernameState.value) {
+        setFormIsValid(false);
+        alert("This email is already used");
+        return;
+      } else {
+        dispatch(
+          authActions.createUser({
+            username: usernameState.value,
+            pin: pinState.value,
+            name: nameState.value,
+            language: languageState.value,
+          })
+        );
+      }
+    });
   };
 
   const lengthOfPassword = 4;
@@ -200,14 +200,6 @@ const CreateUserForm = (props) => {
         onBlur={validateLanguage}
       ></Select>
 
-      {/* <Link
-        to="/sign-in"
-        // type="submit"
-        // onClick={submitCreateUserForm}
-        // className={
-        //   formIsValid ? styles["login-button"] : styles["login-button_disabled"]
-        // }
-      > */}
       <button
         type="submit"
         className={
@@ -216,7 +208,6 @@ const CreateUserForm = (props) => {
       >
         Join
       </button>
-      {/* </Link> */}
     </form>
   );
 };
