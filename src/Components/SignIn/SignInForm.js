@@ -110,8 +110,8 @@ const SignInForm = (props) => {
         pin: 1234,
         name: "Guest",
         language: "None",
+        id: "0000",
       },
-      id: "0000",
     };
 
     dispatch(authActions.login(guest));

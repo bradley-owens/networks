@@ -12,6 +12,8 @@ import Layout from "./Components/Layout/Layout";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.authentication.isLoggedIn);
+  const user = useSelector((state) => state.authentication.loggedInUser);
+  console.log(user);
 
   return (
     <main>

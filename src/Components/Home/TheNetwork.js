@@ -3,7 +3,7 @@ import AuthContext from "../../Store/login-context";
 import MemberCard from "../UI/MemberCard/MemberCard";
 import styles from "./TheNetwork.module.css";
 
-const TheNetwork = (props) => {
+const TheNetwork = () => {
   const ctx = useContext(AuthContext);
 
   return (

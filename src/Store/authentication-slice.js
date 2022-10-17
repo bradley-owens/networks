@@ -12,10 +12,10 @@ const authenticationInitialState = {
     info: {
       email: "guest12345@guest.com",
       pin: 1234,
+      id: "0000",
       name: "Guest",
       language: "None",
     },
-    id: "0000",
   },
 };
 

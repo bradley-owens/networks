@@ -1,15 +1,16 @@
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import EditContact from "../../Components/AccountEdit/Contact/EditContact";
 import EditPersonal from "../../Components/AccountEdit/Personal/EditPersonal";
 import EditSkills from "../../Components/AccountEdit/Skills/EditSkills";
 import AccountCard from "../../Components/UI/AccountCards/AccountCard";
 import { editAccountActions } from "../../Store/editAccount-slice";
+import AuthContext from "../../Store/login-context";
 import styles from "./AccountInformation.module.css";
 
 const AccountInformation = () => {
   const user = useSelector((state) => state.authentication.loggedInUser);
-  const contact = useSelector(
+  const contactInfo = useSelector(
     (state) => state.authentication.loggedInUser.contact
   );
   const modalState = useSelector((state) => state.edit.modalState);
@@ -26,30 +27,36 @@ const AccountInformation = () => {
   };
 
   const checkLinkedInProvided = () => {
-    if (contact === undefined) {
+    if (contactInfo === undefined) {
       return "None";
-    } else if (contact.linkedIn === undefined || contact.linkedIn === "") {
+    } else if (
+      contactInfo.linkedIn === undefined ||
+      contactInfo.linkedIn === ""
+    ) {
       return "None";
     }
-    return contact.linkedIn;
+    return contactInfo.linkedIn;
   };
 
   const checkGithubProvided = () => {
-    if (contact === undefined) {
+    if (contactInfo === undefined) {
       return "None";
-    } else if (contact.github === undefined || contact.github === "") {
+    } else if (contactInfo.github === undefined || contactInfo.github === "") {
       return "None";
     }
-    return contact.github;
+    return contactInfo.github;
   };
 
   const checkWebsiteProvided = () => {
-    if (contact === undefined) {
+    if (contactInfo === undefined) {
       return "None";
-    } else if (contact.website === undefined || contact.website === "") {
+    } else if (
+      contactInfo.website === undefined ||
+      contactInfo.website === ""
+    ) {
       return "None";
     }
-    return contact.website;
+    return contactInfo.website;
   };
 
   const editChoice = clickedEditModal;
@@ -65,6 +72,8 @@ const AccountInformation = () => {
       case "contact":
         return <EditContact user={user} onClose={closeModalHandler} />;
     }
+
+  // Set rendered contact info once editted to be displayed from setUser in editaccountslicr
 
   return (
     <Fragment>

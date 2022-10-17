@@ -6,7 +6,7 @@ const db = StartFirebase();
 const database = getDatabase();
 
 const accountIntialState = {
-  user: {},
+  user: { info: {}, contact: {} },
   modalState: false,
 };
 
@@ -15,10 +15,14 @@ const editAccountSlice = createSlice({
   initialState: accountIntialState,
   reducers: {
     setUser(state, action) {
-      state.user = action.payload.info;
+      state.user.info = action.payload.info;
     },
+    setContactInformation(state, action) {
+      state.user.contact = action.payload;
+    },
+
     editContactDetails(state, action) {
-      update(ref(database, "Users/" + state.user.id), {
+      update(ref(database, "Users/" + state.user.info.id), {
         contact: {
           linkedIn: action.payload.linkedIn,
           github: action.payload.github,
