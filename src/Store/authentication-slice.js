@@ -34,12 +34,18 @@ const authenticationSlice = createSlice({
     createUser(state, action) {
       const user = action.payload;
       const idGen = Math.floor(Math.random() * 1000);
-      set(ref(database, "Users/" + idGen), {
-        email: user.username,
-        pin: user.pin + "",
-        name: user.name,
-        language: user.language,
-      })
+
+      let newUser = {
+        info: {
+          id: Number(idGen),
+          email: user.username,
+          pin: user.pin + "",
+          name: user.name,
+          language: user.language,
+        },
+      };
+
+      set(ref(database, "Users/" + idGen), newUser)
         .then(() => {
           alert("Account Created Successfully");
         })
@@ -48,7 +54,7 @@ const authenticationSlice = createSlice({
         });
 
       state.isLoggedIn = true;
-      state.loggedInUser = user;
+      state.loggedInUser = newUser;
       localStorage.setItem("isLoggedIn", "1");
       localStorage.setItem("loggedInUser", user);
     },

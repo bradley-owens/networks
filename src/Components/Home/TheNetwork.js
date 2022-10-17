@@ -3,7 +3,7 @@ import AuthContext from "../../Store/login-context";
 import MemberCard from "../UI/MemberCard/MemberCard";
 import styles from "./TheNetwork.module.css";
 
-const TheNetwork = () => {
+const TheNetwork = (props) => {
   const ctx = useContext(AuthContext);
 
   return (
@@ -14,7 +14,7 @@ const TheNetwork = () => {
           return (
             <MemberCard
               key={Math.random()}
-              id={user.id}
+              id={user.info.id}
               name={user.info.name}
               email={user.info.email}
               language={user.info.language}

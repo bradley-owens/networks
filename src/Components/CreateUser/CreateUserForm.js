@@ -135,29 +135,28 @@ const CreateUserForm = (props) => {
 
   const dispatch = useDispatch();
   const ctx = useContext(AuthContext);
+  const [userDoesExist, setUserDoesExist] = useState(true);
 
   const submitCreateUserForm = (e) => {
     e.preventDefault();
 
-    const users = ctx.checkUser;
-
-    users.forEach((user) => {
-      console.log(user.info.email);
-      if (user.info.email === usernameState.value) {
-        setFormIsValid(false);
-        alert("This email is already used");
-        return;
-      } else {
-        dispatch(
-          authActions.createUser({
-            username: usernameState.value,
-            pin: pinState.value,
-            name: nameState.value,
-            language: languageState.value,
-          })
-        );
-      }
-    });
+    // users.forEach((user) => {
+    // if (user.info.email === usernameState.value) {
+    dispatch(
+      authActions.createUser({
+        username: usernameState.value,
+        pin: pinState.value,
+        name: nameState.value,
+        language: languageState.value,
+      })
+    );
+    //     return;
+    //   } else {
+    //     setFormIsValid(false);
+    //     alert("This email is already used");
+    //     return;
+    //   }
+    // });
   };
 
   const lengthOfPassword = 4;

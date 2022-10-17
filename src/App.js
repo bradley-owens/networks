@@ -49,6 +49,7 @@ function App() {
             <Route path="/account">
               <Account />
             </Route>
+
             <Route path={`/:memberId`}>
               <MemberDetail />
             </Route>

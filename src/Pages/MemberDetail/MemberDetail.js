@@ -1,16 +1,24 @@
-import { useContext } from "react";
-
+import { useContext, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import AuthContext from "../../Store/login-context";
 import styles from "./MemberDetail.module.css";
 
-const MemberDetail = (props) => {
+const MemberDetail = () => {
   const params = useParams();
   const ctx = useContext(AuthContext);
 
-  const clickedUser = ctx.checkUser.forEach((user) => {
-    return user.id === params.memberId;
-  }).info;
+  const [clickedUser, setClickedUser] = useState({});
+
+  useEffect(() => {
+    ctx.checkUser.forEach((user) => {
+      // console.log(user);
+      if (user.info.id == params.memberId) {
+        setClickedUser(user.info);
+        console.log(clickedUser);
+      }
+    });
+  }, []);
 
   const checkProvided = (info) => {
     if (info === undefined) {
