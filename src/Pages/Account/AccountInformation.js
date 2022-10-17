@@ -9,7 +9,9 @@ import styles from "./AccountInformation.module.css";
 
 const AccountInformation = () => {
   const user = useSelector((state) => state.authentication.loggedInUser);
-
+  const contact = useSelector(
+    (state) => state.authentication.loggedInUser.contact
+  );
   const modalState = useSelector((state) => state.edit.modalState);
   const [clickedEditModal, setClickedEditModal] = useState();
   const dispatch = useDispatch();
@@ -23,11 +25,31 @@ const AccountInformation = () => {
     dispatch(editAccountActions.modalStateHandler());
   };
 
-  const checkProvided = () => {
-    if (user.contact === undefined) {
-      return false;
+  const checkLinkedInProvided = () => {
+    if (contact === undefined) {
+      return "None";
+    } else if (contact.linkedIn === undefined || contact.linkedIn === "") {
+      return "None";
     }
-    return true;
+    return contact.linkedIn;
+  };
+
+  const checkGithubProvided = () => {
+    if (contact === undefined) {
+      return "None";
+    } else if (contact.github === undefined || contact.github === "") {
+      return "None";
+    }
+    return contact.github;
+  };
+
+  const checkWebsiteProvided = () => {
+    if (contact === undefined) {
+      return "None";
+    } else if (contact.website === undefined || contact.website === "") {
+      return "None";
+    }
+    return contact.website;
   };
 
   const editChoice = clickedEditModal;
@@ -83,11 +105,11 @@ const AccountInformation = () => {
           <AccountCard>
             <h1>Contact Information</h1>
             <label>LinkedIN</label>
-            <h3>{!checkProvided() ? "None" : user.contact.linkedIn}</h3>
+            <h3>{checkLinkedInProvided()}</h3>
             <label>Github</label>
-            <h3>{!checkProvided() ? "None" : user.contact.github}</h3>
+            <h3>{checkGithubProvided()}</h3>
             <label>Portfolio Website</label>
-            <h3>{!checkProvided() ? "None" : user.contact.website}</h3>
+            <h3>{checkWebsiteProvided()}</h3>
             <button id="contact" onClick={modalHandler}>
               Edit
             </button>
