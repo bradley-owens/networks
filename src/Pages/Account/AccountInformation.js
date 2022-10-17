@@ -23,11 +23,11 @@ const AccountInformation = () => {
     dispatch(editAccountActions.modalStateHandler());
   };
 
-  const checkProvided = (info) => {
-    if (info === null) {
-      return "N/A";
+  const checkProvided = () => {
+    if (user.contact === undefined) {
+      return false;
     }
-    return info;
+    return true;
   };
 
   const editChoice = clickedEditModal;
@@ -83,11 +83,11 @@ const AccountInformation = () => {
           <AccountCard>
             <h1>Contact Information</h1>
             <label>LinkedIN</label>
-            <h3>{user.contact.linkedIn ? user.contact.linkedIn : "None"}</h3>
+            <h3>{!checkProvided() ? "None" : user.contact.linkedIn}</h3>
             <label>Github</label>
-            <h3>{user.contact.github ? user.contact.github : "None"}</h3>
+            <h3>{!checkProvided() ? "None" : user.contact.github}</h3>
             <label>Portfolio Website</label>
-            <h3>{user.contact.website ? user.contact.website : "None"}</h3>
+            <h3>{!checkProvided() ? "None" : user.contact.website}</h3>
             <button id="contact" onClick={modalHandler}>
               Edit
             </button>
