@@ -1,14 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import StartFirebase from "./Firebase";
-import {
-  ref,
-  set,
-  get,
-  update,
-  remove,
-  child,
-  getDatabase,
-} from "firebase/database";
+import { ref, set, getDatabase } from "firebase/database";
 
 const db = StartFirebase();
 const database = getDatabase();

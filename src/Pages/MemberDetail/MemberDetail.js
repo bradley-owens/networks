@@ -12,7 +12,6 @@ const MemberDetail = () => {
 
   useEffect(() => {
     ctx.checkUser.forEach((user) => {
-      // console.log(user);
       if (user.info.id == params.memberId) {
         setClickedUser(user.info);
         console.log(clickedUser);

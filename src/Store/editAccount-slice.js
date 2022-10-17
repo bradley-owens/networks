@@ -1,11 +1,11 @@
-// import { db } from "./Firebase";
 import { createSlice } from "@reduxjs/toolkit";
+import StartFirebase from "./Firebase";
+import { ref, update, getDatabase } from "firebase/database";
 
-import { red, set, get, update, remove, child } from "firebase/database";
+const db = StartFirebase();
+const database = getDatabase();
 
-// const database = db.collection("Users");
 const accountIntialState = {
-  editAccount: false,
   user: {},
   modalState: false,
 };
@@ -15,15 +15,22 @@ const editAccountSlice = createSlice({
   initialState: accountIntialState,
   reducers: {
     setUser(state, action) {
-      state.user = action.payload;
+      state.user = action.payload.info;
     },
-    editSkillsDetails(state, action) {
-      // database.ref(state.user.info).update({
-      //   name: action.payload.name,
-      //   email: action.payload.userName,
-      // });
-
-      console.log("changed");
+    editContactDetails(state, action) {
+      update(ref(database, "Users/" + state.user.id), {
+        contact: {
+          linkedIn: action.payload.linkedIn,
+          github: action.payload.github,
+          website: action.payload.website,
+        },
+      })
+        .then(() => {
+          alert("Contact Details Updated!");
+        })
+        .catch((error) => {
+          alert("There was an error : " + error);
+        });
     },
     modalStateHandler(state) {
       state.modalState = !state.modalState;

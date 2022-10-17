@@ -5,6 +5,7 @@ import Input from "../UI/Inputs/Input";
 import Select from "../UI/Select";
 import styles from "./CreateUserForm.module.css";
 import AuthContext from "../../Store/login-context";
+import { editAccountActions } from "../../Store/editAccount-slice";
 
 const CreateUserForm = (props) => {
   const usernameReducer = (state, action) => {
@@ -144,6 +145,15 @@ const CreateUserForm = (props) => {
     // if (user.info.email === usernameState.value) {
     dispatch(
       authActions.createUser({
+        username: usernameState.value,
+        pin: pinState.value,
+        name: nameState.value,
+        language: languageState.value,
+      })
+    );
+
+    dispatch(
+      editAccountActions.setUser({
         username: usernameState.value,
         pin: pinState.value,
         name: nameState.value,

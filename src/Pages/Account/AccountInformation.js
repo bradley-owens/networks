@@ -8,7 +8,8 @@ import { editAccountActions } from "../../Store/editAccount-slice";
 import styles from "./AccountInformation.module.css";
 
 const AccountInformation = () => {
-  const user = useSelector((state) => state.authentication.loggedInUser.info);
+  const user = useSelector((state) => state.authentication.loggedInUser);
+
   const modalState = useSelector((state) => state.edit.modalState);
   const [clickedEditModal, setClickedEditModal] = useState();
   const dispatch = useDispatch();
@@ -22,18 +23,25 @@ const AccountInformation = () => {
     dispatch(editAccountActions.modalStateHandler());
   };
 
+  const checkProvided = (info) => {
+    if (info === null) {
+      return "N/A";
+    }
+    return info;
+  };
+
   const editChoice = clickedEditModal;
 
   if (modalState)
     switch (editChoice) {
       case "personal":
-        return <EditPersonal onClose={closeModalHandler} />;
+        return <EditPersonal user={user} onClose={closeModalHandler} />;
 
       case "skills":
-        return <EditSkills onClose={closeModalHandler} />;
+        return <EditSkills user={user} onClose={closeModalHandler} />;
 
       case "contact":
-        return <EditContact onClose={closeModalHandler} />;
+        return <EditContact user={user} onClose={closeModalHandler} />;
     }
 
   return (
@@ -43,11 +51,11 @@ const AccountInformation = () => {
           <AccountCard>
             <h1>Personal Details</h1>
             <label>Name</label>
-            <h3>{user.name}</h3>
+            <h3>{user.info.name}</h3>
             <label>Current Position</label>
             <h3>None</h3>
             <label>Email</label>
-            <h3>{user.email}</h3>
+            <h3>{user.info.email}</h3>
             <label>Location</label>
             <h3>None</h3>
             <button id="personal" onClick={modalHandler}>
@@ -60,7 +68,7 @@ const AccountInformation = () => {
           <AccountCard>
             <h1>Skills and Expereince</h1>
             <label>Programming Language</label>
-            <h3>{user.language}</h3>
+            <h3>{user.info.language}</h3>
             <label>Frameworks</label>
             <h3>None</h3>
             <label>Years Expereince</label>
@@ -75,11 +83,11 @@ const AccountInformation = () => {
           <AccountCard>
             <h1>Contact Information</h1>
             <label>LinkedIN</label>
-            <h3>None</h3>
+            <h3>{user.contact.linkedIn ? user.contact.linkedIn : "None"}</h3>
             <label>Github</label>
-            <h3>None</h3>
+            <h3>{user.contact.github ? user.contact.github : "None"}</h3>
             <label>Portfolio Website</label>
-            <h3>None</h3>
+            <h3>{user.contact.website ? user.contact.website : "None"}</h3>
             <button id="contact" onClick={modalHandler}>
               Edit
             </button>

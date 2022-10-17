@@ -59,25 +59,20 @@ const EditContact = (props) => {
 
   // //////////////////////////////////////////////////
 
-  const [contactDetails, setContactDetails] = useState({
-    linkedIn: "",
-    github: "",
-    website: "",
-  });
   const dispatch = useDispatch();
 
   const editContactSubmit = (e) => {
     e.preventDefault();
 
-    setContactDetails({
-      linkedIn: linkedInState.value,
-      github: githubState.value,
-      website: websiteState.value,
-    });
+    dispatch(
+      editAccountActions.editContactDetails({
+        linkedIn: linkedInState.value,
+        github: githubState.value,
+        website: websiteState.value,
+      })
+    );
 
-    console.log(contactDetails);
-
-    // dispatch(editAccountActions.modalStateHandler());
+    dispatch(editAccountActions.modalStateHandler());
   };
 
   return (

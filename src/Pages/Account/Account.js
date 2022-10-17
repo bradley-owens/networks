@@ -7,7 +7,7 @@ import AccountInformation from "./AccountInformation";
 
 const Account = () => {
   const userName = useSelector(
-    (state) => state.authentication.loggedInUser.name
+    (state) => state.authentication.loggedInUser.info.name
   );
   return (
     <Fragment>

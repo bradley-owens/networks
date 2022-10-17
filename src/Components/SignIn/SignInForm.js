@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import authenticationSlice, {
   authActions,
 } from "../../Store/authentication-slice";
-import { editAccountActions } from "../../Store/editAccount-slice";
+import editAccountSlice, {
+  editAccountActions,
+} from "../../Store/editAccount-slice";
 import AuthContext from "../../Store/login-context";
 import Input from "../UI/Inputs/Input";
 import styles from "./SignInForm.module.css";
@@ -88,6 +90,7 @@ const SignInForm = (props) => {
     users.forEach((user) => {
       if (user.info.email === email && user.info.pin === pin) {
         dispatch(authActions.login(user));
+        dispatch(editAccountActions.setUser(user));
       } else {
         setUserCorrect(false);
       }
