@@ -1,4 +1,4 @@
-import { Fragment, useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import EditContact from "../../Components/AccountEdit/Contact/EditContact";
 import EditPersonal from "../../Components/AccountEdit/Personal/EditPersonal";
@@ -10,9 +10,7 @@ import styles from "./AccountInformation.module.css";
 
 const AccountInformation = () => {
   const user = useSelector((state) => state.authentication.loggedInUser);
-  const contactInfo = useSelector(
-    (state) => state.authentication.loggedInUser.contact
-  );
+  const ctx = useContext(AuthContext);
   const modalState = useSelector((state) => state.edit.modalState);
   const [clickedEditModal, setClickedEditModal] = useState();
   const dispatch = useDispatch();
@@ -20,11 +18,21 @@ const AccountInformation = () => {
   const modalHandler = (event) => {
     setClickedEditModal(event.target.id);
     dispatch(editAccountActions.modalStateHandler());
+    ctx.fetchData();
   };
 
   const closeModalHandler = () => {
     dispatch(editAccountActions.modalStateHandler());
   };
+  ///////////////////////////////////////
+  const loggedInUser = useSelector(
+    (state) => state.authentication.loggedInUser
+  );
+  const contactInfo = ctx.checkUser.find((user) => {
+    return user.id.id === loggedInUser.id.id;
+  }).contact;
+
+  ///////////////////////////////////////
 
   const checkLinkedInProvided = () => {
     if (contactInfo === undefined) {
@@ -72,8 +80,6 @@ const AccountInformation = () => {
       case "contact":
         return <EditContact user={user} onClose={closeModalHandler} />;
     }
-
-  // Set rendered contact info once editted to be displayed from setUser in editaccountslicr
 
   return (
     <Fragment>

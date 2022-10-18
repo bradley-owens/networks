@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import AuthContext from "../../../Store/login-context";
 import styles from "./MemberCard.module.css";
 
 const MemberCard = (props) => {

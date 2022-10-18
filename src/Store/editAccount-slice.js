@@ -1,12 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import StartFirebase from "./Firebase";
 import { ref, update, getDatabase } from "firebase/database";
 
-const db = StartFirebase();
 const database = getDatabase();
 
 const accountIntialState = {
-  user: { info: {}, contact: {} },
+  user: { info: {}, contact: {}, id: {} },
   modalState: false,
 };
 
@@ -15,14 +13,14 @@ const editAccountSlice = createSlice({
   initialState: accountIntialState,
   reducers: {
     setUser(state, action) {
-      state.user.info = action.payload.info;
+      state.user = action.payload;
     },
     setContactInformation(state, action) {
       state.user.contact = action.payload;
     },
 
     editContactDetails(state, action) {
-      update(ref(database, "Users/" + state.user.info.id), {
+      update(ref(database, "Users/" + state.user.id.id), {
         contact: {
           linkedIn: action.payload.linkedIn,
           github: action.payload.github,

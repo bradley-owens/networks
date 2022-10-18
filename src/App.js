@@ -12,8 +12,14 @@ import Layout from "./Components/Layout/Layout";
 
 function App() {
   const isLoggedIn = useSelector((state) => state.authentication.isLoggedIn);
-  const user = useSelector((state) => state.authentication.loggedInUser);
-  console.log(user);
+ 
+  // NEED TO FIX CREATE USER BUG
+
+  // CLEAN CODE
+
+  // MOVE ON TO OTHER EDIT INFORMATION
+
+  // APPLY FOLLOW FUNCTIONALITY AND MY NETWORK RENDER
 
   return (
     <main>

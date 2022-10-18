@@ -7,15 +7,16 @@ const database = getDatabase();
 
 const authenticationInitialState = {
   isLoggedIn: false,
-  loggedInUser: {},
+  loggedInUser: { info: {}, id: {} },
   guestUser: {
     info: {
       email: "guest12345@guest.com",
       pin: 1234,
-      id: "0000",
       name: "Guest",
       language: "None",
     },
+    id: { id: "0000" },
+    contact: {},
   },
 };
 
@@ -29,23 +30,23 @@ const authenticationSlice = createSlice({
 
       let newUser = {
         info: {
-          id: Number(idGen),
           email: user.username,
           pin: user.pin + "",
           name: user.name,
           language: user.language,
         },
+        id: { id: Number(idGen) },
       };
 
       set(ref(database, "Users/" + idGen), newUser)
         .then(() => {
-          alert("Account Created Successfully");
+          alert("Account Created Successfully.Sign in now to start!");
         })
         .catch((error) => {
           alert("There was an error : " + error);
         });
 
-      state.isLoggedIn = true;
+      // state.isLoggedIn = true;
       state.loggedInUser = newUser;
       localStorage.setItem("isLoggedIn", "1");
       localStorage.setItem("loggedInUser", user);

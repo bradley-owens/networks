@@ -1,18 +1,13 @@
 import React, { useEffect, useContext, useState, useReducer } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import authenticationSlice, {
-  authActions,
-} from "../../Store/authentication-slice";
-import editAccountSlice, {
-  editAccountActions,
-} from "../../Store/editAccount-slice";
+import { authActions } from "../../Store/authentication-slice";
+import { editAccountActions } from "../../Store/editAccount-slice";
 import AuthContext from "../../Store/login-context";
 import Input from "../UI/Inputs/Input";
 import styles from "./SignInForm.module.css";
 
 //
-import { fetchUsers } from "../../Store/authentication-slice";
 
 const SignInForm = (props) => {
   const usernameReducer = (state, action) => {
@@ -105,17 +100,11 @@ const SignInForm = (props) => {
 
   const signInAsGuest = () => {
     const guest = {
-      info: {
-        email: "guest12345@guest.com",
-        pin: 1234,
-        name: "Guest",
-        language: "None",
-        id: "0000",
-      },
+      email: "guest12345@guest.com",
+      pin: "1234",
     };
 
-    dispatch(authActions.login(guest));
-    dispatch(editAccountActions.setUser(guest));
+    checkForUser(guest.email, guest.pin);
   };
 
   return (

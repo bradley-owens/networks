@@ -25,7 +25,6 @@ export const AuthContextProvider = (props) => {
       setData(items);
       setloader(false);
 
-      console.log(items);
       return items;
     });
   }, [database]);

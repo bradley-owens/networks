@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useReducer, useState } from "react";
 import { authActions } from "../../Store/authentication-slice";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Input from "../UI/Inputs/Input";
 import Select from "../UI/Select";
 import styles from "./CreateUserForm.module.css";
-import AuthContext from "../../Store/login-context";
 import { editAccountActions } from "../../Store/editAccount-slice";
+import { withRouter } from "react-router-dom";
+import AuthContext from "../../Store/login-context";
 
 const CreateUserForm = (props) => {
   const usernameReducer = (state, action) => {
@@ -136,7 +138,7 @@ const CreateUserForm = (props) => {
 
   const dispatch = useDispatch();
   const ctx = useContext(AuthContext);
-  const [userDoesExist, setUserDoesExist] = useState(true);
+  const history = useHistory();
 
   const submitCreateUserForm = (e) => {
     e.preventDefault();
@@ -167,9 +169,10 @@ const CreateUserForm = (props) => {
     //     return;
     //   }
     // });
-  };
+    ctx.fetchData();
 
-  const lengthOfPassword = 4;
+    history.push("/sign-in");
+  };
 
   return (
     <form className={styles["form-container"]} onSubmit={submitCreateUserForm}>
@@ -189,7 +192,7 @@ const CreateUserForm = (props) => {
         value={pinState.value}
         onChange={userPinHandler}
         onBlur={validatePin}
-        maxLength={lengthOfPassword}
+        maxLength="4"
       ></Input>
 
       <Input
@@ -221,4 +224,4 @@ const CreateUserForm = (props) => {
   );
 };
 
-export default CreateUserForm;
+export default withRouter(CreateUserForm);

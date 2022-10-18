@@ -1,6 +1,6 @@
 import styles from "../Edit.module.css";
 import Modal from "../../UI/Modal/Modal";
-import { useContext, useEffect, useReducer, useState } from "react";
+import { useContext, useReducer } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { editAccountActions } from "../../../Store/editAccount-slice";
@@ -62,6 +62,7 @@ const EditContact = (props) => {
   // //////////////////////////////////////////////////
 
   const dispatch = useDispatch();
+  const ctx = useContext(AuthContext);
 
   const editContactSubmit = (e) => {
     e.preventDefault();
@@ -82,15 +83,16 @@ const EditContact = (props) => {
       })
     );
 
+    ctx.fetchData();
+
     dispatch(editAccountActions.modalStateHandler());
   };
 
-  const ctx = useContext(AuthContext);
   const loggedInUser = useSelector(
     (state) => state.authentication.loggedInUser
   );
   const userInfo = ctx.checkUser.find((user) => {
-    return user.info.id === loggedInUser.info.id;
+    return user.id.id === loggedInUser.id.id;
   });
 
   const checkLinkedInProvided = () => {
