@@ -32,6 +32,10 @@ const AccountInformation = () => {
     return user.id.id === loggedInUser.id.id;
   }).contact;
 
+  const skillsInfo = ctx.checkUser.find((user) => {
+    return user.id.id === loggedInUser.id.id;
+  }).skills;
+
   ///////////////////////////////////////
 
   const checkLinkedInProvided = () => {
@@ -67,6 +71,52 @@ const AccountInformation = () => {
     return contactInfo.website;
   };
 
+  ///////////////////////////////////////////////////////////////////
+  const checkFrameworksProvided = () => {
+    if (skillsInfo === undefined) return "None";
+    else if (
+      skillsInfo.frameworks === undefined ||
+      skillsInfo.frameworks === ""
+    ) {
+      return "None";
+    }
+    return skillsInfo.frameworks;
+  };
+
+  const checkEducationProvided = () => {
+    if (skillsInfo === undefined) return "None";
+    else if (
+      skillsInfo.education === undefined ||
+      skillsInfo.education === ""
+    ) {
+      return "None";
+    }
+    return skillsInfo.education;
+  };
+
+  const checkExperienceProvided = () => {
+    if (skillsInfo === undefined) return "None";
+    else if (
+      skillsInfo.experience === undefined ||
+      skillsInfo.experience === ""
+    ) {
+      return "None";
+    }
+    return skillsInfo.experience;
+  };
+
+  const checkCurrentRoleProvided = () => {
+    if (skillsInfo === undefined) return "None";
+    else if (
+      skillsInfo.currentRole === undefined ||
+      skillsInfo.currentRole === ""
+    ) {
+      return "None";
+    }
+    return skillsInfo.currentRole;
+  };
+  ///////////////////////////////////////////////////////////////////
+
   const editChoice = clickedEditModal;
 
   if (modalState)
@@ -89,12 +139,13 @@ const AccountInformation = () => {
             <h1>Personal Details</h1>
             <label>Name</label>
             <h3>{user.info.name}</h3>
-            <label>Current Position</label>
-            <h3>None</h3>
+            <label>Password Pin</label>
+            <h3>{user.info.pin}</h3>
             <label>Email</label>
             <h3>{user.info.email}</h3>
-            <label>Location</label>
-            <h3>None</h3>
+            <label>Programming Language</label>
+            <h3>{user.info.language}</h3>
+
             <button id="personal" onClick={modalHandler}>
               Edit
             </button>
@@ -104,12 +155,14 @@ const AccountInformation = () => {
         <div className={styles.skills}>
           <AccountCard>
             <h1>Skills and Expereince</h1>
-            <label>Programming Language</label>
-            <h3>{user.info.language}</h3>
             <label>Frameworks</label>
-            <h3>None</h3>
+            <h3>{checkFrameworksProvided()}</h3>
+            <label>Education</label>
+            <h3>{checkEducationProvided()}</h3>
             <label>Years Expereince</label>
-            <h3>None</h3>
+            <h3>{checkExperienceProvided()}</h3>
+            <label>Current Position</label>
+            <h3>{checkCurrentRoleProvided()}</h3>
             <button id="skills" onClick={modalHandler}>
               Edit
             </button>
@@ -119,6 +172,8 @@ const AccountInformation = () => {
         <div className={styles.contact}>
           <AccountCard>
             <h1>Contact Information</h1>
+            <label>Twitter</label>
+            <h3>None</h3>
             <label>LinkedIN</label>
             <h3>{checkLinkedInProvided()}</h3>
             <label>Github</label>

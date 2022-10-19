@@ -13,9 +13,10 @@ import Layout from "./Components/Layout/Layout";
 function App() {
   const isLoggedIn = useSelector((state) => state.authentication.isLoggedIn);
  
-  // NEED TO FIX CREATE USER BUG
 
-  // CLEAN CODE
+
+
+  // CLEAN CODE BY USING CUSTOM HOOKS FOR REDUCER/PROVIDED FUNCTIONS
 
   // MOVE ON TO OTHER EDIT INFORMATION
 

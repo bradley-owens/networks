@@ -93,11 +93,11 @@ const EditContact = (props) => {
   );
   const userInfo = ctx.checkUser.find((user) => {
     return user.id.id === loggedInUser.id.id;
-  });
+  }).contact;
 
   const checkLinkedInProvided = () => {
     if (userInfo === undefined) return "";
-    else if (userInfo.linkedIn === undefined || userInfo.linkedIn === "") {
+    else if (userInfo.linkedIn === undefined || userInfo.linkedIn === "None") {
       return "";
     }
     return userInfo.linkedIn;
@@ -105,7 +105,7 @@ const EditContact = (props) => {
 
   const checkGithubProvided = () => {
     if (userInfo === undefined) return "";
-    else if (userInfo.github === undefined || userInfo.github === "") {
+    else if (userInfo.github === undefined || userInfo.github === "None") {
       return "";
     }
     return userInfo.github;
@@ -113,7 +113,7 @@ const EditContact = (props) => {
 
   const checkWebsiteProvided = () => {
     if (userInfo === undefined) return "";
-    else if (userInfo.website === undefined || userInfo.website === "") {
+    else if (userInfo.website === undefined || userInfo.website === "None") {
       return "";
     }
     return userInfo.website;
