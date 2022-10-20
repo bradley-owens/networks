@@ -15,7 +15,7 @@ const authenticationInitialState = {
       name: "Guest",
       language: "None",
     },
-    id: { id: "0000" },
+    id: { id: "0" },
     contact: {},
   },
 };

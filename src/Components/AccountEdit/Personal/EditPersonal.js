@@ -1,6 +1,7 @@
-import { useReducer, useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useReducer, useState, useEffect, useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { editAccountActions } from "../../../Store/editAccount-slice";
+import AuthContext from "../../../Store/login-context";
 import Modal from "../../UI/Modal/Modal";
 import styles from "../Edit.module.css";
 
@@ -158,14 +159,8 @@ const EditPersonal = (props) => {
   //////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////
 
+  const ctx = useContext(AuthContext);
   const dispatch = useDispatch();
-  const [personalDetails, setPersonalDetails] = useState({
-    name: "",
-    email: "",
-    pin: "",
-    language: "",
-  });
-
   const [formIsValid, setFormIsValid] = useState(false);
 
   useEffect(() => {
@@ -174,15 +169,35 @@ const EditPersonal = (props) => {
     );
   }, [emailIsValid, pinIsValid, languageIsValid, nameIsValid]);
 
+  const loggedInUser = useSelector(
+    (state) => state.authentication.loggedInUser
+  );
+  const userInfo = ctx.checkUser.find((user) => {
+    return user.id.id === loggedInUser.id.id;
+  }).info;
+
   const editPersonalSubmit = (e) => {
     e.preventDefault();
 
-    setPersonalDetails({
-      name: nameState.value,
-      email: emailState.value,
-      pin: pinState.value,
-      language: languageState.value,
-    });
+    dispatch(
+      editAccountActions.setPersonalInformation({
+        name: nameState.value,
+        email: emailState.value,
+        pin: pinState.value,
+        language: languageState.value,
+      })
+    );
+
+    dispatch(
+      editAccountActions.editPersonalDetail({
+        name: nameState.value,
+        email: emailState.value,
+        pin: pinState.value,
+        language: languageState.value,
+      })
+    );
+
+    ctx.fetchData();
 
     dispatch(editAccountActions.modalStateHandler());
   };
@@ -200,6 +215,7 @@ const EditPersonal = (props) => {
           onChange={nameHandler}
           onBlur={validateName}
           placeholder="name"
+          defaultValue={userInfo.name}
         ></input>
 
         <input
@@ -210,6 +226,7 @@ const EditPersonal = (props) => {
           onChange={emailHandler}
           onBlur={validateEmail}
           placeholder="email"
+          defaultValue={userInfo.email}
         ></input>
         <input
           className={`${styles.input} ${
@@ -219,6 +236,7 @@ const EditPersonal = (props) => {
           onChange={pinHandler}
           onBlur={validatePin}
           placeholder="pin"
+          defaultValue={userInfo.pin}
         ></input>
         <input
           className={`${styles.input} ${
@@ -228,6 +246,7 @@ const EditPersonal = (props) => {
           onChange={languageHandler}
           onBlur={validateLanguage}
           placeholder="Programming Language"
+          defaultValue={userInfo.language}
         ></input>
         <div className={styles.buttons}>
           <button

@@ -36,6 +36,10 @@ const AccountInformation = () => {
     return user.id.id === loggedInUser.id.id;
   }).skills;
 
+  const personalInfo = ctx.checkUser.find((user) => {
+    return user.id.id === loggedInUser.id.id;
+  }).info;
+
   ///////////////////////////////////////
 
   const checkLinkedInProvided = () => {
@@ -138,13 +142,13 @@ const AccountInformation = () => {
           <AccountCard>
             <h1>Personal Details</h1>
             <label>Name</label>
-            <h3>{user.info.name}</h3>
+            <h3>{personalInfo.name}</h3>
             <label>Password Pin</label>
-            <h3>{user.info.pin}</h3>
+            <h3>{personalInfo.pin}</h3>
             <label>Email</label>
-            <h3>{user.info.email}</h3>
+            <h3>{personalInfo.email}</h3>
             <label>Programming Language</label>
-            <h3>{user.info.language}</h3>
+            <h3>{personalInfo.language}</h3>
 
             <button id="personal" onClick={modalHandler}>
               Edit

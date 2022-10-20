@@ -16,6 +16,32 @@ const editAccountSlice = createSlice({
       state.user = action.payload;
     },
 
+    modalStateHandler(state) {
+      state.modalState = !state.modalState;
+    },
+
+    ////////////////////////////////////////////////////////
+    setPersonalInformation(state, action) {
+      state.user.info = action.payload;
+    },
+
+    editPersonalDetail(state, action) {
+      update(ref(database, "Users/" + state.user.id.id), {
+        info: {
+          email: action.payload.email,
+          language: action.payload.pin,
+          name: action.payload.name,
+          pin: action.payload.pin,
+        },
+      })
+        .then(() => {
+          alert("Personal Details Updated!");
+        })
+        .catch((error) => {
+          alert("There was an error : " + error);
+        });
+    },
+
     ////////////////////////////////////////////////////////
 
     setContactInformation(state, action) {
@@ -58,10 +84,6 @@ const editAccountSlice = createSlice({
         .catch((error) => {
           alert("There was an error : " + error);
         });
-    },
-
-    modalStateHandler(state) {
-      state.modalState = !state.modalState;
     },
   },
 });
