@@ -8,19 +8,12 @@ const MemberDetail = () => {
   const params = useParams();
   const ctx = useContext(AuthContext);
 
-  const [clickedUser, setClickedUser] = useState({});
-
-  useEffect(() => {
-    ctx.checkUser.forEach((user) => {
-      if (user.info.id == params.memberId) {
-        setClickedUser(user.info);
-        console.log(clickedUser);
-      }
-    });
-  }, []);
+  const clickedUser = ctx.checkUser.find((user) => {
+    if (user.id.id === params.memberId) return user;
+  });
 
   const checkProvided = (info) => {
-    if (info === undefined) {
+    if (info === undefined || info === "") {
       return "Not Provided";
     }
     return info;
@@ -30,50 +23,48 @@ const MemberDetail = () => {
     <div className={styles.container}>
       <div className={styles["header-flex"]}>
         <header>
-          <h1>{`${clickedUser.name}'s Profile`}</h1>
+          <h1>{`${clickedUser.info.name}'s Profile`}</h1>
         </header>
         <h2 className={styles.follow}>Follow</h2>
         <h2
           className={styles.connect}
-        >{`${clickedUser.name} wants to connect`}</h2>
+        >{`${clickedUser.info.name} wants to connect`}</h2>
       </div>
 
       <label
         className={styles.label}
-      >{`${clickedUser.name}'s Information`}</label>
+      >{`${clickedUser.info.name}'s Information`}</label>
       <main>
         <div>
           <label>Email</label>
-          <h2>{clickedUser.email}</h2>
+          <h2>{clickedUser.info.email}</h2>
         </div>
         <div>
-          <label>Position</label>
-          <h2>{checkProvided(clickedUser.postion)}</h2>
-        </div>
-        <div>
-          <label>Location</label>
-          <h2>{checkProvided(clickedUser.location)}</h2>
+          <label>Current Role</label>
+          <h2>{checkProvided(clickedUser.skills.currentRole)}</h2>
         </div>
         <div>
           <label>Education Pathway</label>
-          <h2>{checkProvided(clickedUser.education)}</h2>
+          <h2>{checkProvided(clickedUser.skills.education)}</h2>
         </div>
       </main>
 
-      <label className={styles.label}>{`${clickedUser.name}'s skills`}</label>
+      <label
+        className={styles.label}
+      >{`${clickedUser.info.name}'s skills`}</label>
 
       <main>
         <div>
           <label>Framweorks</label>
-          <h2>{checkProvided(clickedUser.frameworks)}</h2>
+          <h2>{checkProvided(clickedUser.skills.frameworks)}</h2>
         </div>
         <div>
           <label> Programming Language</label>
-          <h2>{clickedUser.language}</h2>
+          <h2>{clickedUser.info.language}</h2>
         </div>
         <div>
           <label>Years Experience</label>
-          <h2>{checkProvided(clickedUser.experience)}</h2>
+          <h2>{checkProvided(clickedUser.skills.experience)}</h2>
         </div>
       </main>
 
@@ -81,15 +72,15 @@ const MemberDetail = () => {
       <main>
         <div>
           <label>LinkedIN</label>
-          <h2>{checkProvided(clickedUser.linkedin)}</h2>
+          <h2>{checkProvided(clickedUser.contact.linkedIn)}</h2>
         </div>
         <div>
           <label>Github</label>
-          <h2>{checkProvided(clickedUser.github)}</h2>
+          <h2>{checkProvided(clickedUser.contact.github)}</h2>
         </div>
         <div>
           <label>Portfolio Website</label>
-          <h2>{checkProvided(clickedUser.ortfolio)}</h2>
+          <h2>{checkProvided(clickedUser.contact.website)}</h2>
         </div>
       </main>
     </div>

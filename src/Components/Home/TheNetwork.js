@@ -14,7 +14,7 @@ const TheNetwork = () => {
           return (
             <MemberCard
               key={Math.random()}
-              id={user.info.id}
+              id={user.id.id}
               name={user.info.name}
               email={user.info.email}
               language={user.info.language}

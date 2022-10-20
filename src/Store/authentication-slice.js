@@ -35,7 +35,19 @@ const authenticationSlice = createSlice({
           name: user.name,
           language: user.language,
         },
-        id: { id: Number(idGen) },
+        id: { id: idGen + "" },
+        contact: {
+          linkedIn: "",
+          twitter: "",
+          github: "",
+          website: "",
+        },
+        skills: {
+          frameworks: "",
+          education: "",
+          experience: "",
+          language: "",
+        },
       };
 
       set(ref(database, "Users/" + idGen), newUser)
