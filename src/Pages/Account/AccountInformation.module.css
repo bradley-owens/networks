@@ -12,7 +12,14 @@
   /* justify-items: center; */
 }
 
+.flex {
+  display: flex;
+  gap: 2rem;
+}
+
 .connect {
+  display: flex;
+  gap: 1rem;
   grid-column: 1 / span 4;
 }
 

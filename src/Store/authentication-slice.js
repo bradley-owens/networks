@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import StartFirebase from "./Firebase";
-import { ref, set, getDatabase } from "firebase/database";
+import { ref, set, remove, getDatabase } from "firebase/database";
 
 const db = StartFirebase();
 const database = getDatabase();
@@ -64,6 +64,17 @@ const authenticationSlice = createSlice({
       state.loggedInUser = {};
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("loggedInUser");
+    },
+
+    deleteAccount(state) {
+      state.isLoggedIn = false;
+      remove(ref(database, "Users/" + state.loggedInUser.id.id))
+        .then(() => {
+          alert("Account Removed!");
+        })
+        .catch((error) => {
+          alert("There was an error : " + error);
+        });
     },
   },
 });

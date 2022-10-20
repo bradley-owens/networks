@@ -1,9 +1,11 @@
 import { Fragment, useContext, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import EditContact from "../../Components/AccountEdit/Contact/EditContact";
 import EditPersonal from "../../Components/AccountEdit/Personal/EditPersonal";
 import EditSkills from "../../Components/AccountEdit/Skills/EditSkills";
 import AccountCard from "../../Components/UI/AccountCards/AccountCard";
+import { authActions } from "../../Store/authentication-slice";
 import { editAccountActions } from "../../Store/editAccount-slice";
 import AuthContext from "../../Store/login-context";
 import styles from "./AccountInformation.module.css";
@@ -122,6 +124,7 @@ const AccountInformation = () => {
   ///////////////////////////////////////////////////////////////////
 
   const editChoice = clickedEditModal;
+  const history = useHistory();
 
   if (modalState)
     switch (editChoice) {
@@ -135,6 +138,11 @@ const AccountInformation = () => {
         return <EditContact user={user} onClose={closeModalHandler} />;
     }
 
+  const deleteAccountHandler = () => {
+    dispatch(authActions.deleteAccount());
+    history.push("/sign-in");
+    ctx.fetchData();
+  };
   return (
     <Fragment>
       <div className={styles["modal-container"]}>
@@ -193,10 +201,23 @@ const AccountInformation = () => {
         <div className={styles.connect}>
           <AccountCard>
             <h1>Want to Connect</h1>
-            <label>
-              This will display to all users that you want to connect with
-              others on Networks!
-            </label>
+            <div className={styles.flex}>
+              <label>
+                Clicking will display to all users that you want to connect with
+                others on Networks!
+              </label>
+              <button> Connect!</button>
+            </div>
+          </AccountCard>
+          <AccountCard>
+            <h1>Remove Account</h1>
+            <div className={styles.flex}>
+              <label>
+                If you wish to delete your account you can right here. However
+                once clicked, this cannot be undone
+              </label>
+              <button onClick={deleteAccountHandler}>Delete</button>
+            </div>
           </AccountCard>
         </div>
       </div>
