@@ -213,7 +213,6 @@ const CreateUserForm = (props) => {
       ></Select>
 
       <button
-        type="submit"
         className={
           formIsValid ? styles["login-button"] : styles["login-button_disabled"]
         }

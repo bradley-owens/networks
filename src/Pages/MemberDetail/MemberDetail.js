@@ -1,5 +1,8 @@
+import { click } from "@testing-library/user-event/dist/click";
 import { useContext } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { connectActions } from "../../Store/connect-slice";
 import AuthContext from "../../Store/login-context";
 import styles from "./MemberDetail.module.css";
 
@@ -18,13 +21,25 @@ const MemberDetail = () => {
     return info;
   };
 
+  const dispatch = useDispatch();
+
+  const followHandler = () => {
+    console.log(clickedUser);
+    dispatch(
+      connectActions.follow(clickedUser.info.name, clickedUser.info.email)
+    );
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles["header-flex"]}>
         <header>
           <h1>{`${clickedUser.info.name}'s Profile`}</h1>
         </header>
-        <h2 className={styles.follow}>Follow</h2>
+
+        <h2 className={styles.follow} onClick={followHandler}>
+          Follow
+        </h2>
         <h2
           className={styles.connect}
         >{`${clickedUser.info.name} wants to connect`}</h2>

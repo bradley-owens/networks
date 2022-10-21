@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "./MemberCard.module.css";
 
 const MemberCard = (props) => {
-  console.log("CARD", props.id);
   return (
     <div className={styles.container}>
       <div className={styles.info}>

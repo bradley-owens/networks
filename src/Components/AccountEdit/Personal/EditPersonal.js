@@ -9,6 +9,7 @@ const EditPersonal = (props) => {
   //////////////////////////////////////////////////////////
   //// Personal details form state Reducer Fucntions
   //////////////////////////////////////////////////////////
+
   const nameReducer = (state, action) => {
     if (action.type === "USER-INPUT")
       return {
@@ -16,13 +17,13 @@ const EditPersonal = (props) => {
         isValid: action.val.length > 2,
       };
 
-    if (action.type === "INPUT-BLUR")
-      return {
-        value: state.value,
-        isValid: state.value.length > 2,
-      };
+    // if (action.type === "INPUT-BLUR")
+    //   return {
+    //     value: state.value,
+    //     isValid: state.value.length > 2,
+    //   };
 
-    return { value: "", isValid: false };
+    // return { value: "", isValid: false };
   };
 
   const [nameState, dispatchName] = useReducer(nameReducer, {
@@ -37,11 +38,11 @@ const EditPersonal = (props) => {
     });
   };
 
-  const validateName = () => {
-    dispatchName({
-      type: "INPUT-BLUR",
-    });
-  };
+  // const validateName = () => {
+  //   dispatchName({
+  //     type: "INPUT-BLUR",
+  //   });
+  // };
 
   const { isValid: nameIsValid } = nameState;
 
@@ -55,13 +56,13 @@ const EditPersonal = (props) => {
         isValid: action.val.includes(".com") && action.val.length > 16,
       };
 
-    if (action.type === "INPUT-BLUR")
-      return {
-        value: state.value,
-        isValid: state.value.includes(".com") && state.value.length > 16,
-      };
+    // if (action.type === "INPUT-BLUR")
+    //   return {
+    //     value: state.value,
+    //     isValid: state.value.includes(".com") && state.value.length > 16,
+    //   };
 
-    return { value: "", isValid: false };
+    // return { value: "", isValid: false };
   };
 
   const [emailState, dispatchEmail] = useReducer(emailReducer, {
@@ -76,11 +77,11 @@ const EditPersonal = (props) => {
     });
   };
 
-  const validateEmail = () => {
-    dispatchEmail({
-      type: "INPUT-BLUR",
-    });
-  };
+  // const validateEmail = () => {
+  //   dispatchEmail({
+  //     type: "INPUT-BLUR",
+  //   });
+  // };
 
   const { isValid: emailIsValid } = emailState;
 
@@ -94,11 +95,11 @@ const EditPersonal = (props) => {
         isValid: action.val > 999.9,
       };
 
-    if (action.type === "INPUT-BLUR")
-      return {
-        value: state.value,
-        isValid: state.value > 999.9,
-      };
+    // if (action.type === "INPUT-BLUR")
+    //   return {
+    //     value: state.value,
+    //     isValid: state.value > 999.9 || state.value === 0000,
+    //   };
   };
 
   const [pinState, dispatchPin] = useReducer(pinReducer, {
@@ -131,11 +132,11 @@ const EditPersonal = (props) => {
         isValid: true,
       };
 
-    if (action.type === "INPUT-BLUR")
-      return {
-        value: state.value,
-        isValid: state.value,
-      };
+    // if (action.type === "INPUT-BLUR")
+    //   return {
+    //     value: state.value,
+    //     isValid: state.value,
+    //   };
   };
 
   const [languageState, dispatchLanguage] = useReducer(languageReducer, {
@@ -150,11 +151,11 @@ const EditPersonal = (props) => {
     });
   };
 
-  const validateLanguage = () => {
-    dispatchLanguage({
-      type: "INPUT-BLUR",
-    });
-  };
+  // const validateLanguage = () => {
+  //   dispatchLanguage({
+  //     type: "INPUT-BLUR",
+  //   });
+  // };
 
   const { isValid: languageIsValid } = languageState;
 
@@ -219,7 +220,7 @@ const EditPersonal = (props) => {
           }`}
           type="text"
           onChange={nameHandler}
-          onBlur={validateName}
+          // onBlur={validateName}
           placeholder="name"
           defaultValue={userInfo.name}
         ></input>
@@ -230,7 +231,7 @@ const EditPersonal = (props) => {
           }`}
           type="email"
           onChange={emailHandler}
-          onBlur={validateEmail}
+          // onBlur={validateEmail}
           placeholder="email"
           defaultValue={userInfo.email}
         ></input>
@@ -240,7 +241,7 @@ const EditPersonal = (props) => {
           }`}
           type="pin"
           onChange={pinHandler}
-          onBlur={validatePin}
+          // onBlur={validatePin}
           placeholder="pin"
           defaultValue={userInfo.pin}
         ></input>
@@ -250,7 +251,7 @@ const EditPersonal = (props) => {
           }`}
           type="text"
           onChange={languageHandler}
-          onBlur={validateLanguage}
+          // onBlur={validateLanguage}
           placeholder="Programming Language"
           defaultValue={userInfo.language}
         ></input>

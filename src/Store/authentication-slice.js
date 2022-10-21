@@ -48,6 +48,10 @@ const authenticationSlice = createSlice({
           experience: "",
           language: "",
         },
+        connections: {
+          followers: "",
+          following: "",
+        },
       };
 
       set(ref(database, "Users/" + idGen), newUser)
