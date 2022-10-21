@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import AuthContext from "../../Store/login-context";
 import styles from "./MemberDetail.module.css";

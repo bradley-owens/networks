@@ -30,98 +30,16 @@ const AccountInformation = () => {
   const loggedInUser = useSelector(
     (state) => state.authentication.loggedInUser
   );
-  const contactInfo = ctx.checkUser.find((user) => {
+
+  const userInfo = ctx.checkUser.find((user) => {
     return user.id.id === loggedInUser.id.id;
-  }).contact;
-
-  const skillsInfo = ctx.checkUser.find((user) => {
-    return user.id.id === loggedInUser.id.id;
-  }).skills;
-
-  const personalInfo = ctx.checkUser.find((user) => {
-    return user.id.id === loggedInUser.id.id;
-  }).info;
-
-  ///////////////////////////////////////
-
-  const checkLinkedInProvided = () => {
-    if (contactInfo === undefined) {
-      return "None";
-    } else if (
-      contactInfo.linkedIn === undefined ||
-      contactInfo.linkedIn === ""
-    ) {
+  });
+  const checkProvided = (info) => {
+    if (info === undefined || info === "") {
       return "None";
     }
-    return contactInfo.linkedIn;
+    return info;
   };
-
-  const checkGithubProvided = () => {
-    if (contactInfo === undefined) {
-      return "None";
-    } else if (contactInfo.github === undefined || contactInfo.github === "") {
-      return "None";
-    }
-    return contactInfo.github;
-  };
-
-  const checkWebsiteProvided = () => {
-    if (contactInfo === undefined) {
-      return "None";
-    } else if (
-      contactInfo.website === undefined ||
-      contactInfo.website === ""
-    ) {
-      return "None";
-    }
-    return contactInfo.website;
-  };
-
-  ///////////////////////////////////////////////////////////////////
-  const checkFrameworksProvided = () => {
-    if (skillsInfo === undefined) return "None";
-    else if (
-      skillsInfo.frameworks === undefined ||
-      skillsInfo.frameworks === ""
-    ) {
-      return "None";
-    }
-    return skillsInfo.frameworks;
-  };
-
-  const checkEducationProvided = () => {
-    if (skillsInfo === undefined) return "None";
-    else if (
-      skillsInfo.education === undefined ||
-      skillsInfo.education === ""
-    ) {
-      return "None";
-    }
-    return skillsInfo.education;
-  };
-
-  const checkExperienceProvided = () => {
-    if (skillsInfo === undefined) return "None";
-    else if (
-      skillsInfo.experience === undefined ||
-      skillsInfo.experience === ""
-    ) {
-      return "None";
-    }
-    return skillsInfo.experience;
-  };
-
-  const checkCurrentRoleProvided = () => {
-    if (skillsInfo === undefined) return "None";
-    else if (
-      skillsInfo.currentRole === undefined ||
-      skillsInfo.currentRole === ""
-    ) {
-      return "None";
-    }
-    return skillsInfo.currentRole;
-  };
-  ///////////////////////////////////////////////////////////////////
 
   const editChoice = clickedEditModal;
   const history = useHistory();
@@ -150,13 +68,13 @@ const AccountInformation = () => {
           <AccountCard>
             <h1>Personal Details</h1>
             <label>Name</label>
-            <h3>{personalInfo.name}</h3>
+            <h3>{userInfo.info.name}</h3>
             <label>Password Pin</label>
-            <h3>{personalInfo.pin}</h3>
+            <h3>{userInfo.info.pin}</h3>
             <label>Email</label>
-            <h3>{personalInfo.email}</h3>
+            <h3>{userInfo.info.email}</h3>
             <label>Programming Language</label>
-            <h3>{personalInfo.language}</h3>
+            <h3>{userInfo.info.language}</h3>
 
             <button id="personal" onClick={modalHandler}>
               Edit
@@ -168,13 +86,13 @@ const AccountInformation = () => {
           <AccountCard>
             <h1>Skills and Expereince</h1>
             <label>Frameworks</label>
-            <h3>{checkFrameworksProvided()}</h3>
+            <h3>{checkProvided(userInfo.skills.frameworks)}</h3>
             <label>Education</label>
-            <h3>{checkEducationProvided()}</h3>
+            <h3>{checkProvided(userInfo.skills.education)}</h3>
             <label>Years Expereince</label>
-            <h3>{checkExperienceProvided()}</h3>
+            <h3>{checkProvided(userInfo.skills.experience)}</h3>
             <label>Current Position</label>
-            <h3>{checkCurrentRoleProvided()}</h3>
+            <h3>{checkProvided(userInfo.skills.currentRole)}</h3>
             <button id="skills" onClick={modalHandler}>
               Edit
             </button>
@@ -187,11 +105,11 @@ const AccountInformation = () => {
             <label>Twitter</label>
             <h3>None</h3>
             <label>LinkedIN</label>
-            <h3>{checkLinkedInProvided()}</h3>
+            <h3>{checkProvided(userInfo.contact.linkedIn)}</h3>
             <label>Github</label>
-            <h3>{checkGithubProvided()}</h3>
+            <h3>{checkProvided(userInfo.contact.github)}</h3>
             <label>Portfolio Website</label>
-            <h3>{checkWebsiteProvided()}</h3>
+            <h3>{checkProvided(userInfo.contact.website)}</h3>
             <button id="contact" onClick={modalHandler}>
               Edit
             </button>

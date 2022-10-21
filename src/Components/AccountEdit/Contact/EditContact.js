@@ -88,35 +88,19 @@ const EditContact = (props) => {
     dispatch(editAccountActions.modalStateHandler());
   };
 
+  // /////////////////////////////////////
+
   const loggedInUser = useSelector(
     (state) => state.authentication.loggedInUser
   );
   const userInfo = ctx.checkUser.find((user) => {
     return user.id.id === loggedInUser.id.id;
-  }).contact;
-
-  const checkLinkedInProvided = () => {
-    if (userInfo === undefined) return "";
-    else if (userInfo.linkedIn === undefined || userInfo.linkedIn === "None") {
-      return "";
+  });
+  const checkProvided = (info) => {
+    if (info === undefined || info === "") {
+      return;
     }
-    return userInfo.linkedIn;
-  };
-
-  const checkGithubProvided = () => {
-    if (userInfo === undefined) return "";
-    else if (userInfo.github === undefined || userInfo.github === "None") {
-      return "";
-    }
-    return userInfo.github;
-  };
-
-  const checkWebsiteProvided = () => {
-    if (userInfo === undefined) return "";
-    else if (userInfo.website === undefined || userInfo.website === "None") {
-      return "";
-    }
-    return userInfo.website;
+    return info;
   };
 
   return (
@@ -127,21 +111,21 @@ const EditContact = (props) => {
         <input
           className={styles.input}
           type="text"
-          defaultValue={checkLinkedInProvided()}
+          defaultValue={checkProvided(userInfo.contact.linkedIn)}
           onChange={linkedInHandler}
           placeholder="LinkedIN"
         ></input>
         <input
           className={styles.input}
           type="text"
-          defaultValue={checkGithubProvided()}
+          defaultValue={checkProvided(userInfo.contact.github)}
           onChange={githubHandler}
           placeholder="Github"
         ></input>
         <input
           className={styles.input}
           type="text"
-          defaultValue={checkWebsiteProvided()}
+          defaultValue={checkProvided(userInfo.contact.website)}
           onChange={websiteHandler}
           placeholder="Portfolio Website"
         ></input>

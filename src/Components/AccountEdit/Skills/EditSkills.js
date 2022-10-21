@@ -133,41 +133,13 @@ const EditSkills = (props) => {
   );
   const userInfo = ctx.checkUser.find((user) => {
     return user.id.id === loggedInUser.id.id;
-  }).skills;
+  });
 
-  const checkFrameworksProvided = () => {
-    if (userInfo === undefined) return "";
-    else if (userInfo.frameworks === undefined || userInfo.frameworks === "") {
-      return "";
+  const checkProvided = (info) => {
+    if (info === undefined || info === "") {
+      return;
     }
-    return userInfo.frameworks;
-  };
-
-  const checkEducationProvided = () => {
-    if (userInfo === undefined) return "";
-    else if (userInfo.education === undefined || userInfo.education === "") {
-      return "";
-    }
-    return userInfo.education;
-  };
-
-  const checkExperienceProvided = () => {
-    if (userInfo === undefined) return "";
-    else if (userInfo.experience === undefined || userInfo.experience === "") {
-      return "";
-    }
-    return userInfo.experience;
-  };
-
-  const checkCurrentRoleProvided = () => {
-    if (userInfo === undefined) return "";
-    else if (
-      userInfo.currentRole === undefined ||
-      userInfo.currentRole === ""
-    ) {
-      return "";
-    }
-    return userInfo.currentRole;
+    return info;
   };
 
   return (
@@ -180,13 +152,13 @@ const EditSkills = (props) => {
           type="text"
           onChange={frameworkHandler}
           placeholder="Frameworks"
-          defaultValue={checkFrameworksProvided()}
+          defaultValue={checkProvided(userInfo.skills.frameworks)}
         ></input>
         <select
           className={styles.input}
           onChange={educationHandler}
           placeholder="Education"
-          defaultValue={checkEducationProvided()}
+          defaultValue={checkProvided(userInfo.skills.education)}
         >
           <option value="" disabled selected>
             How do you know how to code?
@@ -202,14 +174,14 @@ const EditSkills = (props) => {
           type="number"
           onChange={experienceHandler}
           placeholder="How many years experience (years)"
-          defaultValue={checkExperienceProvided()}
+          defaultValue={checkProvided(userInfo.skills.experience)}
         ></input>
         <input
           className={styles.input}
           type="text"
           onChange={currentRoleHandler}
           placeholder="Current Role"
-          defaultValue={checkCurrentRoleProvided()}
+          defaultValue={checkProvided(userInfo.skills.currentRole)}
         ></input>
         <div className={styles.buttons}>
           <button className={styles.button}>Submit</button>

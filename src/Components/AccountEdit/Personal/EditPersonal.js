@@ -7,6 +7,8 @@ import styles from "../Edit.module.css";
 
 const EditPersonal = (props) => {
   //////////////////////////////////////////////////////////
+  //// Personal details form state Reducer Fucntions
+  //////////////////////////////////////////////////////////
   const nameReducer = (state, action) => {
     if (action.type === "USER-INPUT")
       return {
@@ -157,7 +159,8 @@ const EditPersonal = (props) => {
   const { isValid: languageIsValid } = languageState;
 
   //////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////
+  //// Personal details validation of form
+  //////////////////////////////////////////////////////////
 
   const ctx = useContext(AuthContext);
   const dispatch = useDispatch();
@@ -169,6 +172,9 @@ const EditPersonal = (props) => {
     );
   }, [emailIsValid, pinIsValid, languageIsValid, nameIsValid]);
 
+  //////////////////////////////////////////////////////////
+  //// Personal details dispatch action to update firebase data
+  //////////////////////////////////////////////////////////
   const loggedInUser = useSelector(
     (state) => state.authentication.loggedInUser
   );
