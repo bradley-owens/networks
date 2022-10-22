@@ -28,6 +28,7 @@ const MemberDetail = () => {
 
   const followHandler = () => {
     dispatch(connectActions.follow({ clickedUser, loggedInUser }));
+    ctx.fetchData();
   };
 
   return (

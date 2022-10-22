@@ -18,6 +18,7 @@ const MemberCard = (props) => {
       if (user.id.id === props.id) return user;
     });
     dispatch(connectActions.follow({ clickedUser, loggedInUser }));
+    ctx.fetchData();
   };
 
   return (

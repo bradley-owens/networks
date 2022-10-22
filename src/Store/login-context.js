@@ -4,6 +4,7 @@ import { ref, get, update, child, getDatabase } from "firebase/database";
 const AuthContext = React.createContext({
   checkUser: [],
   fetchData: () => {},
+  // getConnections: [],
 });
 
 export const AuthContextProvider = (props) => {
@@ -19,7 +20,7 @@ export const AuthContextProvider = (props) => {
     get(child(dbRef, "Users/")).then((snapshot) => {
       const userDatabase = snapshot.val();
 
-      Object.entries(userDatabase).forEach((userAcc) => {
+      Object.entries(userDatabase).map((userAcc) => {
         items.push(userAcc[1]);
       });
       setData(items);
@@ -29,6 +30,24 @@ export const AuthContextProvider = (props) => {
     });
   }, [database]);
 
+  // const getConnections = useCallback(
+  //   (id) => {
+  //     const dbRef = ref(database);
+  //     get(child(dbRef, "Users/" + id + "/connections/following/")).then(
+  //       (snapshot) => {
+  //         const userDatabase = snapshot.val();
+
+  //         // Object.entries(userDatabase).forEach((userAcc) => {
+  //         //   items.push(userAcc[1]);
+  //         // });
+  //         // setData(items);
+  //         // setloader(false);
+  //         console.log(userDatabase);
+  //       }
+  //     );
+  //   },
+  //   [database]
+  // );
   useEffect(() => {
     getData();
   }, [getData, database]);
@@ -38,6 +57,7 @@ export const AuthContextProvider = (props) => {
       value={{
         checkUser: data,
         fetchData: getData,
+        // getConnections: getConnections,
       }}
     >
       {props.children}
