@@ -1,9 +1,25 @@
 import React, { useContext } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { connectActions } from "../../../Store/connect-slice";
+import AuthContext from "../../../Store/login-context";
 import styles from "./MemberCard.module.css";
 
 const MemberCard = (props) => {
+  const ctx = useContext(AuthContext);
+  const dispatch = useDispatch();
+
+  const loggedInUser = useSelector(
+    (state) => state.authentication.loggedInUser
+  );
+
+  const followHandler = () => {
+    const clickedUser = ctx.checkUser.find((user) => {
+      if (user.id.id === props.id) return user;
+    });
+    dispatch(connectActions.follow({ clickedUser, loggedInUser }));
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.info}>
@@ -15,7 +31,9 @@ const MemberCard = (props) => {
         <Link to={`/${props.id}`} className={styles.button}>
           View
         </Link>
-        <button className={styles.button}>Follow</button>
+        <button className={styles.button} onClick={followHandler}>
+          Follow
+        </button>
       </div>
     </div>
   );

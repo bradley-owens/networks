@@ -1,18 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ref, update, getDatabase, set } from "firebase/database";
-import { useContext } from "react";
-import { useSelector } from "react-redux";
+import { ref, getDatabase, set } from "firebase/database";
+
 import AuthContext from "./login-context";
 
 const database = getDatabase();
 
 const connectIntialState = {
-  user: {
-    info: {},
-    contact: {},
-    id: {},
-    skills: {},
-    connections: {},
+  userConnections: {
     followers: {},
     following: {},
   },
@@ -25,13 +19,18 @@ const connectSlice = createSlice({
     follow(state, action) {
       const loggedInUser = action.payload.loggedInUser;
       const clickedUser = action.payload.clickedUser;
-      const idGen = Math.floor(Math.random() * 1000);
 
-      update(ref(database, "Users/" + loggedInUser.id.id), {
-        connections: {
-          idGen: [clickedUser.info.name, clickedUser.info.email],
-        },
-      })
+      set(
+        ref(
+          database,
+          "Users/" +
+            loggedInUser.id.id +
+            "/connections/following/" +
+            clickedUser.id.id
+        ),
+
+        { name: clickedUser.info.name, email: clickedUser.info.email }
+      )
         .then(() => {
           alert(`You're now following ${clickedUser.info.name}!`);
         })
