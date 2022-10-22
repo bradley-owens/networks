@@ -1,0 +1,7 @@
+.network-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 4rem;
+  column-gap: 1.2rem;
+  row-gap: 1.5rem;
+}

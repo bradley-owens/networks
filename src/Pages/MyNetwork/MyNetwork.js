@@ -2,6 +2,7 @@ import { Fragment, useContext } from "react";
 import { useSelector } from "react-redux";
 import MemberCard from "../../Components/UI/MemberCard/MemberCard";
 import AuthContext from "../../Store/login-context";
+import styles from "./MyNetwork.module.css";
 
 const MyNetwork = () => {
   const ctx = useContext(AuthContext);
@@ -24,19 +25,21 @@ const MyNetwork = () => {
       {userConnections && (
         <div>
           <h1>Your Connections</h1>
-          {Object.entries(userConnections.following).map((connection) => {
-            return (
-              <Fragment>
-                <MemberCard
-                  key={Math.random()}
-                  id={userInfo.id.id}
-                  name={connection[1].name}
-                  email={connection[1].email}
-                  language={userInfo.info.language}
-                />
-              </Fragment>
-            );
-          })}
+          <div className={styles["network-grid"]}>
+            {Object.entries(userConnections.following).map((connection) => {
+              return (
+                <Fragment>
+                  <MemberCard
+                    key={Math.random()}
+                    id={userInfo.id.id}
+                    name={connection[1].name}
+                    email={connection[1].email}
+                    language={userInfo.info.language}
+                  />
+                </Fragment>
+              );
+            })}
+          </div>
         </div>
       )}
     </Fragment>
