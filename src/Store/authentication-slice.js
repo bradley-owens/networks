@@ -49,14 +49,16 @@ const authenticationSlice = createSlice({
           language: "",
         },
         connections: {
-          followers: "",
-          following: "",
+          followers: {},
+          following: {},
         },
       };
 
       set(ref(database, "Users/" + idGen), newUser)
         .then(() => {
-          alert("Account Created Successfully.Sign in now to start!");
+          alert(
+            `Account Created Successfully!  Sign in to start networking ${user.name}!`
+          );
         })
         .catch((error) => {
           alert("There was an error : " + error);

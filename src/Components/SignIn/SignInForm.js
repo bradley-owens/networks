@@ -87,6 +87,7 @@ const SignInForm = (props) => {
       if (user.info.email === email && user.info.pin === pin) {
         dispatch(authActions.login(user));
         dispatch(editAccountActions.setUser(user));
+        ctx.fetchData();
       } else {
         setUserCorrect(false);
       }

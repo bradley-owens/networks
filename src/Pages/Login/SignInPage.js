@@ -5,7 +5,7 @@ import styles from "./SignInPage.module.css";
 import { Link } from "react-router-dom";
 import MemberCounter from "../../Components/MemberCounter/MemberCounter";
 
-const SignInPage = (props) => {
+const SignInPage = () => {
   return (
     <div className={styles.container}>
       <h1 className={styles["main-title"]}>NetWORKS</h1>
