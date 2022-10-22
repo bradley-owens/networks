@@ -49,6 +49,7 @@ const editAccountSlice = createSlice({
     },
 
     editContactDetails(state, action) {
+      console.log(state.user.id.id);
       update(ref(database, "Users/" + state.user.id.id), {
         contact: {
           linkedIn: action.payload.linkedIn,

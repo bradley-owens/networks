@@ -1,6 +1,5 @@
-import { click } from "@testing-library/user-event/dist/click";
 import { useContext } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { connectActions } from "../../Store/connect-slice";
 import AuthContext from "../../Store/login-context";
@@ -9,6 +8,10 @@ import styles from "./MemberDetail.module.css";
 const MemberDetail = () => {
   const params = useParams();
   const ctx = useContext(AuthContext);
+
+  const loggedInUser = useSelector(
+    (state) => state.authentication.loggedInUser
+  );
 
   const clickedUser = ctx.checkUser.find((user) => {
     if (user.id.id === params.memberId) return user;
@@ -24,10 +27,7 @@ const MemberDetail = () => {
   const dispatch = useDispatch();
 
   const followHandler = () => {
-    console.log(clickedUser);
-    dispatch(
-      connectActions.follow(clickedUser.info.name, clickedUser.info.email)
-    );
+    dispatch(connectActions.follow({ clickedUser, loggedInUser }));
   };
 
   return (

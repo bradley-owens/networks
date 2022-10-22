@@ -26,7 +26,7 @@ const authenticationSlice = createSlice({
   reducers: {
     createUser(state, action) {
       const user = action.payload;
-      const idGen = Math.floor(Math.random() * 1000);
+      const idGen = Math.floor(Math.random() * 10000);
 
       let newUser = {
         info: {

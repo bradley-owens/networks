@@ -154,14 +154,14 @@ const CreateUserForm = (props) => {
       })
     );
 
-    dispatch(
-      editAccountActions.setUser({
-        username: usernameState.value,
-        pin: pinState.value,
-        name: nameState.value,
-        language: languageState.value,
-      })
-    );
+    // dispatch(
+    //   editAccountActions.setUser({
+    //     username: usernameState.value,
+    //     pin: pinState.value,
+    //     name: nameState.value,
+    //     language: languageState.value,
+    //   })
+    // );
     //     return;
     //   } else {
     //     setFormIsValid(false);

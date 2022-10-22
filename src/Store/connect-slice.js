@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ref, update, getDatabase } from "firebase/database";
+import { ref, update, getDatabase, set } from "firebase/database";
 import { useContext } from "react";
 import { useSelector } from "react-redux";
 import AuthContext from "./login-context";
@@ -13,9 +13,9 @@ const connectIntialState = {
     id: {},
     skills: {},
     connections: {},
+    followers: {},
+    following: {},
   },
-  followers: {},
-  following: {},
 };
 
 const connectSlice = createSlice({
@@ -23,14 +23,17 @@ const connectSlice = createSlice({
   initialState: connectIntialState,
   reducers: {
     follow(state, action) {
-      console.log(state.user.id);
-      update(ref(database, "Users/" + state.user.id.id), {
+      const loggedInUser = action.payload.loggedInUser;
+      const clickedUser = action.payload.clickedUser;
+      const idGen = Math.floor(Math.random() * 1000);
+
+      update(ref(database, "Users/" + loggedInUser.id.id), {
         connections: {
-          following: { name: action.payload.name, email: action.payload.email },
+          idGen: [clickedUser.info.name, clickedUser.info.email],
         },
       })
         .then(() => {
-          alert(`You're now following ${action.payload.name}!`);
+          alert(`You're now following ${clickedUser.info.name}!`);
         })
         .catch((error) => {
           alert("There was an error : " + error);
