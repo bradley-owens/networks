@@ -22,6 +22,14 @@ const MemberCard = (props) => {
     ctx.fetchData();
   };
 
+  const unfollowHandler = () => {
+    const clickedUser = ctx.checkUser.find((user) => {
+      if (user.id.id === props.id) return user;
+    });
+    dispatch(connectActions.unfollow({ clickedUser, loggedInUser }));
+    ctx.fetchData();
+  };
+
   const [followingState, setFollowingState] = useState();
 
   const connections = ctx.checkUser.find((user) => {
@@ -59,7 +67,7 @@ const MemberCard = (props) => {
           </button>
         )}
         {followingState && (
-          <button className={styles.button} onClick={followHandler}>
+          <button className={styles.button} onClick={unfollowHandler}>
             Unfollow
           </button>
         )}

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ref, getDatabase, set } from "firebase/database";
+import { ref, getDatabase, remove, set } from "firebase/database";
 
 import AuthContext from "./login-context";
 
@@ -33,6 +33,28 @@ const connectSlice = createSlice({
       )
         .then(() => {
           alert(`You're now following ${clickedUser.info.name}!`);
+        })
+        .catch((error) => {
+          alert("There was an error : " + error);
+        });
+    },
+    unfollow(state, action) {
+      const loggedInUser = action.payload.loggedInUser;
+      const clickedUser = action.payload.clickedUser;
+
+      remove(
+        ref(
+          database,
+          "Users/" +
+            loggedInUser.id.id +
+            "/connections/following/" +
+            clickedUser.id.id
+        ),
+
+        { name: clickedUser.info.name, email: clickedUser.info.email }
+      )
+        .then(() => {
+          alert(`You're no longer following ${clickedUser.info.name}!`);
         })
         .catch((error) => {
           alert("There was an error : " + error);
