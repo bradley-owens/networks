@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useSelector } from "react-redux";
 import AuthContext from "../../Store/login-context";
 
-const CheckFollowing = (props) => {
+const FollowingAmount = () => {
   const ctx = useContext(AuthContext);
 
   const loggedInUser = useSelector(
@@ -14,17 +14,12 @@ const CheckFollowing = (props) => {
   }).connections;
 
   if (connections === undefined) {
-    return false;
+    return 0;
   }
 
-  Object.entries(connections.following).map((connection) => {
-    let userEmail = connection[1].email;
-    if (userEmail === props) {
-      return true;
-    } else {
-      return false;
-    }
-  });
+  const followingNumber = Object.entries(connections.following).length;
+
+  return followingNumber;
 };
 
-export default CheckFollowing;
+export default FollowingAmount;

@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { connectActions } from "../../../Store/connect-slice";
 import AuthContext from "../../../Store/login-context";
+import CheckFollowing from "../../Account/CheckFollowing";
 import styles from "./MemberCard.module.css";
 
 const MemberCard = (props) => {
@@ -21,9 +22,29 @@ const MemberCard = (props) => {
     ctx.fetchData();
   };
 
+  const [followingState, setFollowingState] = useState();
+
+  const connections = ctx.checkUser.find((user) => {
+    return user.id.id === loggedInUser.id.id;
+  }).connections;
+
+  const checkFollowing = () => {
+    Object.entries(connections.following).map((connection) => {
+      let userEmail = connection[1].email;
+      if (userEmail === props.email) {
+        setFollowingState(true);
+      }
+    });
+  };
+
+  useEffect(() => {
+    checkFollowing();
+  }, [connections]);
+
   return (
     <div className={styles.container}>
       <div className={styles.info}>
+        <h1>{followingState === true ? "True" : "False"}</h1>
         <h2>{props.name}</h2>
         <h3>{props.email}</h3>
         <h4> Code: {props.language}</h4>

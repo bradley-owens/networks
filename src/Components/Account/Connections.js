@@ -1,4 +1,4 @@
-import CheckFollowing from "./CheckFollowing";
+import FollowingAmount from "./FollowingAmount";
 import styles from "./Connections.module.css";
 
 const Connections = () => {
@@ -12,7 +12,7 @@ const Connections = () => {
       <div className={styles["followers-container"]}>
         <div className={styles.numbers}>
           <label>Following</label>
-          <h2>{CheckFollowing()}</h2>
+          <h2>{FollowingAmount()}</h2>
         </div>
       </div>
     </div>
