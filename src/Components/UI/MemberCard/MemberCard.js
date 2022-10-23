@@ -44,7 +44,7 @@ const MemberCard = (props) => {
   return (
     <div className={styles.container}>
       <div className={styles.info}>
-        <h1>{followingState === true ? "True" : "False"}</h1>
+        <h1>{followingState === true ? "Following" : "Not following"}</h1>
         <h2>{props.name}</h2>
         <h3>{props.email}</h3>
         <h4> Code: {props.language}</h4>
@@ -53,9 +53,16 @@ const MemberCard = (props) => {
         <Link to={`/${props.id}`} className={styles.button}>
           View
         </Link>
-        <button className={styles.button} onClick={followHandler}>
-          Follow
-        </button>
+        {!followingState && (
+          <button className={styles.button} onClick={followHandler}>
+            Follow
+          </button>
+        )}
+        {followingState && (
+          <button className={styles.button} onClick={followHandler}>
+            Unfollow
+          </button>
+        )}
       </div>
     </div>
   );
