@@ -25,6 +25,18 @@
   transition: 0.3s;
 }
 
+.unfollow {
+  font-size: 1.5rem;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.258);
+  border-radius: 20px;
+  padding: 1rem;
+  border: 3px solid white;
+  background-color: #2d5148;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
 .follow:hover {
   background-color: #35927b;
   transition: 0.3s;

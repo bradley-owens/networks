@@ -67,7 +67,7 @@ const MemberCard = (props) => {
           </button>
         )}
         {followingState && (
-          <button className={styles.button} onClick={unfollowHandler}>
+          <button className={styles.unfollow} onClick={unfollowHandler}>
             Unfollow
           </button>
         )}

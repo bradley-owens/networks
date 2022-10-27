@@ -35,7 +35,16 @@
   text-decoration: none;
   color: #246253;
 }
-
+.unfollow {
+  font-size: 1rem;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  border: 2px solid white;
+  background-color: #2d5148;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
 .button:hover {
   cursor: pointer;
   background-color: #5cb8a1;

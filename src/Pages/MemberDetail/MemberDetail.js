@@ -68,7 +68,7 @@ const MemberDetail = () => {
           </h2>
         )}
         {followingState && (
-          <h2 className={styles.follow} onClick={unfollowHandler}>
+          <h2 className={styles.unfollow} onClick={unfollowHandler}>
             Unfollow
           </h2>
         )}
