@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { connectActions } from "../../Store/connect-slice";
@@ -17,6 +17,35 @@ const MemberDetail = () => {
     if (user.id.id === params.memberId) return user;
   });
 
+  const [followingState, setFollowingState] = useState();
+
+  const connections = ctx.checkUser.find((user) => {
+    return user.id.id === loggedInUser.id.id;
+  }).connections;
+
+  const checkFollowing = () => {
+    Object.entries(connections.following).map((connection) => {
+      let userEmail = connection[1].email;
+      if (userEmail === clickedUser.info.email) {
+        setFollowingState(true);
+      }
+    });
+  };
+
+  useEffect(() => {
+    checkFollowing();
+  }, [connections]);
+
+  const followHandler = () => {
+    dispatch(connectActions.follow({ clickedUser, loggedInUser }));
+    ctx.fetchData();
+  };
+
+  const unfollowHandler = () => {
+    dispatch(connectActions.unfollow({ clickedUser, loggedInUser }));
+    ctx.fetchData();
+  };
+
   const checkProvided = (info) => {
     if (info === undefined || info === "") {
       return "Not Provided";
@@ -26,11 +55,6 @@ const MemberDetail = () => {
 
   const dispatch = useDispatch();
 
-  const followHandler = () => {
-    dispatch(connectActions.follow({ clickedUser, loggedInUser }));
-    ctx.fetchData();
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles["header-flex"]}>
@@ -38,9 +62,17 @@ const MemberDetail = () => {
           <h1>{`${clickedUser.info.name}'s Profile`}</h1>
         </header>
 
-        <h2 className={styles.follow} onClick={followHandler}>
-          Follow
-        </h2>
+        {!followingState && (
+          <h2 className={styles.follow} onClick={followHandler}>
+            Follow
+          </h2>
+        )}
+        {followingState && (
+          <h2 className={styles.follow} onClick={unfollowHandler}>
+            Unfollow
+          </h2>
+        )}
+
         <h2
           className={styles.connect}
         >{`${clickedUser.info.name} wants to connect`}</h2>
