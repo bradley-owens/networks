@@ -37,12 +37,16 @@ const MemberCard = (props) => {
   }).connections;
 
   const checkFollowing = () => {
-    Object.entries(connections.following).map((connection) => {
-      let userEmail = connection[1].email;
-      if (userEmail === props.email) {
-        setFollowingState(true);
-      }
-    });
+    if (connections === undefined) {
+      setFollowingState(false);
+    } else {
+      Object.entries(connections.following).map((connection) => {
+        let userEmail = connection[1].email;
+        if (userEmail === props.email) {
+          setFollowingState(true);
+        }
+      });
+    }
   };
 
   useEffect(() => {
