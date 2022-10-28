@@ -6,6 +6,14 @@ import Modal from "../../UI/Modal/Modal";
 import styles from "../Edit.module.css";
 
 const EditPersonal = (props) => {
+  const ctx = useContext(AuthContext);
+
+  const loggedInUser = useSelector(
+    (state) => state.authentication.loggedInUser
+  );
+  const userInfo = ctx.checkUser.find((user) => {
+    return user.id.id === loggedInUser.id.id;
+  }).info;
   //////////////////////////////////////////////////////////
   //// Personal details form state Reducer Fucntions
   //////////////////////////////////////////////////////////
@@ -17,18 +25,18 @@ const EditPersonal = (props) => {
         isValid: action.val.length > 2,
       };
 
-    // if (action.type === "INPUT-BLUR")
-    //   return {
-    //     value: state.value,
-    //     isValid: state.value.length > 2,
-    //   };
+    if (action.type === "INPUT-BLUR")
+      return {
+        value: state.value,
+        isValid: state.value.length > 2,
+      };
 
-    // return { value: "", isValid: false };
+    return { value: "", isValid: false };
   };
 
   const [nameState, dispatchName] = useReducer(nameReducer, {
-    value: "",
-    isValid: null,
+    value: userInfo.name,
+    isValid: true,
   });
 
   const nameHandler = (e) => {
@@ -38,11 +46,11 @@ const EditPersonal = (props) => {
     });
   };
 
-  // const validateName = () => {
-  //   dispatchName({
-  //     type: "INPUT-BLUR",
-  //   });
-  // };
+  const validateName = () => {
+    dispatchName({
+      type: "INPUT-BLUR",
+    });
+  };
 
   const { isValid: nameIsValid } = nameState;
 
@@ -56,18 +64,18 @@ const EditPersonal = (props) => {
         isValid: action.val.includes(".com") && action.val.length > 16,
       };
 
-    // if (action.type === "INPUT-BLUR")
-    //   return {
-    //     value: state.value,
-    //     isValid: state.value.includes(".com") && state.value.length > 16,
-    //   };
+    if (action.type === "INPUT-BLUR")
+      return {
+        value: state.value,
+        isValid: state.value.includes(".com") && state.value.length > 16,
+      };
 
-    // return { value: "", isValid: false };
+    return { value: "", isValid: false };
   };
 
   const [emailState, dispatchEmail] = useReducer(emailReducer, {
-    value: "",
-    isValid: null,
+    value: userInfo.email,
+    isValid: true,
   });
 
   const emailHandler = (e) => {
@@ -77,11 +85,11 @@ const EditPersonal = (props) => {
     });
   };
 
-  // const validateEmail = () => {
-  //   dispatchEmail({
-  //     type: "INPUT-BLUR",
-  //   });
-  // };
+  const validateEmail = () => {
+    dispatchEmail({
+      type: "INPUT-BLUR",
+    });
+  };
 
   const { isValid: emailIsValid } = emailState;
 
@@ -95,16 +103,16 @@ const EditPersonal = (props) => {
         isValid: action.val > 999.9,
       };
 
-    // if (action.type === "INPUT-BLUR")
-    //   return {
-    //     value: state.value,
-    //     isValid: state.value > 999.9 || state.value === 0000,
-    //   };
+    if (action.type === "INPUT-BLUR")
+      return {
+        value: state.value,
+        isValid: state.value > 999.9,
+      };
   };
 
   const [pinState, dispatchPin] = useReducer(pinReducer, {
-    value: "",
-    isValid: null,
+    value: userInfo.pin,
+    isValid: true,
   });
 
   const pinHandler = (e) => {
@@ -132,16 +140,16 @@ const EditPersonal = (props) => {
         isValid: true,
       };
 
-    // if (action.type === "INPUT-BLUR")
-    //   return {
-    //     value: state.value,
-    //     isValid: state.value,
-    //   };
+    if (action.type === "INPUT-BLUR")
+      return {
+        value: state.value,
+        isValid: state.value,
+      };
   };
 
   const [languageState, dispatchLanguage] = useReducer(languageReducer, {
-    value: "",
-    isValid: null,
+    value: userInfo.language,
+    isValid: true,
   });
 
   const languageHandler = (e) => {
@@ -151,11 +159,11 @@ const EditPersonal = (props) => {
     });
   };
 
-  // const validateLanguage = () => {
-  //   dispatchLanguage({
-  //     type: "INPUT-BLUR",
-  //   });
-  // };
+  const validateLanguage = () => {
+    dispatchLanguage({
+      type: "INPUT-BLUR",
+    });
+  };
 
   const { isValid: languageIsValid } = languageState;
 
@@ -163,7 +171,6 @@ const EditPersonal = (props) => {
   //// Personal details validation of form
   //////////////////////////////////////////////////////////
 
-  const ctx = useContext(AuthContext);
   const dispatch = useDispatch();
   const [formIsValid, setFormIsValid] = useState(false);
 
@@ -176,12 +183,6 @@ const EditPersonal = (props) => {
   //////////////////////////////////////////////////////////
   //// Personal details dispatch action to update firebase data
   //////////////////////////////////////////////////////////
-  const loggedInUser = useSelector(
-    (state) => state.authentication.loggedInUser
-  );
-  const userInfo = ctx.checkUser.find((user) => {
-    return user.id.id === loggedInUser.id.id;
-  }).info;
 
   const editPersonalSubmit = (e) => {
     e.preventDefault();
@@ -213,14 +214,14 @@ const EditPersonal = (props) => {
     <Modal onClose={props.onClose}>
       <h1>Personal Information</h1>
       <p>Must be completed</p>
-      <form onSubmit={editPersonalSubmit}>
+      <form>
         <input
           className={`${styles.input} ${
             nameIsValid === false ? styles.invalid : undefined
           }`}
           type="text"
           onChange={nameHandler}
-          // onBlur={validateName}
+          onBlur={validateName}
           placeholder="name"
           defaultValue={userInfo.name}
         ></input>
@@ -231,7 +232,7 @@ const EditPersonal = (props) => {
           }`}
           type="email"
           onChange={emailHandler}
-          // onBlur={validateEmail}
+          onBlur={validateEmail}
           placeholder="email"
           defaultValue={userInfo.email}
         ></input>
@@ -241,7 +242,7 @@ const EditPersonal = (props) => {
           }`}
           type="pin"
           onChange={pinHandler}
-          // onBlur={validatePin}
+          onBlur={validatePin}
           placeholder="pin"
           defaultValue={userInfo.pin}
         ></input>
@@ -251,16 +252,19 @@ const EditPersonal = (props) => {
           }`}
           type="text"
           onChange={languageHandler}
-          // onBlur={validateLanguage}
+          onBlur={validateLanguage}
           placeholder="Programming Language"
           defaultValue={userInfo.language}
         ></input>
         <div className={styles.buttons}>
-          <button
-            className={formIsValid ? styles.button : styles["submit_disabled"]}
-          >
-            Submit
-          </button>
+          {formIsValid && (
+            <button className={styles.button} onClick={editPersonalSubmit}>
+              Submit
+            </button>
+          )}
+          {!formIsValid && (
+            <button className={styles["submit_disabled"]}>Submit</button>
+          )}
           <button className={styles.button} onClick={props.onClose}>
             Cancel
           </button>

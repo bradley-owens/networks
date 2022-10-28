@@ -32,6 +32,7 @@ const editAccountSlice = createSlice({
           language: action.payload.pin,
           name: action.payload.name,
           pin: action.payload.pin,
+          language: action.payload.language,
         },
       })
         .then(() => {
