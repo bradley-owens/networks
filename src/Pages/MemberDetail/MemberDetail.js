@@ -77,10 +77,10 @@ const MemberDetail = () => {
             Unfollow
           </h2>
         )}
-
+        {/* 
         <h2
           className={styles.connect}
-        >{`${clickedUser.info.name} wants to connect`}</h2>
+        >{`${clickedUser.info.name} wants to connect`}</h2> */}
       </div>
 
       <div className={styles.grid}>
@@ -98,6 +98,10 @@ const MemberDetail = () => {
             <div>
               <label> Programming Language</label>
               <h2>{clickedUser.info.language}</h2>
+            </div>
+            <div>
+              <label> Wants to connect</label>
+              <h2>Yes!</h2>
             </div>
           </main>
         </div>
