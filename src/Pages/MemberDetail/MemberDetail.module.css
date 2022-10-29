@@ -3,7 +3,7 @@
 }
 
 .label {
-  font-size: 2rem;
+  font-size: 1.5rem;
   padding-left: 2rem;
 }
 
@@ -49,24 +49,36 @@
   border: 3px solid white;
 }
 
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 2rem;
+}
+
 .container header {
   border-bottom: solid 4px #246253;
   width: 40vw;
   margin-bottom: 5rem;
+  text-align: left;
 }
 
 .container main {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 2rem;
-  margin-bottom: 2rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2rem 3rem;
   box-shadow: 0 10px 20px 0px rgba(36, 98, 82, 0.5);
-  background-color: rgba(240, 248, 255, 0.203);
+  background-color: rgba(240, 248, 255, 0.403);
   border-radius: 20px;
 }
+
 .container h1 {
-  font-size: 3.2rem;
+  font-size: 2.5rem;
   padding-left: 3rem;
   letter-spacing: 2px;
+}
+
+.container h2 {
+  font-size: 1.5rem;
 }

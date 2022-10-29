@@ -63,7 +63,7 @@ const MemberDetail = () => {
     <div className={styles.container}>
       <div className={styles["header-flex"]}>
         <header>
-          <h1>{`${clickedUser.info.name}'s Profile`}</h1>
+          <h1>{`${clickedUser.info.name}'s  Profile`}</h1>
         </header>
 
         {!followingState && (
@@ -82,58 +82,61 @@ const MemberDetail = () => {
         >{`${clickedUser.info.name} wants to connect`}</h2>
       </div>
 
-      <label
-        className={styles.label}
-      >{`${clickedUser.info.name}'s Information`}</label>
-      <main>
+      <div className={styles.grid}>
         <div>
-          <label>Email</label>
-          <h2>{clickedUser.info.email}</h2>
+          <label className={styles.label}>Information</label>
+          <main>
+            <div>
+              <label>Email</label>
+              <h2>{clickedUser.info.email}</h2>
+            </div>
+            <div>
+              <label>Current Role</label>
+              <h2>{checkProvided(clickedUser.skills.currentRole)}</h2>
+            </div>
+            <div>
+              <label>Education Pathway</label>
+              <h2>{checkProvided(clickedUser.skills.education)}</h2>
+            </div>
+          </main>
         </div>
-        <div>
-          <label>Current Role</label>
-          <h2>{checkProvided(clickedUser.skills.currentRole)}</h2>
-        </div>
-        <div>
-          <label>Education Pathway</label>
-          <h2>{checkProvided(clickedUser.skills.education)}</h2>
-        </div>
-      </main>
 
-      <label
-        className={styles.label}
-      >{`${clickedUser.info.name}'s skills`}</label>
+        <div>
+          <label className={styles.label}>Skills</label>
 
-      <main>
-        <div>
-          <label>Framweorks</label>
-          <h2>{checkProvided(clickedUser.skills.frameworks)}</h2>
+          <main>
+            <div>
+              <label>Framweorks</label>
+              <h2>{checkProvided(clickedUser.skills.frameworks)}</h2>
+            </div>
+            <div>
+              <label> Programming Language</label>
+              <h2>{clickedUser.info.language}</h2>
+            </div>
+            <div>
+              <label>Years Experience</label>
+              <h2>{checkProvided(clickedUser.skills.experience)}</h2>
+            </div>
+          </main>
         </div>
         <div>
-          <label> Programming Language</label>
-          <h2>{clickedUser.info.language}</h2>
+          <label className={styles.label}>To check out...</label>
+          <main>
+            <div>
+              <label>LinkedIN</label>
+              <h2>{checkProvided(clickedUser.contact.linkedIn)}</h2>
+            </div>
+            <div>
+              <label>Github</label>
+              <h2>{checkProvided(clickedUser.contact.github)}</h2>
+            </div>
+            <div>
+              <label>Portfolio Website</label>
+              <h2>{checkProvided(clickedUser.contact.website)}</h2>
+            </div>
+          </main>
         </div>
-        <div>
-          <label>Years Experience</label>
-          <h2>{checkProvided(clickedUser.skills.experience)}</h2>
-        </div>
-      </main>
-
-      <label className={styles.label}>To check out...</label>
-      <main>
-        <div>
-          <label>LinkedIN</label>
-          <h2>{checkProvided(clickedUser.contact.linkedIn)}</h2>
-        </div>
-        <div>
-          <label>Github</label>
-          <h2>{checkProvided(clickedUser.contact.github)}</h2>
-        </div>
-        <div>
-          <label>Portfolio Website</label>
-          <h2>{checkProvided(clickedUser.contact.website)}</h2>
-        </div>
-      </main>
+      </div>
     </div>
   );
 };
