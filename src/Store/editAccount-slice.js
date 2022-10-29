@@ -53,6 +53,7 @@ const editAccountSlice = createSlice({
       console.log(state.user.id.id);
       update(ref(database, "Users/" + state.user.id.id), {
         contact: {
+          twitter: action.payload.twitter,
           linkedIn: action.payload.linkedIn,
           github: action.payload.github,
           website: action.payload.website,

@@ -7,6 +7,23 @@ import { editAccountActions } from "../../../Store/editAccount-slice";
 import AuthContext from "../../../Store/login-context";
 
 const EditContact = (props) => {
+  const twitterReducer = (state, action) => {
+    if (action.type === "USER-INPUT")
+      return {
+        value: action.val,
+      };
+  };
+
+  const [twitterState, dispatchTwitter] = useReducer(twitterReducer, {
+    value: "",
+  });
+
+  const twitterHandler = (e) => {
+    dispatchTwitter({ type: "USER-INPUT", val: e.target.value });
+  };
+
+  //////////////////////////////////////////////////
+
   const linkedInReducer = (state, action) => {
     if (action.type === "USER-INPUT")
       return {
@@ -69,6 +86,7 @@ const EditContact = (props) => {
 
     dispatch(
       editAccountActions.setContactInformation({
+        twitter: twitterState.value,
         linkedIn: linkedInState.value,
         github: githubState.value,
         website: websiteState.value,
@@ -77,6 +95,7 @@ const EditContact = (props) => {
 
     dispatch(
       editAccountActions.editContactDetails({
+        twitter: twitterState.value,
         linkedIn: linkedInState.value,
         github: githubState.value,
         website: websiteState.value,
@@ -108,6 +127,13 @@ const EditContact = (props) => {
       <h1>Contact Information</h1>
       <p>Optional</p>
       <form onSubmit={editContactSubmit}>
+        <input
+          className={styles.input}
+          type="text"
+          defaultValue={checkProvided(userInfo.contact.twitter)}
+          onChange={twitterHandler}
+          placeholder="Twitter"
+        ></input>
         <input
           className={styles.input}
           type="text"

@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import AccountCard from "../../Components/UI/AccountCards/AccountCard";
 import { connectActions } from "../../Store/connect-slice";
 import AuthContext from "../../Store/login-context";
 import styles from "./MemberDetail.module.css";
@@ -95,8 +96,8 @@ const MemberDetail = () => {
               <h2>{checkProvided(clickedUser.skills.currentRole)}</h2>
             </div>
             <div>
-              <label>Education Pathway</label>
-              <h2>{checkProvided(clickedUser.skills.education)}</h2>
+              <label> Programming Language</label>
+              <h2>{clickedUser.info.language}</h2>
             </div>
           </main>
         </div>
@@ -110,18 +111,26 @@ const MemberDetail = () => {
               <h2>{checkProvided(clickedUser.skills.frameworks)}</h2>
             </div>
             <div>
-              <label> Programming Language</label>
-              <h2>{clickedUser.info.language}</h2>
+              <label>Education Pathway</label>
+              <h2>{checkProvided(clickedUser.skills.education)}</h2>
             </div>
             <div>
               <label>Years Experience</label>
               <h2>{checkProvided(clickedUser.skills.experience)}</h2>
+            </div>
+            <div>
+              <label>Current Role</label>
+              <h2>{checkProvided(clickedUser.skills.currentRole)}</h2>
             </div>
           </main>
         </div>
         <div>
           <label className={styles.label}>To check out...</label>
           <main>
+            <div>
+              <label>Twitter</label>
+              <h2>{checkProvided(clickedUser.contact.twitter)}</h2>
+            </div>
             <div>
               <label>LinkedIN</label>
               <h2>{checkProvided(clickedUser.contact.linkedIn)}</h2>

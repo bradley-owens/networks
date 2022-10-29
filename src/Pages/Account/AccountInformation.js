@@ -103,7 +103,7 @@ const AccountInformation = () => {
           <AccountCard>
             <h1>Contact Information</h1>
             <label>Twitter</label>
-            <h3>None</h3>
+            <h3>{checkProvided(userInfo.contact.twitter)}</h3>
             <label>LinkedIN</label>
             <h3>{checkProvided(userInfo.contact.linkedIn)}</h3>
             <label>Github</label>
