@@ -4,7 +4,7 @@ import { ref, update, getDatabase } from "firebase/database";
 const database = getDatabase();
 
 const accountIntialState = {
-  user: { info: {}, contact: {}, id: {}, skills: {} },
+  user: { info: {}, contact: {}, id: {}, skills: {}, image: {} },
   modalState: false,
 };
 
@@ -18,6 +18,25 @@ const editAccountSlice = createSlice({
 
     modalStateHandler(state) {
       state.modalState = !state.modalState;
+    },
+    ////////////////////////////////////////////////////////
+
+    setProfileImage(state, action) {
+      state.user.image.src = action.payload;
+    },
+
+    editProfileImage(state, action) {
+      update(ref(database, "Users/" + state.user.id.id), {
+        image: {
+          src: action.payload,
+        },
+      })
+        .then(() => {
+          alert("Profile Picture Updated");
+        })
+        .catch((error) => {
+          alert("There was an error : " + error);
+        });
     },
 
     ////////////////////////////////////////////////////////

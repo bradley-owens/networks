@@ -56,6 +56,11 @@ const MemberCard = (props) => {
   return (
     <div className={styles.container}>
       <div className={styles.info}>
+        <img
+          className={styles["profile-img"]}
+          src={props.imgSrc}
+          alt="profile-pic"
+        />
         <h2>{props.name}</h2>
         <h3>{props.email}</h3>
         <h4> Code: {props.language}</h4>

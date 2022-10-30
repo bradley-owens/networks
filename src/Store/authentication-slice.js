@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import StartFirebase from "./Firebase";
 import { ref, set, remove, getDatabase } from "firebase/database";
+import imgSrc from "../Components/IMG/noProfile.png";
 
 const db = StartFirebase();
 const database = getDatabase();
@@ -51,6 +52,9 @@ const authenticationSlice = createSlice({
         connections: {
           followers: {},
           following: {},
+        },
+        image: {
+          src: imgSrc,
         },
       };
 

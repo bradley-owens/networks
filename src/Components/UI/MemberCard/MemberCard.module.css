@@ -7,6 +7,11 @@
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.258);
 }
 
+.profile-img {
+  width: 80%;
+  height: 10rem;
+}
+
 .info {
   display: flex;
   flex-direction: column;
