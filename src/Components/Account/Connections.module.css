@@ -1,9 +1,10 @@
 .followers-container {
   display: flex;
-  gap: 4rem;
+  gap: 5rem;
   align-items: center;
   justify-content: center;
   text-align: center;
+  margin-left: -3rem;
 }
 
 .numbers {

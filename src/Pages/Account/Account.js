@@ -20,19 +20,19 @@ const Account = () => {
   return (
     <Fragment>
       <div className={styles["account-container"]}>
-        <div>
+        <div className={styles.flex}>
           <h1>{`${userName}'s Account`}</h1>
           <p>
             Edit your profile to show more information about yourself to other
             members
           </p>
-          <div>
-            <h3>Change your profile picture</h3>
-            <input type="file" onChange={onImageChange} className="filetype" />
-            <img src={image} className={styles.picture} alt="preview image" />
-          </div>
         </div>
         <Connections />
+        <div className={styles["choose-img"]}>
+          <img src={image} className={styles.picture} alt="preview image" />
+          {/* <h2>Change your profile picture</h2> */}
+          <input type="file" onChange={onImageChange} className="filetype" />
+        </div>
       </div>
 
       <AccountInformation />
