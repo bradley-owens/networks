@@ -77,6 +77,12 @@ const MemberDetail = () => {
             Unfollow
           </h2>
         )}
+
+        <img
+          className={styles["profile-img"]}
+          src={clickedUser.image.src}
+          alt="profile-pic"
+        />
         {/* 
         <h2
           className={styles.connect}

@@ -30,6 +30,7 @@ const MyNetwork = () => {
           <h1>Your Connections</h1>
           <div className={styles["network-grid"]}>
             {Object.entries(userConnections.following).map((connection) => {
+              console.log(userInfo);
               return (
                 <Fragment>
                   <MemberCard
@@ -38,6 +39,7 @@ const MyNetwork = () => {
                     name={connection[1].name}
                     email={connection[1].email}
                     language={userInfo.info.language}
+                    imgSrc={userInfo.image.src}
                   />
                 </Fragment>
               );
