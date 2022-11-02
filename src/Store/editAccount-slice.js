@@ -22,7 +22,7 @@ const editAccountSlice = createSlice({
     ////////////////////////////////////////////////////////
 
     setProfileImage(state, action) {
-      state.user.image.src = action.payload;
+      state.user.image = action.payload;
     },
 
     editProfileImage(state, action) {
