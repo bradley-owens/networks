@@ -7,7 +7,7 @@ import displayImg from "../../Components/IMG/noProfile.png";
 import AuthContext from "../../Store/login-context";
 import { editAccountActions } from "../../Store/editAccount-slice";
 import { storage } from "../../Store/Firebase";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
 
 const Account = () => {
   const userName = useSelector(
@@ -18,24 +18,29 @@ const Account = () => {
 
   const [imageFile, setImageFile] = useState(null);
   const [url, setUrl] = useState(null);
-
+  const imageListRef = ref(storage, "images/users/");
   const onImageChange = (event) => {
-    if (event.target.files && event.target.files[0]) {
-      setImageFile(event.target.files[0]);
-      const imageRef = ref(storage, "image");
-      uploadBytes(imageRef, imageFile).then(() => {
-        getDownloadURL(imageRef).then((url) => {
-          setUrl(url);
-        });
-        // .catch((error) => alert(error.message));
-        setImageFile(null);
-      });
-      // .catch((error) => alert(error.message));
-      ctx.fetchData();
-    }
+    setImageFile(event.target.files[0]);
   };
 
-  console.log(url);
+  const submitImage = () => {
+    if (imageFile === null) return;
+    const imageRef = ref(storage, "images/users/" + userName);
+    uploadBytes(imageRef, imageFile).then(() => {
+      alert("Profile Picture Updated");
+    });
+  };
+
+  // useEffect(() => {
+  listAll(imageListRef).then((res) => {
+    res.items.forEach((item) => {
+      if (item._location.path_ === "images/users/" + userName)
+        getDownloadURL(item).then((url) => {
+          setUrl(url);
+        });
+    });
+  });
+  // }, [url]);
 
   return (
     <Fragment>
@@ -50,7 +55,10 @@ const Account = () => {
         <Connections />
         <div className={styles["choose-img"]}>
           <img src={url} className={styles.picture} alt="preview image" />
-          <input type="file" onChange={onImageChange} className="filetype" />
+          <div>
+            <input type="file" onChange={onImageChange} className="filetype" />
+            <button onClick={submitImage}>Submit</button>
+          </div>
         </div>
       </div>
 
