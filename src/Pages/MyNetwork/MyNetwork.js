@@ -1,6 +1,7 @@
 import { Fragment, useContext } from "react";
 import { useSelector } from "react-redux";
 import CheckFollowing from "../../Components/Account/FollowingAmount";
+import LoadImage from "../../Components/Hooks/LoadImage";
 import MemberCard from "../../Components/UI/MemberCard/MemberCard";
 import AuthContext from "../../Store/login-context";
 import styles from "./MyNetwork.module.css";
@@ -39,7 +40,8 @@ const MyNetwork = () => {
                     name={connection[1].name}
                     email={connection[1].email}
                     language={userInfo.info.language}
-                    imgSrc={userInfo.image.src}
+                    // imgSrc={userInfo.image.src}
+                    imgSrc={LoadImage(connection[1].name)}
                   />
                 </Fragment>
               );

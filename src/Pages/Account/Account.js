@@ -1,4 +1,4 @@
-import { Fragment, useContext, useEffect, useState } from "react";
+import { Fragment, Suspense, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Connections from "../../Components/Account/Connections";
 import styles from "./Account.module.css";
@@ -8,39 +8,57 @@ import AuthContext from "../../Store/login-context";
 import { editAccountActions } from "../../Store/editAccount-slice";
 import { storage } from "../../Store/Firebase";
 import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
+import LoadingSpinner from "../../Components/UI/LoadingSpinner/LoadingSpinner";
+import LoadImage from "../../Components/Hooks/LoadImage";
 
 const Account = () => {
   const userName = useSelector(
     (state) => state.authentication.loggedInUser.info.name
   );
 
-  const ctx = useContext(AuthContext);
+  // const ctx = useContext(AuthContext);
 
   const [imageFile, setImageFile] = useState(null);
-  const [url, setUrl] = useState(null);
+
+  const [url, setUrl] = useState(displayImg);
+
   const imageListRef = ref(storage, "images/users/");
+
   const onImageChange = (event) => {
     setImageFile(event.target.files[0]);
   };
 
+  // const imageUrl = LoadImage(userName, imageFile);
+
   const submitImage = () => {
-    if (imageFile === null) return;
+    if (imageFile === null) {
+      return;
+    }
     const imageRef = ref(storage, "images/users/" + userName);
     uploadBytes(imageRef, imageFile).then(() => {
+      LoadImage();
       alert("Profile Picture Updated");
     });
   };
 
-  // useEffect(() => {
-  listAll(imageListRef).then((res) => {
-    res.items.forEach((item) => {
-      if (item._location.path_ === "images/users/" + userName)
-        getDownloadURL(item).then((url) => {
-          setUrl(url);
-        });
+  const [loaded, setLoaded] = useState(true);
+
+  function LoadImage() {
+    setLoaded(false);
+    listAll(imageListRef).then((res) => {
+      res.items.forEach((item) => {
+        if (item._location.path_ === "images/users/" + userName)
+          getDownloadURL(item).then((url) => {
+            setUrl(url);
+          });
+      });
     });
-  });
-  // }, [url]);
+    setLoaded(true);
+  }
+
+  useEffect(() => {
+    LoadImage();
+  }, []);
 
   return (
     <Fragment>
@@ -55,6 +73,7 @@ const Account = () => {
         <Connections />
         <div className={styles["choose-img"]}>
           <img src={url} className={styles.picture} alt="preview image" />
+
           <div>
             <input type="file" onChange={onImageChange} className="filetype" />
             <button onClick={submitImage}>Submit</button>

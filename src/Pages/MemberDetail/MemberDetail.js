@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import LoadImage from "../../Components/Hooks/LoadImage";
 import AccountCard from "../../Components/UI/AccountCards/AccountCard";
 import { connectActions } from "../../Store/connect-slice";
 import AuthContext from "../../Store/login-context";
@@ -80,7 +81,8 @@ const MemberDetail = () => {
 
         <img
           className={styles["profile-img"]}
-          src={clickedUser.image.src}
+          // src={clickedUser.image.src}
+          src={LoadImage(clickedUser.info.name)}
           alt="profile-pic"
         />
         {/* 

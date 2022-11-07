@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import AuthContext from "../../Store/login-context";
 import MemberCard from "../UI/MemberCard/MemberCard";
 import styles from "./TheNetwork.module.css";
+import LoadImage from "../Hooks/LoadImage";
 
 const TheNetwork = () => {
   const ctx = useContext(AuthContext);
@@ -19,7 +20,7 @@ const TheNetwork = () => {
               name={user.info.name}
               email={user.info.email}
               language={user.info.language}
-              imgSrc={user.image.src}
+              imgSrc={LoadImage(user.info.name)}
             />
           );
         })}
