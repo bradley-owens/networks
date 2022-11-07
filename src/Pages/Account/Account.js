@@ -4,19 +4,14 @@ import Connections from "../../Components/Account/Connections";
 import styles from "./Account.module.css";
 import AccountInformation from "./AccountInformation";
 import displayImg from "../../Components/IMG/noProfile.png";
-import AuthContext from "../../Store/login-context";
-import { editAccountActions } from "../../Store/editAccount-slice";
 import { storage } from "../../Store/Firebase";
 import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
 import LoadingSpinner from "../../Components/UI/LoadingSpinner/LoadingSpinner";
-import LoadImage from "../../Components/Hooks/LoadImage";
 
 const Account = () => {
   const userName = useSelector(
     (state) => state.authentication.loggedInUser.info.name
   );
-
-  // const ctx = useContext(AuthContext);
 
   const [imageFile, setImageFile] = useState(null);
 
@@ -27,8 +22,6 @@ const Account = () => {
   const onImageChange = (event) => {
     setImageFile(event.target.files[0]);
   };
-
-  // const imageUrl = LoadImage(userName, imageFile);
 
   const submitImage = () => {
     if (imageFile === null) {

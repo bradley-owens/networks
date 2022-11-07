@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
 import { storage } from "../../Store/Firebase";
-import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
+import { ref, getDownloadURL, listAll } from "firebase/storage";
 import noImage from "../IMG/noProfile.png";
 
 const LoadImage = (userName) => {

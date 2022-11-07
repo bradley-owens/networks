@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { useSelector } from "react-redux";
 import AuthContext from "../../Store/login-context";
 import MemberCard from "../UI/MemberCard/MemberCard";
 import styles from "./TheNetwork.module.css";

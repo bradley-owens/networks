@@ -20,7 +20,7 @@ function App() {
   const isLoggedIn = useSelector((state) => state.authentication.isLoggedIn);
 
   // apply want to connect function
-  // apply profile picture input
+  // apply quicker loading of images
   // apply restyling
   // clean code
   // fin
