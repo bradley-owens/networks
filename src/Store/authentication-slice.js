@@ -76,17 +76,19 @@ const authenticationSlice = createSlice({
     },
 
     login(state, action) {
+      // const initalID = localStorage.getItem("userID");
       const user = action.payload;
+
       state.isLoggedIn = true;
+
       state.loggedInUser = user;
-      localStorage.setItem("isLoggedIn", "1");
-      localStorage.setItem("loggedInUser", user);
+
+      // localStorage.setItem("userID", user.id.id);
     },
     logout(state) {
       state.isLoggedIn = false;
       state.loggedInUser = {};
-      localStorage.removeItem("isLoggedIn");
-      localStorage.removeItem("loggedInUser");
+      // localStorage.removeItem("userID");
     },
 
     deleteAccount(state) {
