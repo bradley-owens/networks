@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ref, getDatabase, remove, set } from "firebase/database";
+import { useContext } from "react";
+import AuthContext from "./login-context";
 
 const database = getDatabase();
 
@@ -27,7 +29,11 @@ const connectSlice = createSlice({
             clickedUser.id.id
         ),
 
-        { name: clickedUser.info.name, email: clickedUser.info.email }
+        {
+          name: clickedUser.info.name,
+          email: clickedUser.info.email,
+          language: clickedUser.info.language,
+        }
       )
         .then(() => {
           alert(`You're now following ${clickedUser.info.name}!`);
@@ -49,7 +55,11 @@ const connectSlice = createSlice({
             clickedUser.id.id
         ),
 
-        { name: clickedUser.info.name, email: clickedUser.info.email }
+        {
+          name: clickedUser.info.name,
+          email: clickedUser.info.email,
+          language: clickedUser.info.language,
+        }
       )
         .then(() => {
           alert(`You're no longer following ${clickedUser.info.name}!`);

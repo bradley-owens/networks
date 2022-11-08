@@ -24,6 +24,9 @@ const MemberDetail = React.lazy(() =>
 
 function App() {
   const isLoggedIn = useSelector((state) => state.authentication.isLoggedIn);
+  // const loggedInUser = useSelector(
+  //   (state) => state.authentication.loggedInUser
+  // );
 
   // const loggedInStatus = localStorage.getItem("userID");
   // const [isLoggedIn, setIsLoggedIn] = useState(false);

@@ -28,7 +28,7 @@ export const AuthContextProvider = (props) => {
 
       return items;
     });
-  }, [database]);
+  }, [loader]);
 
   // const getConnections = useCallback(
   //   (id) => {

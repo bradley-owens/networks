@@ -1,10 +1,12 @@
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import { useSelector } from "react-redux";
 import CheckFollowing from "../../Components/Account/FollowingAmount";
 import LoadImage from "../../Components/Hooks/LoadImage";
+import SignInForm from "../../Components/SignIn/SignInForm";
 import MemberCard from "../../Components/UI/MemberCard/MemberCard";
 import AuthContext from "../../Store/login-context";
 import styles from "./MyNetwork.module.css";
+import displayImg from "../../Components/IMG/noProfile.png";
 
 const MyNetwork = () => {
   const ctx = useContext(AuthContext);
@@ -13,15 +15,9 @@ const MyNetwork = () => {
     (state) => state.authentication.loggedInUser
   );
 
-  const userInfo = ctx.checkUser.find((user) => {
-    return user.id.id === loggedInUser.id.id;
-  });
-
   const userConnections = ctx.checkUser.find((user) => {
     return user.id.id === loggedInUser.id.id;
   }).connections;
-
-  // CheckFollowing();
 
   return (
     <Fragment>
@@ -31,17 +27,18 @@ const MyNetwork = () => {
           <h1>Your Connections</h1>
           <div className={styles["network-grid"]}>
             {Object.entries(userConnections.following).map((connection) => {
-              console.log(userInfo);
               return (
                 <Fragment>
                   <MemberCard
                     key={Math.random()}
-                    id={userInfo.id.id}
+                    id={connection[0]}
                     name={connection[1].name}
                     email={connection[1].email}
-                    language={userInfo.info.language}
-                    // imgSrc={userInfo.image.src}
-                    imgSrc={LoadImage(connection[1].name)}
+                    language={connection[1].language}
+                    imgSrc={
+                      displayImg
+                      // LoadImage(connection[1].name)
+                    }
                   />
                 </Fragment>
               );

@@ -14,22 +14,6 @@ const MemberCard = (props) => {
     (state) => state.authentication.loggedInUser
   );
 
-  const followHandler = () => {
-    const clickedUser = ctx.checkUser.find((user) => {
-      if (user.id.id === props.id) return user;
-    });
-    dispatch(connectActions.follow({ clickedUser, loggedInUser }));
-    ctx.fetchData();
-  };
-
-  const unfollowHandler = () => {
-    const clickedUser = ctx.checkUser.find((user) => {
-      if (user.id.id === props.id) return user;
-    });
-    dispatch(connectActions.unfollow({ clickedUser, loggedInUser }));
-    ctx.fetchData();
-  };
-
   const [followingState, setFollowingState] = useState();
 
   const connections = ctx.checkUser.find((user) => {
@@ -52,6 +36,23 @@ const MemberCard = (props) => {
   useEffect(() => {
     checkFollowing();
   }, [connections]);
+
+  const followHandler = () => {
+    const clickedUser = ctx.checkUser.find((user) => {
+      if (user.id.id === props.id) return user;
+    });
+    dispatch(connectActions.follow({ clickedUser, loggedInUser }));
+    ctx.fetchData();
+  };
+
+  const unfollowHandler = () => {
+    const clickedUser = ctx.checkUser.find((user) => {
+      if (user.id.id === props.id) return user;
+    });
+
+    dispatch(connectActions.unfollow({ clickedUser, loggedInUser }));
+    ctx.fetchData();
+  };
 
   return (
     <div className={styles.container}>
