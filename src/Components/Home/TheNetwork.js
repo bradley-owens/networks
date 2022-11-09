@@ -19,7 +19,6 @@ const TheNetwork = () => {
               name={user.info.name}
               email={user.info.email}
               language={user.info.language}
-              imgSrc={LoadImage(user.info.name)}
             />
           );
         })}

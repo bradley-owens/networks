@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { connectActions } from "../../../Store/connect-slice";
 import AuthContext from "../../../Store/login-context";
 import CheckFollowing from "../../Account/CheckFollowing";
+import LoadImage from "../../Hooks/LoadImage";
 import styles from "./MemberCard.module.css";
 
 const MemberCard = (props) => {
@@ -59,7 +60,8 @@ const MemberCard = (props) => {
       <div className={styles.info}>
         <img
           className={styles["profile-img"]}
-          src={props.imgSrc}
+          // src={props.imgSrc}
+          src={LoadImage(props.name)}
           alt="profile-pic"
         />
         <h2>{props.name}</h2>
