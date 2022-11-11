@@ -1,82 +1,16 @@
 import styles from "../Edit.module.css";
 import Modal from "../../UI/Modal/Modal";
-import { useContext, useReducer } from "react";
+import { useContext, useReducer, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { editAccountActions } from "../../../Store/editAccount-slice";
 import AuthContext from "../../../Store/login-context";
 
 const EditContact = (props) => {
-  const twitterReducer = (state, action) => {
-    if (action.type === "USER-INPUT")
-      return {
-        value: action.val,
-      };
-  };
-
-  const [twitterState, dispatchTwitter] = useReducer(twitterReducer, {
-    value: "",
-  });
-
-  const twitterHandler = (e) => {
-    dispatchTwitter({ type: "USER-INPUT", val: e.target.value });
-  };
-
-  //////////////////////////////////////////////////
-
-  const linkedInReducer = (state, action) => {
-    if (action.type === "USER-INPUT")
-      return {
-        value: action.val,
-      };
-  };
-
-  const [linkedInState, dispatchLinkedIn] = useReducer(linkedInReducer, {
-    value: "",
-  });
-
-  const linkedInHandler = (e) => {
-    dispatchLinkedIn({ type: "USER-INPUT", val: e.target.value });
-  };
-
-  //////////////////////////////////////////////////
-
-  const githubReducer = (state, action) => {
-    if (action.type === "USER-INPUT")
-      return {
-        value: action.val,
-      };
-  };
-
-  const [githubState, dispatchGithub] = useReducer(githubReducer, {
-    value: "",
-  });
-
-  const githubHandler = (e) => {
-    dispatchGithub({
-      type: "USER-INPUT",
-      val: e.target.value,
-    });
-  };
-
-  ////////////////////////////////////////////////////
-
-  const websiteReducer = (state, action) => {
-    if (action.type === "USER-INPUT")
-      return {
-        value: action.val,
-      };
-  };
-
-  const [websiteState, dispatchWebsite] = useReducer(websiteReducer, {
-    value: "",
-  });
-
-  const websiteHandler = (e) => {
-    dispatchWebsite({ type: "USER-INPUT", val: e.target.value });
-  };
-
-  // //////////////////////////////////////////////////
+  const twitterInputRef = useRef();
+  const linkedInInputRef = useRef();
+  const githubInputRef = useRef();
+  const websiteInputRef = useRef();
 
   const dispatch = useDispatch();
   const ctx = useContext(AuthContext);
@@ -84,23 +18,21 @@ const EditContact = (props) => {
   const editContactSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(
-      editAccountActions.setContactInformation({
-        twitter: twitterState.value,
-        linkedIn: linkedInState.value,
-        github: githubState.value,
-        website: websiteState.value,
-      })
-    );
+    const enteredTwitter = twitterInputRef.current.value;
+    const enteredLinkedIn = linkedInInputRef.current.value;
+    const enteredGithub = githubInputRef.current.value;
+    const enteredWebsite = websiteInputRef.current.value;
 
-    dispatch(
-      editAccountActions.editContactDetails({
-        twitter: twitterState.value,
-        linkedIn: linkedInState.value,
-        github: githubState.value,
-        website: websiteState.value,
-      })
-    );
+    const contactData = {
+      twitter: enteredTwitter,
+      linkedIn: enteredLinkedIn,
+      github: enteredGithub,
+      website: enteredWebsite,
+    };
+
+    dispatch(editAccountActions.setContactInformation(contactData));
+
+    dispatch(editAccountActions.editContactDetails(contactData));
 
     ctx.fetchData();
 
@@ -131,28 +63,32 @@ const EditContact = (props) => {
           className={styles.input}
           type="text"
           defaultValue={checkProvided(userInfo.contact.twitter)}
-          onChange={twitterHandler}
+          // onChange={twitterHandler}
+          ref={twitterInputRef}
           placeholder="Twitter"
         ></input>
         <input
           className={styles.input}
           type="text"
           defaultValue={checkProvided(userInfo.contact.linkedIn)}
-          onChange={linkedInHandler}
+          // onChange={linkedInHandler}
+          ref={linkedInInputRef}
           placeholder="LinkedIN"
         ></input>
         <input
           className={styles.input}
           type="text"
           defaultValue={checkProvided(userInfo.contact.github)}
-          onChange={githubHandler}
+          // onChange={githubHandler}
+          ref={githubInputRef}
           placeholder="Github"
         ></input>
         <input
           className={styles.input}
           type="text"
           defaultValue={checkProvided(userInfo.contact.website)}
-          onChange={websiteHandler}
+          // onChange={websiteHandler}
+          ref={websiteInputRef}
           placeholder="Portfolio Website"
         ></input>
         <div className={styles.buttons}>
