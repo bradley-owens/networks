@@ -2,7 +2,6 @@ import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 import { getStorage } from "firebase/storage";
 
-// const StartFirebase = () => {
 const firebaseConfig = {
   apiKey: "AIzaSyDkDj9Z4eBhxmBLlkgFCgtESXYAJcbedbg",
   authDomain: "networks-react.firebaseapp.com",
@@ -14,10 +13,6 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-//   return getDatabase(app);
-// };
 
 export const storage = getStorage(app);
 export const StartFirebase = getDatabase(app);
-
-// export default StartFirebase;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { ref, get, child, getDatabase } from "firebase/database";
+import { ref, get, update, child, getDatabase } from "firebase/database";
 
 const AuthContext = React.createContext({
   checkUser: [],
@@ -11,6 +11,7 @@ export const AuthContextProvider = (props) => {
   const database = getDatabase();
 
   const [data, setData] = useState([]);
+  const [loader, setloader] = useState(true);
 
   const getData = useCallback(() => {
     const dbRef = ref(database);
@@ -22,6 +23,7 @@ export const AuthContextProvider = (props) => {
         items.push(userAcc[1]);
       });
       setData(items);
+      setloader(false);
 
       return items;
     });
