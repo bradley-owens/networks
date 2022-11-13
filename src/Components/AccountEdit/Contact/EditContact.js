@@ -1,6 +1,6 @@
 import styles from "../Edit.module.css";
 import Modal from "../../UI/Modal/Modal";
-import { useContext, useReducer, useRef } from "react";
+import { useContext, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { editAccountActions } from "../../../Store/editAccount-slice";
@@ -63,7 +63,6 @@ const EditContact = (props) => {
           className={styles.input}
           type="text"
           defaultValue={checkProvided(userInfo.contact.twitter)}
-          // onChange={twitterHandler}
           ref={twitterInputRef}
           placeholder="Twitter"
         ></input>
@@ -71,7 +70,6 @@ const EditContact = (props) => {
           className={styles.input}
           type="text"
           defaultValue={checkProvided(userInfo.contact.linkedIn)}
-          // onChange={linkedInHandler}
           ref={linkedInInputRef}
           placeholder="LinkedIN"
         ></input>
@@ -79,7 +77,6 @@ const EditContact = (props) => {
           className={styles.input}
           type="text"
           defaultValue={checkProvided(userInfo.contact.github)}
-          // onChange={githubHandler}
           ref={githubInputRef}
           placeholder="Github"
         ></input>
@@ -87,7 +84,6 @@ const EditContact = (props) => {
           className={styles.input}
           type="text"
           defaultValue={checkProvided(userInfo.contact.website)}
-          // onChange={websiteHandler}
           ref={websiteInputRef}
           placeholder="Portfolio Website"
         ></input>

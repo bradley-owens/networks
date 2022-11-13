@@ -1,4 +1,4 @@
-import { useReducer, useState } from "react";
+import { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { editAccountActions } from "../../../Store/editAccount-slice";
 import Modal from "../../UI/Modal/Modal";
@@ -8,96 +8,10 @@ import AuthContext from "../../../Store/login-context";
 import { useSelector } from "react-redux";
 
 const EditSkills = (props) => {
-  /////////////////////////////////////////////////////////////////////
-  const frameworkReducer = (state, action) => {
-    if (action.type === "USER-INPUT")
-      return {
-        value: action.val,
-      };
-  };
-
-  const [frameworkState, dispatchFramework] = useReducer(frameworkReducer, {
-    value: "",
-  });
-
-  const frameworkHandler = (e) => {
-    dispatchFramework({
-      type: "USER-INPUT",
-      val: e.target.value,
-    });
-  };
-
-  //////////////////////////////////////////////////////////////////
-
-  const educationReducer = (state, action) => {
-    if (action.type === "USER-INPUT")
-      return {
-        value: action.val,
-      };
-  };
-
-  const [educationState, dispatchEducation] = useReducer(educationReducer, {
-    value: "",
-  });
-
-  const educationHandler = (e) => {
-    dispatchEducation({
-      type: "USER-INPUT",
-      val: e.target.value,
-    });
-  };
-
-  //////////////////////////////////////////////////////////////////
-
-  const experienceReducer = (state, action) => {
-    if (action.type === "USER-INPUT")
-      return {
-        value: action.val,
-        isValid: action.val >= 0,
-      };
-
-    if (state.isValid)
-      return {
-        value: state.value,
-      };
-  };
-
-  const [experienceState, dispatchExperience] = useReducer(experienceReducer, {
-    value: "",
-    isValid: null,
-  });
-
-  const experienceHandler = (e) => {
-    dispatchExperience({
-      type: "USER-INPUT",
-      val: e.target.value,
-    });
-  };
-
-  //////////////////////////////////////////////////////////////////
-
-  const currentRoleReducer = (state, action) => {
-    if (action.type === "USER-INPUT")
-      return {
-        value: action.val,
-      };
-  };
-
-  const [currentRoleState, dispatchCurrentRole] = useReducer(
-    currentRoleReducer,
-    {
-      value: "",
-    }
-  );
-
-  const currentRoleHandler = (e) => {
-    dispatchCurrentRole({
-      type: "USER-INPUT",
-      val: e.target.value,
-    });
-  };
-
-  //////////////////////////////////////////////////////////////////
+  const frameworkInputRef = useRef();
+  const educationInputRef = useRef();
+  const experienceInputRef = useRef();
+  const currentRoleInputRef = useRef();
 
   const dispatch = useDispatch();
   const ctx = useContext(AuthContext);
@@ -105,23 +19,21 @@ const EditSkills = (props) => {
   const submitEditSkills = (e) => {
     e.preventDefault();
 
-    dispatch(
-      editAccountActions.setSkillsInformation({
-        frameworks: frameworkState.value,
-        education: educationState.value,
-        experience: experienceState.value,
-        currentRole: currentRoleState.value,
-      })
-    );
+    const enteredFrameworks = frameworkInputRef.current.value;
+    const enteredEducation = educationInputRef.current.value;
+    const enteredExperience = experienceInputRef.current.value;
+    const enteredCurrentRole = currentRoleInputRef.current.value;
 
-    dispatch(
-      editAccountActions.editSkillsDetails({
-        frameworks: frameworkState.value,
-        education: educationState.value,
-        experience: experienceState.value,
-        currentRole: currentRoleState.value,
-      })
-    );
+    const skillsData = {
+      frameworks: enteredFrameworks,
+      education: enteredEducation,
+      experience: enteredExperience,
+      currentRole: enteredCurrentRole,
+    };
+
+    dispatch(editAccountActions.setSkillsInformation(skillsData));
+
+    dispatch(editAccountActions.editSkillsDetails(skillsData));
 
     ctx.fetchData();
 
@@ -150,13 +62,13 @@ const EditSkills = (props) => {
         <input
           className={styles.input}
           type="text"
-          onChange={frameworkHandler}
+          ref={frameworkInputRef}
           placeholder="Frameworks"
           defaultValue={checkProvided(userInfo.skills.frameworks)}
         ></input>
         <select
           className={styles.input}
-          onChange={educationHandler}
+          ref={educationInputRef}
           placeholder="Education"
           defaultValue={checkProvided(userInfo.skills.education)}
         >
@@ -172,14 +84,14 @@ const EditSkills = (props) => {
         <input
           className={styles.input}
           type="number"
-          onChange={experienceHandler}
+          ref={experienceInputRef}
           placeholder="How many years experience (years)"
           defaultValue={checkProvided(userInfo.skills.experience)}
         ></input>
         <input
           className={styles.input}
           type="text"
-          onChange={currentRoleHandler}
+          ref={currentRoleInputRef}
           placeholder="Current Role"
           defaultValue={checkProvided(userInfo.skills.currentRole)}
         ></input>
