@@ -1,10 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import StartFirebase from "./Firebase";
-import { StartFirebase } from "./Firebase";
 import { ref, set, remove, getDatabase } from "firebase/database";
 import imgSrc from "../Components/IMG/noProfile.png";
 
-// const db = StartFirebase();
 const database = getDatabase();
 
 const authenticationInitialState = {
@@ -69,10 +66,10 @@ const authenticationSlice = createSlice({
           alert("There was an error : " + error);
         });
 
-      // state.isLoggedIn = true;
+      state.isLoggedIn = true;
       state.loggedInUser = newUser;
-      localStorage.setItem("isLoggedIn", "1");
-      localStorage.setItem("loggedInUser", user);
+      // localStorage.setItem("isLoggedIn", "1");
+      // localStorage.setItem("loggedInUser", user);
     },
 
     login(state, action) {

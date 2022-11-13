@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import Input from "../UI/Inputs/Input";
 import Select from "../UI/Select";
 import styles from "./CreateUserForm.module.css";
-import { editAccountActions } from "../../Store/editAccount-slice";
 import { withRouter } from "react-router-dom";
 import AuthContext from "../../Store/login-context";
 
@@ -143,8 +142,6 @@ const CreateUserForm = (props) => {
   const submitCreateUserForm = (e) => {
     e.preventDefault();
 
-    // users.forEach((user) => {
-    // if (user.info.email === usernameState.value) {
     dispatch(
       authActions.createUser({
         username: usernameState.value,
@@ -154,21 +151,6 @@ const CreateUserForm = (props) => {
       })
     );
 
-    // dispatch(
-    //   editAccountActions.setUser({
-    //     username: usernameState.value,
-    //     pin: pinState.value,
-    //     name: nameState.value,
-    //     language: languageState.value,
-    //   })
-    // );
-    //     return;
-    //   } else {
-    //     setFormIsValid(false);
-    //     alert("This email is already used");
-    //     return;
-    //   }
-    // });
     ctx.fetchData();
 
     history.push("/sign-in");

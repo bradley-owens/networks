@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ref, getDatabase, remove, set } from "firebase/database";
-import { useContext } from "react";
-import AuthContext from "./login-context";
 
 const database = getDatabase();
 

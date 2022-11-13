@@ -84,6 +84,7 @@ const EditSkills = (props) => {
         <input
           className={styles.input}
           type="number"
+          min="0"
           ref={experienceInputRef}
           placeholder="How many years experience (years)"
           defaultValue={checkProvided(userInfo.skills.experience)}

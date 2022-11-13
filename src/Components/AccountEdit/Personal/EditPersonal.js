@@ -14,6 +14,7 @@ const EditPersonal = (props) => {
   const userInfo = ctx.checkUser.find((user) => {
     return user.id.id === loggedInUser.id.id;
   }).info;
+
   //////////////////////////////////////////////////////////
   //// Personal details form state Reducer Fucntions
   //////////////////////////////////////////////////////////

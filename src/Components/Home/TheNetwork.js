@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import AuthContext from "../../Store/login-context";
 import MemberCard from "../UI/MemberCard/MemberCard";
 import styles from "./TheNetwork.module.css";
-import LoadImage from "../Hooks/LoadImage";
 
 const TheNetwork = () => {
   const ctx = useContext(AuthContext);

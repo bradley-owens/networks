@@ -1,12 +1,11 @@
-import { Fragment, Suspense, useContext, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Fragment, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Connections from "../../Components/Account/Connections";
 import styles from "./Account.module.css";
 import AccountInformation from "./AccountInformation";
 import displayImg from "../../Components/IMG/noProfile.png";
 import { storage } from "../../Store/Firebase";
 import { ref, uploadBytes, getDownloadURL, listAll } from "firebase/storage";
-import LoadingSpinner from "../../Components/UI/LoadingSpinner/LoadingSpinner";
 
 const Account = () => {
   const userName = useSelector(
@@ -34,10 +33,7 @@ const Account = () => {
     });
   };
 
-  const [loaded, setLoaded] = useState(true);
-
   function LoadImage() {
-    setLoaded(false);
     listAll(imageListRef).then((res) => {
       res.items.forEach((item) => {
         if (item._location.path_ === "images/users/" + userName)
@@ -46,7 +42,6 @@ const Account = () => {
           });
       });
     });
-    setLoaded(true);
   }
 
   useEffect(() => {
@@ -65,7 +60,7 @@ const Account = () => {
         </div>
         <Connections />
         <div className={styles["choose-img"]}>
-          <img src={url} className={styles.picture} alt="preview image" />
+          <img src={url} className={styles.picture} alt="preview" />
 
           <div>
             <input type="file" onChange={onImageChange} className="filetype" />

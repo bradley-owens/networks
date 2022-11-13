@@ -2,7 +2,6 @@ import React, { useEffect, useContext, useState, useReducer } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { authActions } from "../../Store/authentication-slice";
-import { connectActions } from "../../Store/connect-slice";
 import { editAccountActions } from "../../Store/editAccount-slice";
 import AuthContext from "../../Store/login-context";
 import Input from "../UI/Inputs/Input";

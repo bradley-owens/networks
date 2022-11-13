@@ -11,7 +11,6 @@ export const AuthContextProvider = (props) => {
   const database = getDatabase();
 
   const [data, setData] = useState([]);
-  const [loader, setloader] = useState(true);
 
   const getData = useCallback(() => {
     const dbRef = ref(database);
@@ -23,7 +22,6 @@ export const AuthContextProvider = (props) => {
         items.push(userAcc[1]);
       });
       setData(items);
-      setloader(false);
 
       return items;
     });

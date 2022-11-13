@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <Fragment>
-      <img className={styles.arrow} src={arrow}></img>
+      <img className={styles.arrow} alt="pointer" src={arrow}></img>
       <div className={styles["home-header"]}>
         <div className={styles["home-modal"]}>
           <h2 className={styles.welcome}>{`Hi ${loggedInName}!`}</h2>

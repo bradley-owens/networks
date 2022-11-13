@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense, useEffect, useState } from "react";
+import React, { Fragment, Suspense } from "react";
 import { useSelector } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import { Redirect } from "react-router-dom";
@@ -24,18 +24,6 @@ const MemberDetail = React.lazy(() =>
 
 function App() {
   const isLoggedIn = useSelector((state) => state.authentication.isLoggedIn);
-  // const loggedInUser = useSelector(
-  //   (state) => state.authentication.loggedInUser
-  // );
-
-  // const loggedInStatus = localStorage.getItem("userID");
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // useEffect(() => {
-  //   if (loggedInStatus > 0) {
-  //     setIsLoggedIn(true);
-  //   }
-  // }, [loggedInStatus]);
 
   // apply want to connect function
   // apply quicker loading of images

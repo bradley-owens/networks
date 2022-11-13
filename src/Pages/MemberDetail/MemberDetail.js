@@ -2,7 +2,6 @@ import { useContext, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import LoadImage from "../../Components/Hooks/LoadImage";
-import AccountCard from "../../Components/UI/AccountCards/AccountCard";
 import { connectActions } from "../../Store/connect-slice";
 import AuthContext from "../../Store/login-context";
 import styles from "./MemberDetail.module.css";
@@ -81,14 +80,9 @@ const MemberDetail = () => {
 
         <img
           className={styles["profile-img"]}
-          // src={clickedUser.image.src}
           src={LoadImage(clickedUser.info.name)}
           alt="profile-pic"
         />
-        {/* 
-        <h2
-          className={styles.connect}
-        >{`${clickedUser.info.name} wants to connect`}</h2> */}
       </div>
 
       <div className={styles.grid}>
