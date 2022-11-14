@@ -25,7 +25,6 @@ const MemberDetail = React.lazy(() =>
 function App() {
   const isLoggedIn = useSelector((state) => state.authentication.isLoggedIn);
 
-  // apply want to connect function
   // apply quicker loading of images
   // apply restyling
   // clean code

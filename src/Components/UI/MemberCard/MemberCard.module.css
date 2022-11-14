@@ -8,8 +8,9 @@
 }
 
 .profile-img {
-  width: 80%;
+  width: 65%;
   height: 10rem;
+  border-radius: 20rem;
 }
 
 .info {
@@ -22,6 +23,10 @@
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   padding: 0.5rem;
+}
+
+.info h2 {
+  border-bottom: 2px solid hsla(165, 46%, 26%, 1);
 }
 
 .buttons {

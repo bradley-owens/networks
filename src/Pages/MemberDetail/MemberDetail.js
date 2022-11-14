@@ -40,7 +40,7 @@ const MemberDetail = () => {
 
   useEffect(() => {
     checkFollowing();
-  }, [connections]);
+  }, [connections, followingState]);
 
   const followHandler = () => {
     dispatch(connectActions.follow({ clickedUser, loggedInUser }));
