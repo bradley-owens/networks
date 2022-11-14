@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import FollowingAmount from "../../Components/Account/FollowingAmount";
 import Connections from "../../Components/Account/Connections";
 import LoadImage from "../../Components/Hooks/LoadImage";
 import { connectActions } from "../../Store/connect-slice";
@@ -104,8 +105,8 @@ const MemberDetail = () => {
               <h2>{clickedUser.info.language}</h2>
             </div>
             <div>
-              <label> Wants to connect</label>
-              <h2>Yes!</h2>
+              <label> Connections</label>
+              <h2>{FollowingAmount()}</h2>
             </div>
           </main>
         </div>
