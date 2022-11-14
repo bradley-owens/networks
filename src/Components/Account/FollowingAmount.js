@@ -1,8 +1,11 @@
 import { useContext } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import AuthContext from "../../Store/login-context";
 
 const FollowingAmount = () => {
+  const params = useParams();
+
   const ctx = useContext(AuthContext);
 
   const loggedInUser = useSelector(
@@ -10,7 +13,10 @@ const FollowingAmount = () => {
   );
 
   const connections = ctx.checkUser.find((user) => {
-    return user.id.id === loggedInUser.id.id;
+    if (params.memberId === undefined) {
+      return user.id.id === loggedInUser.id.id;
+    }
+    return user.id.id === params.memberId;
   }).connections;
 
   if (connections === undefined) {

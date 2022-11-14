@@ -10,7 +10,7 @@
 .header-flex {
   display: flex;
   align-items: flex-start;
-  gap: 10rem;
+  gap: 7rem;
   margin-bottom: 2rem;
 }
 

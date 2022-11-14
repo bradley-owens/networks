@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import Connections from "../../Components/Account/Connections";
 import LoadImage from "../../Components/Hooks/LoadImage";
 import { connectActions } from "../../Store/connect-slice";
 import AuthContext from "../../Store/login-context";
@@ -66,6 +67,7 @@ const MemberDetail = () => {
         <header>
           <h1>{`${clickedUser.info.name}'s  Profile`}</h1>
         </header>
+        <Connections />
 
         {!followingState && (
           <h2 className={styles.follow} onClick={followHandler}>

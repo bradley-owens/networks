@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { ref, get, update, child, getDatabase } from "firebase/database";
+import { ref, get, child, getDatabase } from "firebase/database";
 
 const AuthContext = React.createContext({
   checkUser: [],
