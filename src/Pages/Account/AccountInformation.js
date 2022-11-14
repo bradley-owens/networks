@@ -117,7 +117,7 @@ const AccountInformation = () => {
         </div>
 
         <div className={styles.connect}>
-          <AccountCard>
+          {/* <AccountCard>
             <h1>Want to Connect</h1>
             <div className={styles.flex}>
               <label>
@@ -126,7 +126,7 @@ const AccountInformation = () => {
               </label>
               <button> Connect!</button>
             </div>
-          </AccountCard>
+          </AccountCard> */}
           <AccountCard>
             <h1>Remove Account</h1>
             <div className={styles.flex}>
