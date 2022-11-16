@@ -117,16 +117,6 @@ const AccountInformation = () => {
         </div>
 
         <div className={styles.connect}>
-          {/* <AccountCard>
-            <h1>Want to Connect</h1>
-            <div className={styles.flex}>
-              <label>
-                Clicking will display to all users that you want to connect with
-                others on Networks!
-              </label>
-              <button> Connect!</button>
-            </div>
-          </AccountCard> */}
           <AccountCard>
             <h1>Remove Account</h1>
             <div className={styles.flex}>
