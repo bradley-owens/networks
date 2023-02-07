@@ -80,9 +80,8 @@ const SignInForm = (props) => {
   const dispatch = useDispatch();
 
   const checkForUser = (email, pin) => {
-    const users = ctx.checkUser;
-
-    users.forEach((user) => {
+    console.log(ctx.checkUser);
+    ctx.checkUser.forEach((user) => {
       if (user.info.email === email && user.info.pin === pin) {
         dispatch(authActions.login(user));
         dispatch(editAccountActions.setUser(user));
