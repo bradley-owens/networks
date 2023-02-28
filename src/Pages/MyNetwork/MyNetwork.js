@@ -19,7 +19,7 @@ const MyNetwork = () => {
     <Fragment>
       {userConnections === undefined && <h1>You have no connections!</h1>}
       {userConnections && (
-        <div>
+        <div className={styles.main}>
           <h1>Your Connections</h1>
           <div className={styles["network-grid"]}>
             {Object.entries(userConnections.following).map((connection) => {

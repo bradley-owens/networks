@@ -1,10 +1,9 @@
 .container {
   /* border: 2px solid #246253; */
-  padding: 3px;
+
   border-radius: 20px;
   width: 18rem;
-
-  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.158);
+  box-shadow: 0 10px 20px 0px rgba(36, 98, 82, 0.5);
 }
 
 .profile-img {
@@ -19,10 +18,11 @@
   gap: 0.5rem;
   justify-content: center;
   align-items: center;
-  background-color: hsla(165, 46%, 26%, 0.2);
+  /* background-color: hsla(165, 46%, 26%, 0.2); */
+  background-color: rgba(240, 248, 255, 0.403);
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-  padding: 0.5rem;
+  padding: 1rem 0.5rem;
 }
 
 .info h2 {
@@ -31,8 +31,10 @@
 
 .buttons {
   padding: 1rem;
+  background-color: rgba(240, 248, 255, 0.403);
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
   display: flex;
-
   justify-content: space-evenly;
 }
 

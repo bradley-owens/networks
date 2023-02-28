@@ -9,10 +9,11 @@ body {
   max-width: 1440px;
   margin: 0 auto;
   background: linear-gradient(
-    70deg,
-    rgba(255, 255, 255, 0.768),
-    rgba(79, 154, 135, 0.6)
+    50deg,
+    rgba(255, 255, 255, 0.168),
+    rgba(79, 154, 135, 0.5)
   );
+
   color: #246253;
 }
 
