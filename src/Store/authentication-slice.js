@@ -66,11 +66,6 @@ const authenticationSlice = createSlice({
         .catch((error) => {
           alert("There was an error : " + error);
         });
-
-      state.isLoggedIn = true;
-      state.loggedInUser = newUser;
-      // localStorage.setItem("isLoggedIn", "1");
-      // localStorage.setItem("loggedInUser", user);
     },
 
     login(state, action) {

@@ -1,10 +1,10 @@
 .container {
-  border: 2px solid #246253;
+  /* border: 2px solid #246253; */
   padding: 3px;
   border-radius: 20px;
   width: 18rem;
 
-  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.258);
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.158);
 }
 
 .profile-img {

@@ -8,6 +8,12 @@ body {
   font-family: "Roboto Slab", serif;
   max-width: 1440px;
   margin: 0 auto;
+  background: linear-gradient(
+    70deg,
+    rgba(255, 255, 255, 0.768),
+    rgba(79, 154, 135, 0.6)
+  );
+  color: #246253;
 }
 
 .spinner {
